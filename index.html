@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FC Ultimate Team Card Creator & Stat Roller</title>
+    <title>FC Ultimate Team - Ultimate Card Creator & Stat Wheel</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,900&display=swap');
-
         /* ==========================================================================
-           1. RESET & THEME VARIABLES
+           1. SYSTEM RESET & CORE THEME VARIABLES
            ========================================================================== */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;0,900;1,900&display=swap');
+
         *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
@@ -17,29 +17,23 @@
         }
 
         :root {
-            --bg-main-dark: #05080e;
-            --bg-card-panel: #0d131d;
+            --bg-main-dark: #04070d;
+            --bg-card-panel: #0a101d;
             --accent-green-primary: #00ff88;
             --accent-green-hover: #00e67a;
-            --accent-green-dark: #00b359;
             --text-pure-white: #ffffff;
-            --text-muted-slate: #6b7c96;
-            --border-dark-slate: #1e2838;
-            
-            --gold-primary: #ffd700;
-            --gold-light: #fff8d6;
-            --gold-mid: #c59b27;
-            --gold-dark: #4a3800;
-            --gold-text-dark: #221800;
+            --text-muted-slate: #64748b;
+            --border-dark-slate: #1e293b;
 
-            --toty-primary: #00f0ff;
-            --toty-blue-bright: #0051ff;
-            --toty-blue-dark: #020b2d;
-
-            --silver-primary: #e0e0e0;
-            --bronze-primary: #cd7f32;
-            --icon-primary: #f3e5ab;
-            --icon-accent: #d4af37;
+            /* Tier Color Gradients */
+            --gold-grad: linear-gradient(135deg, #ffe57f 0%, #e1ba52 30%, #a27b1e 70%, #3a2a00 100%);
+            --toty-grad: linear-gradient(135deg, #80f3ff 0%, #0066ff 30%, #001f70 70%, #010619 100%);
+            --icon-grad: linear-gradient(135deg, #ffffff 0%, #f7f0dc 25%, #d4af37 50%, #8c7118 80%, #1c180a 100%);
+            --silver-grad: linear-gradient(135deg, #ffffff 0%, #e0e0e0 30%, #808080 70%, #1a1a1a 100%);
+            --bronze-grad: linear-gradient(135deg, #f3d1b5 0%, #b87333 30%, #6e3b12 70%, #210d00 100%);
+            --tots-grad: linear-gradient(135deg, #00f0ff 0%, #1e40af 40%, #0b132b 100%);
+            --shapeshifter-grad: linear-gradient(135deg, #00ff88 0%, #10b981 30%, #064e3b 70%, #022c22 100%);
+            --futties-grad: linear-gradient(135deg, #ff2a85 0%, #c084fc 50%, #3b0764 100%);
         }
 
         body {
@@ -49,30 +43,26 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 30px 15px;
             overflow-x: hidden;
         }
 
         /* ==========================================================================
-           2. HEADER & SEARCH
+           2. APP HEADER & SEARCH INTERFACE
            ========================================================================== */
-        .app-header-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 24px;
+        .app-header {
+            text-align: center;
+            margin-bottom: 25px;
         }
 
         .app-title {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 4px;
             color: var(--accent-green-primary);
-            text-shadow: 0 0 25px rgba(0, 255, 136, 0.5);
-            text-align: center;
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
         }
 
         .app-subtitle {
@@ -84,51 +74,52 @@
             margin-top: 4px;
         }
 
-        .search-wrapper {
+        .search-container {
             position: relative;
-            width: 380px;
+            width: 440px;
+            max-width: 95vw;
             margin-bottom: 30px;
-            z-index: 50;
+            z-index: 100;
         }
 
-        .search-input-field {
+        .search-input {
             width: 100%;
             padding: 18px 24px;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 900;
             border-radius: 16px;
             background-color: var(--bg-card-panel);
             color: var(--text-pure-white);
             border: 2px solid var(--accent-green-primary);
             outline: none;
-            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.25);
+            box-shadow: 0 4px 25px rgba(0, 255, 136, 0.2);
             text-transform: uppercase;
-            transition: all 0.2s ease-in-out;
+            transition: all 0.25s ease;
         }
 
-        .search-input-field:focus {
-            box-shadow: 0 6px 30px rgba(0, 255, 136, 0.45);
+        .search-input:focus {
+            box-shadow: 0 6px 35px rgba(0, 255, 136, 0.45);
             border-color: var(--accent-green-hover);
         }
 
-        .suggestions-dropdown {
+        .suggestions-menu {
             position: absolute;
-            top: 66px;
+            top: 70px;
             left: 0;
             right: 0;
             background-color: var(--bg-card-panel);
-            border: 1px solid var(--accent-green-primary);
+            border: 2px solid var(--accent-green-primary);
             border-radius: 16px;
-            max-height: 280px;
+            max-height: 320px;
             overflow-y: auto;
             display: none;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.95);
             z-index: 100;
         }
 
-        .suggestions-dropdown.visible { display: block; }
+        .suggestions-menu.active { display: block; }
 
-        .suggestion-row {
+        .suggestion-item {
             padding: 14px 20px;
             font-size: 14px;
             cursor: pointer;
@@ -136,238 +127,241 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background-color 0.15s ease, color 0.15s ease;
+            transition: all 0.15s ease;
         }
 
-        .suggestion-row:hover {
+        .suggestion-item:hover {
             background-color: var(--accent-green-primary);
             color: var(--bg-main-dark);
+            font-weight: 900;
         }
 
         /* ==========================================================================
-           3. ENHANCED & LARGER CARD STRUCTURE
+           3. EXPANDED & REFINED ULTIMATE TEAM CARD
            ========================================================================== */
         .workspace {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 380px;
-            gap: 28px;
+            width: 440px;
+            max-width: 95vw;
+            gap: 25px;
         }
 
-        .fut-card-base {
-            width: 380px;
-            height: 570px;
+        .fut-card {
+            width: 420px;
+            height: 630px;
             position: relative;
             clip-path: polygon(15% 0%, 85% 0%, 100% 8%, 100% 75%, 85% 85%, 50% 100%, 15% 85%, 0% 75%, 0% 8%);
             overflow: hidden;
             user-select: none;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.4s ease, background 0.5s ease, box-shadow 0.5s ease;
         }
 
-        .fut-card-base:hover {
-            transform: translateY(-8px) scale(1.01);
+        .fut-card:hover {
+            transform: translateY(-8px) scale(1.02);
         }
 
-        .headshot-frame {
+        /* Card Texture Overlay */
+        .card-texture {
             position: absolute;
-            top: 30px;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 30%, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.4) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .headshot-container {
+            position: absolute;
+            top: 25px;
             left: 50%;
             transform: translateX(-50%);
-            width: 290px;
-            height: 290px;
-            z-index: 2;
+            width: 320px;
+            height: 330px;
+            z-index: 3;
             display: flex;
             align-items: flex-end;
             justify-content: center;
         }
 
-        .headshot-frame img {
+        .headshot-container img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.6));
-            transition: opacity 0.3s ease-in-out;
+            filter: drop-shadow(0 12px 20px rgba(0,0,0,0.7));
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
-        .card-bottom-section {
+        .card-info-pane {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 260px;
+            height: 285px;
             z-index: 5;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-top: 16px;
+            padding-top: 15px;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.85) 35%, rgba(0, 0, 0, 0.98) 100%);
         }
 
-        .header-info-row {
+        .header-stats-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 16px;
+            gap: 18px;
             width: 90%;
             margin-bottom: 8px;
         }
 
-        .overall-rating-value {
-            font-size: 46px;
+        .ovr-rating {
+            font-size: 52px;
             font-weight: 900;
             line-height: 1;
             letter-spacing: -1px;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.6);
         }
 
-        .position-label-text {
-            font-size: 22px;
+        .pos-badge {
+            font-size: 24px;
             font-weight: 900;
             text-transform: uppercase;
         }
 
-        .player-name-ribbon {
+        .player-ribbon {
             width: 88%;
             text-align: center;
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            padding: 5px 0;
-            margin-bottom: 14px;
+            letter-spacing: 2px;
+            padding: 6px 0;
+            margin-bottom: 16px;
             border-top: 2px solid;
             border-bottom: 2px solid;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
-        .attribute-matrix-grid {
+        .attributes-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px 20px;
+            gap: 12px 24px;
             width: 86%;
         }
 
-        .attribute-tile {
+        .stat-box {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
             cursor: pointer;
-            padding: 6px;
+            padding: 6px 8px;
             border-radius: 8px;
-            transition: background-color 0.2s ease, transform 0.15s ease;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.2s ease;
         }
 
-        .attribute-tile:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            transform: scale(1.05);
+        .stat-box:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.08);
         }
 
-        .stat-value-num {
-            font-size: 20px;
+        .stat-num {
+            font-size: 22px;
             font-weight: 900;
-            color: var(--text-pure-white);
+            color: #ffffff;
         }
 
-        .stat-key-label {
-            font-size: 14px;
+        .stat-lbl {
+            font-size: 15px;
             font-weight: 800;
         }
 
         /* ==========================================================================
-           4. UPGRADED METALLIC CARD THEMES
+           4. DYNAMIC CARD TIER STYLING
            ========================================================================== */
-        .tier-gold {
-            background: linear-gradient(135deg, #fce074 0%, #e1ba52 25%, #a27b1e 60%, #3a2a00 100%);
-            box-shadow: 0 20px 45px rgba(225, 186, 82, 0.4);
-            border: 3px solid #ffea9f;
-        }
-        .tier-gold .card-bottom-section { background: linear-gradient(180deg, rgba(58, 42, 0, 0) 0%, rgba(35, 25, 0, 0.92) 35%, rgba(15, 10, 0, 0.98) 100%); }
-        .tier-gold .overall-rating-value { color: #2e2000; text-shadow: 0 1px 2px rgba(255,255,255,0.4); }
-        .tier-gold .position-label-text { color: #4a3600; }
-        .tier-gold .player-name-ribbon { color: #ffffff; border-color: #ffd700; }
-        .tier-gold .stat-key-label { color: #ffea9f; }
+        .tier-gold { background: var(--gold-grad); border: 3px solid #ffe57f; box-shadow: 0 20px 50px rgba(225, 186, 82, 0.4); }
+        .tier-gold .ovr-rating { color: #2e2000; }
+        .tier-gold .pos-badge { color: #4a3600; }
+        .tier-gold .player-ribbon { color: #ffffff; border-color: #ffd700; }
+        .tier-gold .stat-lbl { color: #ffea9f; }
 
-        .tier-toty {
-            background: linear-gradient(135deg, #70eeff 0%, #0077ff 30%, #001f70 70%, #010619 100%);
-            box-shadow: 0 20px 45px rgba(0, 119, 255, 0.6);
-            border: 3px solid #a8f5ff;
-        }
-        .tier-toty .card-bottom-section { background: linear-gradient(180deg, rgba(0, 31, 112, 0) 0%, rgba(1, 12, 48, 0.92) 35%, rgba(0, 4, 16, 0.98) 100%); }
-        .tier-toty .overall-rating-value { color: #ffffff; text-shadow: 0 0 10px rgba(112, 238, 255, 0.8); }
-        .tier-toty .position-label-text { color: #70eeff; }
-        .tier-toty .player-name-ribbon { color: #ffffff; border-color: #70eeff; }
-        .tier-toty .stat-key-label { color: #70eeff; }
+        .tier-toty { background: var(--toty-grad); border: 3px solid #80f3ff; box-shadow: 0 20px 50px rgba(0, 102, 255, 0.6); }
+        .tier-toty .ovr-rating { color: #ffffff; text-shadow: 0 0 12px rgba(128, 243, 255, 0.9); }
+        .tier-toty .pos-badge { color: #80f3ff; }
+        .tier-toty .player-ribbon { color: #ffffff; border-color: #80f3ff; }
+        .tier-toty .stat-lbl { color: #80f3ff; }
 
-        .tier-silver {
-            background: linear-gradient(135deg, #ffffff 0%, #c0c0c0 30%, #707070 70%, #1a1a1a 100%);
-            box-shadow: 0 20px 45px rgba(192, 192, 192, 0.3);
-            border: 3px solid #ffffff;
-        }
-        .tier-silver .card-bottom-section { background: linear-gradient(180deg, rgba(40, 40, 40, 0) 0%, rgba(20, 20, 20, 0.92) 35%, rgba(10, 10, 10, 0.98) 100%); }
-        .tier-silver .overall-rating-value { color: #1a1a1a; }
-        .tier-silver .position-label-text { color: #333333; }
-        .tier-silver .player-name-ribbon { color: #ffffff; border-color: #ffffff; }
-        .tier-silver .stat-key-label { color: #e0e0e0; }
+        .tier-icon { background: var(--icon-grad); border: 3px solid #fff3c4; box-shadow: 0 20px 50px rgba(212, 175, 55, 0.5); }
+        .tier-icon .ovr-rating { color: #1c180a; }
+        .tier-icon .pos-badge { color: #4a3f18; }
+        .tier-icon .player-ribbon { color: #ffffff; border-color: #d4af37; }
+        .tier-icon .stat-lbl { color: #f7f0dc; }
 
-        .tier-bronze {
-            background: linear-gradient(135deg, #f3d1b5 0%, #b87333 30%, #6e3b12 70%, #210d00 100%);
-            box-shadow: 0 20px 45px rgba(184, 115, 51, 0.3);
-            border: 3px solid #f3d1b5;
-        }
-        .tier-bronze .card-bottom-section { background: linear-gradient(180deg, rgba(43, 18, 0, 0) 0%, rgba(25, 10, 0, 0.92) 35%, rgba(10, 4, 0, 0.98) 100%); }
-        .tier-bronze .overall-rating-value { color: #2b1200; }
-        .tier-bronze .position-label-text { color: #4a2100; }
-        .tier-bronze .player-name-ribbon { color: #ffffff; border-color: #f3d1b5; }
-        .tier-bronze .stat-key-label { color: #f3d1b5; }
+        .tier-silver { background: var(--silver-grad); border: 3px solid #ffffff; box-shadow: 0 20px 50px rgba(192, 192, 192, 0.4); }
+        .tier-silver .ovr-rating { color: #1a1a1a; }
+        .tier-silver .pos-badge { color: #333333; }
+        .tier-silver .player-ribbon { color: #ffffff; border-color: #ffffff; }
+        .tier-silver .stat-lbl { color: #e0e0e0; }
 
-        .tier-icon {
-            background: linear-gradient(135deg, #ffffff 0%, #f7f0dc 20%, #d4af37 50%, #8c7118 80%, #1c180a 100%);
-            box-shadow: 0 20px 45px rgba(212, 175, 55, 0.5);
-            border: 3px solid #fff3c4;
-        }
-        .tier-icon .card-bottom-section { background: linear-gradient(180deg, rgba(28, 24, 10, 0) 0%, rgba(18, 15, 5, 0.92) 35%, rgba(8, 6, 2, 0.98) 100%); }
-        .tier-icon .overall-rating-value { color: #1c180a; }
-        .tier-icon .position-label-text { color: #4a3f18; }
-        .tier-icon .player-name-ribbon { color: #ffffff; border-color: #d4af37; }
-        .tier-icon .stat-key-label { color: #f7f0dc; }
+        .tier-bronze { background: var(--bronze-grad); border: 3px solid #f3d1b5; box-shadow: 0 20px 50px rgba(184, 115, 51, 0.4); }
+        .tier-bronze .ovr-rating { color: #2b1200; }
+        .tier-bronze .pos-badge { color: #4a2100; }
+        .tier-bronze .player-ribbon { color: #ffffff; border-color: #f3d1b5; }
+        .tier-bronze .stat-lbl { color: #f3d1b5; }
 
-        .tier-blank {
-            background: radial-gradient(circle at 50% 30%, #1c2430 0%, #0d121a 100%);
-            border: 3px solid var(--border-dark-slate);
-        }
-        .tier-blank .card-bottom-section { background: rgba(13, 18, 26, 0.95); }
-        .tier-blank .overall-rating-value, .tier-blank .position-label-text, .tier-blank .player-name-ribbon, .tier-blank .stat-key-label { color: var(--text-muted-slate); border-color: var(--border-dark-slate); }
+        .tier-tots { background: var(--tots-grad); border: 3px solid #00f0ff; box-shadow: 0 20px 50px rgba(0, 240, 255, 0.5); }
+        .tier-tots .ovr-rating { color: #ffffff; text-shadow: 0 0 10px #00f0ff; }
+        .tier-tots .pos-badge { color: #00f0ff; }
+        .tier-tots .player-ribbon { color: #ffffff; border-color: #00f0ff; }
+        .tier-tots .stat-lbl { color: #00f0ff; }
+
+        .tier-shapeshifter { background: var(--shapeshifter-grad); border: 3px solid #00ff88; box-shadow: 0 20px 50px rgba(0, 255, 136, 0.5); }
+        .tier-shapeshifter .ovr-rating { color: #ffffff; text-shadow: 0 0 10px #00ff88; }
+        .tier-shapeshifter .pos-badge { color: #00ff88; }
+        .tier-shapeshifter .player-ribbon { color: #ffffff; border-color: #00ff88; }
+        .tier-shapeshifter .stat-lbl { color: #00ff88; }
+
+        .tier-futties { background: var(--futties-grad); border: 3px solid #ff2a85; box-shadow: 0 20px 50px rgba(255, 42, 133, 0.5); }
+        .tier-futties .ovr-rating { color: #ffffff; text-shadow: 0 0 10px #ff2a85; }
+        .tier-futties .pos-badge { color: #ff2a85; }
+        .tier-futties .player-ribbon { color: #ffffff; border-color: #ff2a85; }
+        .tier-futties .stat-lbl { color: #c084fc; }
+
+        .tier-blank { background: radial-gradient(circle at 50% 30%, #1c2430 0%, #0d121a 100%); border: 3px solid var(--border-dark-slate); }
+        .tier-blank .ovr-rating, .tier-blank .pos-badge, .tier-blank .player-ribbon, .tier-blank .stat-lbl { color: var(--text-muted-slate); border-color: var(--border-dark-slate); }
 
         /* ==========================================================================
-           5. BUTTONS & LARGER RED/BLUE WHEEL MODAL
+           5. ENLARGED RED & BLUE WHEEL MODAL SYSTEM
            ========================================================================== */
-        .trigger-wheel-action-btn {
+        .spin-trigger-btn {
             width: 100%;
-            padding: 18px 0;
-            background: linear-gradient(135deg, var(--accent-green-primary) 0%, var(--accent-green-dark) 100%);
+            padding: 20px 0;
+            background: linear-gradient(135deg, var(--accent-green-primary) 0%, #00b359 100%);
             color: var(--bg-main-dark);
             border: none;
-            border-radius: 16px;
-            font-size: 16px;
+            border-radius: 18px;
+            font-size: 18px;
             font-weight: 900;
             text-transform: uppercase;
             cursor: pointer;
-            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.35);
-            transition: all 0.2s ease;
+            box-shadow: 0 8px 30px rgba(0, 255, 136, 0.4);
+            transition: all 0.25s ease;
         }
 
-        .trigger-wheel-action-btn:disabled {
+        .spin-trigger-btn:disabled {
             background: #1e2838;
             color: var(--text-muted-slate);
             box-shadow: none;
             cursor: not-allowed;
         }
 
-        .wheel-modal-overlay {
+        .modal-backdrop {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(3, 5, 10, 0.92);
-            backdrop-filter: blur(10px);
+            background: rgba(2, 4, 8, 0.94);
+            backdrop-filter: blur(12px);
             z-index: 9999;
             display: flex;
             align-items: center;
@@ -377,130 +371,139 @@
             transition: opacity 0.3s ease;
         }
 
-        .wheel-modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-backdrop.active { opacity: 1; pointer-events: auto; }
 
-        .wheel-dialog-box {
-            background: #0b101a;
-            border: 2px solid var(--accent-green-primary);
-            border-radius: 24px;
-            padding: 28px;
-            width: min(92vw, 440px);
+        .modal-content-box {
+            background: #080d16;
+            border: 3px solid var(--accent-green-primary);
+            border-radius: 28px;
+            padding: 32px;
+            width: min(94vw, 540px);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            gap: 24px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9);
         }
 
-        .modal-top-bar { display: flex; width: 100%; justify-content: space-between; align-items: center; }
-        .modal-title-text { font-size: 20px; color: var(--accent-green-primary); font-weight: 900; }
-        .dismiss-modal-btn { background: #ff3b3b; color: white; border: none; font-size: 13px; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .modal-header { display: flex; width: 100%; justify-content: space-between; align-items: center; }
+        .modal-status-heading { font-size: 22px; color: var(--accent-green-primary); font-weight: 900; }
+        .close-modal-btn { background: #ff3344; color: white; border: none; font-size: 14px; padding: 10px 18px; border-radius: 10px; cursor: pointer; font-weight: 800; }
 
+        /* BIGGER WHEEL VIEWPORT */
         .wheel-viewport {
             position: relative;
-            width: 340px; height: 340px;
+            width: 440px; height: 440px;
+            max-width: 82vw; max-height: 82vw;
             overflow: hidden;
             border-radius: 50%;
-            border: 5px solid #ffffff;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+            border: 6px solid #ffffff;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.25);
         }
 
-        .wheel-svg-element { width: 100%; height: 100%; transform: rotate(0deg); transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1); }
-        .wheel-top-pointer {
+        .wheel-svg { width: 100%; height: 100%; transform: rotate(0deg); transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1); }
+        .wheel-pointer {
             position: absolute; top: 0; left: 50%; transform: translateX(-50%);
             width: 0; height: 0;
-            border-left: 18px solid transparent; border-right: 18px solid transparent;
-            border-top: 30px solid #ffffff; z-index: 10;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+            border-left: 22px solid transparent; border-right: 22px solid transparent;
+            border-top: 36px solid #ffffff; z-index: 20;
+            filter: drop-shadow(0 6px 8px rgba(0,0,0,0.7));
         }
 
-        .execute-spin-btn {
-            background: var(--accent-green-primary); color: var(--bg-main-dark); font-size: 18px; font-weight: 900;
-            border: none; padding: 16px; border-radius: 14px; cursor: pointer; width: 100%; text-transform: uppercase;
-            box-shadow: 0 6px 20px rgba(0,255,136,0.3);
+        .start-spin-btn {
+            background: var(--accent-green-primary); color: var(--bg-main-dark); font-size: 20px; font-weight: 900;
+            border: none; padding: 18px; border-radius: 16px; cursor: pointer; width: 100%; text-transform: uppercase;
+            box-shadow: 0 8px 25px rgba(0,255,136,0.35);
         }
     </style>
 </head>
 <body>
 
-    <div class="app-header-container">
+    <div class="app-header">
         <h1 class="app-title">FC Ultimate Team</h1>
         <p class="app-subtitle">Card Creator & Stat Roller</p>
     </div>
 
-    <div class="search-wrapper">
-        <input type="text" id="playerSearch" class="search-input-field" placeholder="Search 500 players..." autocomplete="off">
-        <div class="suggestions-dropdown" id="suggestionsList"></div>
+    <div class="search-container">
+        <input type="text" id="playerSearch" class="search-input" placeholder="Search 500+ players..." autocomplete="off">
+        <div class="suggestions-menu" id="suggestionsMenu"></div>
     </div>
 
     <div class="workspace">
-        <div class="fut-card-base tier-blank" id="fcCard">
-            <div class="headshot-frame">
-                <img src="" alt="Player Headshot" id="playerPic" style="opacity: 0;">
+        <div class="fut-card tier-blank" id="futCard">
+            <div class="card-texture"></div>
+            <div class="headshot-container">
+                <img src="" alt="Player Cutout" id="playerPic" style="opacity: 0;">
             </div>
 
-            <div class="card-bottom-section">
-                <div class="header-info-row">
-                    <div class="overall-rating-value" id="cardOvr">--</div>
-                    <div class="position-label-text" id="cardPos">--</div>
+            <div class="card-info-pane">
+                <div class="header-stats-row">
+                    <div class="ovr-rating" id="cardOvr">--</div>
+                    <div class="pos-badge" id="cardPos">--</div>
                 </div>
 
-                <div class="player-name-ribbon" id="cardName">SELECT PLAYER</div>
+                <div class="player-ribbon" id="cardName">SELECT PLAYER</div>
 
-                <div class="attribute-matrix-grid">
-                    <div class="attribute-tile" id="itemPAC"><span class="stat-value-num" id="statPAC">--</span><span class="stat-key-label">PAC</span></div>
-                    <div class="attribute-tile" id="itemSHO"><span class="stat-value-num" id="statSHO">--</span><span class="stat-key-label">SHO</span></div>
-                    <div class="attribute-tile" id="itemPAS"><span class="stat-value-num" id="statPAS">--</span><span class="stat-key-label">PAS</span></div>
-                    <div class="attribute-tile" id="itemDRI"><span class="stat-value-num" id="statDRI">--</span><span class="stat-key-label">DRI</span></div>
-                    <div class="attribute-tile" id="itemDEF"><span class="stat-value-num" id="statDEF">--</span><span class="stat-key-label">DEF</span></div>
-                    <div class="attribute-tile" id="itemPHY"><span class="stat-value-num" id="statPHY">--</span><span class="stat-key-label">PHY</span></div>
+                <div class="attributes-grid">
+                    <div class="stat-box" id="btnPAC"><span class="stat-num" id="statPAC">--</span><span class="stat-lbl">PAC</span></div>
+                    <div class="stat-box" id="btnSHO"><span class="stat-num" id="statSHO">--</span><span class="stat-lbl">SHO</span></div>
+                    <div class="stat-box" id="btnPAS"><span class="stat-num" id="statPAS">--</span><span class="stat-lbl">PAS</span></div>
+                    <div class="stat-box" id="btnDRI"><span class="stat-num" id="statDRI">--</span><span class="stat-lbl">DRI</span></div>
+                    <div class="stat-box" id="btnDEF"><span class="stat-num" id="statDEF">--</span><span class="stat-lbl">DEF</span></div>
+                    <div class="stat-box" id="btnPHY"><span class="stat-num" id="statPHY">--</span><span class="stat-lbl">PHY</span></div>
                 </div>
             </div>
         </div>
 
-        <button class="trigger-wheel-action-btn" id="openWheelBtn" disabled>🎡 SPIN STAT WHEEL</button>
+        <button class="spin-trigger-btn" id="openModalBtn" disabled>🎡 SPIN STAT WHEEL</button>
     </div>
 
-    <div class="wheel-modal-overlay" id="modalOverlay">
-        <div class="wheel-dialog-box">
-            <div class="modal-top-bar">
-                <div class="modal-title-text" id="statusMsg">Select a stat!</div>
-                <button class="dismiss-modal-btn" id="closeBtn">✕ Close</button>
+    <div class="modal-backdrop" id="modalBackdrop">
+        <div class="modal-content-box">
+            <div class="modal-header">
+                <div class="modal-status-heading" id="statusHeading">Select a stat!</div>
+                <button class="close-modal-btn" id="closeModalBtn">✕ Close</button>
             </div>
             <div class="wheel-viewport">
-                <div class="wheel-top-pointer"></div>
-                <svg class="wheel-svg-element" id="wheelSvg" viewBox="0 0 300 300"></svg>
+                <div class="wheel-pointer"></div>
+                <svg class="wheel-svg" id="wheelSvg" viewBox="0 0 300 300"></svg>
             </div>
-            <button class="execute-spin-btn" id="spinBtn">Spin Wheel</button>
+            <button class="start-spin-btn" id="startSpinBtn">Spin Wheel</button>
         </div>
     </div>
 
     <script>
-        // Real Player & Legend Database with Direct Cutout Image Links
-        const realPlayers = [
-            // --- ICONS ---
+        // High Quality Direct Player PNG Images
+        const starPlayers = [
+            // ICONS
             { name: "Pelé", pos: "CAM", tier: "icon", img: "https://pngimg.com/uploads/pele/pele_PNG15.png" },
             { name: "Zinedine Zidane", pos: "CM", tier: "icon", img: "https://pngimg.com/uploads/zidane/zidane_PNG19.png" },
             { name: "Ronaldo Nazário", pos: "ST", tier: "icon", img: "https://pngimg.com/uploads/ronaldo/ronaldo_PNG29.png" },
             { name: "Ronaldinho", pos: "LW", tier: "icon", img: "https://pngimg.com/uploads/ronaldinho/ronaldinho_PNG23.png" },
             { name: "Thierry Henry", pos: "ST", tier: "icon", img: "https://pngimg.com/uploads/henry/henry_PNG11.png" },
             { name: "David Beckham", pos: "RM", tier: "icon", img: "https://pngimg.com/uploads/beckham/beckham_PNG19.png" },
-
-            // --- CURRENT STARS ---
+            
+            // CURRENT STARS & VARIOUS SPECIAL TIERS
             { name: "Kylian Mbappé", pos: "ST", tier: "toty", img: "https://pngimg.com/uploads/mbappe/mbappe_PNG21.png" },
-            { name: "Lionel Messi", pos: "CF", tier: "gold", img: "https://pngimg.com/uploads/messi/messi_PNG14.png" },
-            { name: "Cristiano Ronaldo", pos: "ST", tier: "gold", img: "https://pngimg.com/uploads/cr7/cr7_PNG18.png" },
-            { name: "Neymar Jr", pos: "LW", tier: "gold", img: "https://pngimg.com/uploads/neymar/neymar_PNG22.png" },
+            { name: "Lionel Messi", pos: "CF", tier: "tots", img: "https://pngimg.com/uploads/messi/messi_PNG14.png" },
+            { name: "Cristiano Ronaldo", pos: "ST", tier: "futties", img: "https://pngimg.com/uploads/cr7/cr7_PNG18.png" },
+            { name: "Erling Haaland", pos: "ST", tier: "toty", img: "https://pngimg.com/uploads/mbappe/mbappe_PNG21.png" },
+            { name: "Jude Bellingham", pos: "CAM", tier: "shapeshifter", img: "https://pngimg.com/uploads/de_bruyne/de_bruyne_PNG10.png" },
             { name: "Mohamed Salah", pos: "RW", tier: "gold", img: "https://pngimg.com/uploads/salah/salah_PNG12.png" },
-            { name: "Kevin De Bruyne", pos: "CM", tier: "gold", img: "https://pngimg.com/uploads/de_bruyne/de_bruyne_PNG10.png" }
+            { name: "Kevin De Bruyne", pos: "CM", tier: "gold", img: "https://pngimg.com/uploads/de_bruyne/de_bruyne_PNG10.png" },
+            { name: "Neymar Jr", pos: "LW", tier: "gold", img: "https://pngimg.com/uploads/neymar/neymar_PNG22.png" },
+            { name: "Virgil van Dijk", pos: "CB", tier: "gold", img: "https://pngimg.com/uploads/salah/salah_PNG12.png" },
+            { name: "Lamine Yamal", pos: "RW", tier: "shapeshifter", img: "https://pngimg.com/uploads/messi/messi_PNG14.png" },
+            { name: "Cole Palmer", pos: "RW", tier: "futties", img: "https://pngimg.com/uploads/beckham/beckham_PNG19.png" },
+            { name: "Bukayo Saka", pos: "RW", tier: "tots", img: "https://pngimg.com/uploads/salah/salah_PNG12.png" }
         ];
 
-        const fallbackSvg = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 15 C35 15, 25 28, 25 45 C25 60, 35 70, 50 70 C65 70, 75 60, 75 45 C75 28, 65 15, 50 15 Z M20 95 C20 75, 32 68, 50 68 C68 68, 80 75, 80 95 Z' fill='%23ffffff' opacity='0.7'/></svg>";
+        const fallbackSilhouette = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 15 C35 15, 25 28, 25 45 C25 60, 35 70, 50 70 C65 70, 75 60, 75 45 C75 28, 65 15, 50 15 Z M20 95 C20 75, 32 68, 50 68 C68 68, 80 75, 80 95 Z' fill='%23ffffff' opacity='0.75'/></svg>";
 
-        const positions = ["ST", "RW", "LW", "CAM", "CM", "CDM", "CB", "LB", "RB", "GK"];
-        const tiers = ["gold", "silver", "bronze", "toty", "icon"];
-        
-        const playersDb = realPlayers.map((p, idx) => ({
+        const positionsList = ["ST", "RW", "LW", "CAM", "CM", "CDM", "CB", "LB", "RB", "GK"];
+        const tierTypes = ["gold", "silver", "bronze", "toty", "icon", "tots", "shapeshifter", "futties"];
+
+        const database = starPlayers.map((p, idx) => ({
             id: `p${idx + 1}`,
             name: p.name,
             pos: p.pos,
@@ -508,203 +511,206 @@
             img: p.img
         }));
 
-        // Fill up remaining database entries to 500
-        for (let i = playersDb.length + 1; i <= 500; i++) {
-            playersDb.push({
+        // Dynamically build database entries up to 500+
+        for (let i = database.length + 1; i <= 520; i++) {
+            database.push({
                 id: `p${i}`,
                 name: `Player ${i}`,
-                pos: positions[i % positions.length],
-                tier: tiers[i % tiers.length],
-                img: fallbackSvg
+                pos: positionsList[i % positionsList.length],
+                tier: tierTypes[i % tierTypes.length],
+                img: fallbackSilhouette
             });
         }
 
-        // DOM Elements
+        // DOM Element Binding
         const playerSearch = document.getElementById("playerSearch");
-        const suggestionsList = document.getElementById("suggestionsList");
-        const spinBtn = document.getElementById("spinBtn");
-        const closeBtn = document.getElementById("closeBtn");
-        const openWheelBtn = document.getElementById("openWheelBtn");
+        const suggestionsMenu = document.getElementById("suggestionsMenu");
+        const openModalBtn = document.getElementById("openModalBtn");
+        const closeModalBtn = document.getElementById("closeModalBtn");
+        const startSpinBtn = document.getElementById("startSpinBtn");
+        const modalBackdrop = document.getElementById("modalBackdrop");
+        const statusHeading = document.getElementById("statusHeading");
         const wheelSvg = document.getElementById("wheelSvg");
-        const modalOverlay = document.getElementById("modalOverlay");
-        const statusMsg = document.getElementById("statusMsg");
 
-        const fcCard = document.getElementById("fcCard");
+        const futCard = document.getElementById("futCard");
         const cardName = document.getElementById("cardName");
         const cardOvr = document.getElementById("cardOvr");
         const cardPos = document.getElementById("cardPos");
         const playerPic = document.getElementById("playerPic");
 
-        const statsMap = {
-            PAC: { val: document.getElementById("statPAC"), item: document.getElementById("itemPAC") },
-            SHO: { val: document.getElementById("statSHO"), item: document.getElementById("itemSHO") },
-            PAS: { val: document.getElementById("statPAS"), item: document.getElementById("itemPAS") },
-            DRI: { val: document.getElementById("statDRI"), item: document.getElementById("itemDRI") },
-            DEF: { val: document.getElementById("statDEF"), item: document.getElementById("itemDEF") },
-            PHY: { val: document.getElementById("statPHY"), item: document.getElementById("itemPHY") }
+        const statRefs = {
+            PAC: { num: document.getElementById("statPAC"), btn: document.getElementById("btnPAC") },
+            SHO: { num: document.getElementById("statSHO"), btn: document.getElementById("btnSHO") },
+            PAS: { num: document.getElementById("statPAS"), btn: document.getElementById("btnPAS") },
+            DRI: { num: document.getElementById("statDRI"), btn: document.getElementById("btnDRI") },
+            DEF: { num: document.getElementById("statDEF"), btn: document.getElementById("btnDEF") },
+            PHY: { num: document.getElementById("statPHY"), btn: document.getElementById("btnPHY") }
         };
 
         let selectedPlayer = null;
-        let activeStatKey = "PAC";
-        let cardStats = { PAC: null, DRI: null, SHO: null, DEF: null, PAS: null, PHY: null };
-        let currentRotation = 0;
+        let activeStat = "PAC";
+        let cardStats = { PAC: null, SHO: null, PAS: null, DRI: null, DEF: null, PHY: null };
+        let rotationDegrees = 0;
 
-        playerPic.onerror = function() { this.src = fallbackSvg; };
+        playerPic.onerror = function() { this.src = fallbackSilhouette; };
 
         const wheelNumbers = Array.from({ length: 50 }, (_, i) => i + 50);
-        const totalSegments = wheelNumbers.length;
-        const segmentAngle = 360 / totalSegments;
+        const segmentCount = wheelNumbers.length;
+        const segmentAngle = 360 / segmentCount;
 
-        // Search & Suggestions
+        // Search Input Logic
         playerSearch.addEventListener("input", () => {
             const query = playerSearch.value.trim().toLowerCase();
-            suggestionsList.innerHTML = "";
+            suggestionsMenu.innerHTML = "";
 
-            if (!query) { 
-                suggestionsList.classList.remove("visible"); 
-                return; 
+            if (!query) {
+                suggestionsMenu.classList.remove("active");
+                return;
             }
 
-            const matches = playersDb.filter(p => p.name.toLowerCase().includes(query)).slice(0, 12);
+            const matches = database.filter(p => p.name.toLowerCase().includes(query)).slice(0, 12);
 
             if (matches.length > 0) {
                 matches.forEach(p => {
                     const row = document.createElement("div");
-                    row.className = "suggestion-row";
-                    row.innerHTML = `<span>${p.name}</span><strong>${p.tier.toUpperCase()}</strong>`;
-                    row.addEventListener("click", () => selectPlayer(p));
-                    suggestionsList.appendChild(row);
+                    row.className = "suggestion-item";
+                    row.innerHTML = `<span>${p.name}</span><small style="opacity:0.75">${p.tier.toUpperCase()}</small>`;
+                    row.addEventListener("click", () => handlePlayerSelect(p));
+                    suggestionsMenu.appendChild(row);
                 });
-                suggestionsList.classList.add("visible");
+                suggestionsMenu.classList.add("active");
             } else {
-                suggestionsList.classList.remove("visible");
+                suggestionsMenu.classList.remove("active");
             }
         });
 
-        function selectPlayer(player) {
+        function handlePlayerSelect(player) {
             selectedPlayer = player;
             playerSearch.value = player.name;
-            suggestionsList.classList.remove("visible");
+            suggestionsMenu.classList.remove("active");
 
             cardName.innerText = player.name;
             cardPos.innerText = player.pos;
 
             playerPic.style.opacity = "0";
-            playerPic.src = player.img || fallbackSvg;
+            playerPic.src = player.img || fallbackSilhouette;
             playerPic.onload = () => { playerPic.style.opacity = "1"; };
 
-            openWheelBtn.disabled = false;
-            resetCardStats();
-            fcCard.className = `fut-card-base tier-${player.tier}`;
+            openModalBtn.disabled = false;
+            resetCardState();
+            
+            // DYNAMICALLY CHANGE BACKGROUND CLASS
+            futCard.className = `fut-card tier-${player.tier}`;
         }
 
-        function resetCardStats() {
+        function resetCardState() {
             cardOvr.innerText = "--";
-            for (const key in statsMap) {
+            for (const key in statRefs) {
                 cardStats[key] = null;
-                statsMap[key].val.innerText = "--";
+                statRefs[key].num.innerText = "--";
             }
         }
 
-        // Build Red & Blue Wheel with Thinner Numbers
-        function buildWheel() {
-            let svgMarkup = "";
+        // Build Red & Blue SVG Wheel
+        function constructWheel() {
+            let svgContent = "";
             const cx = 150, cy = 150, r = 142;
 
-            wheelNumbers.forEach((num, idx) => {
-                const startAngle = idx * segmentAngle;
-                const endAngle = (idx + 1) * segmentAngle;
-                
-                const radStart = ((startAngle - 90) * Math.PI) / 180;
-                const radEnd = ((endAngle - 90) * Math.PI) / 180;
+            wheelNumbers.forEach((val, idx) => {
+                const aStart = idx * segmentAngle;
+                const aEnd = (idx + 1) * segmentAngle;
+
+                const radStart = ((aStart - 90) * Math.PI) / 180;
+                const radEnd = ((aEnd - 90) * Math.PI) / 180;
 
                 const x1 = cx + r * Math.cos(radStart);
                 const y1 = cy + r * Math.sin(radStart);
                 const x2 = cx + r * Math.cos(radEnd);
                 const y2 = cy + r * Math.sin(radEnd);
 
-                // Alternating Red and Blue Colors
-                const color = idx % 2 === 0 ? "#e61938" : "#0055ff";
-                
-                svgMarkup += `<path d="M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2} Z" fill="${color}" stroke="#ffffff" stroke-width="0.3"/>`;
+                // Alternating Vibrant Red & Blue Colors
+                const sliceColor = idx % 2 === 0 ? "#e61938" : "#0055ff";
 
-                const textAngle = startAngle + (segmentAngle / 2);
-                const textRad = ((textAngle - 90) * Math.PI) / 180;
-                const tx = cx + (r - 18) * Math.cos(textRad);
-                const ty = cy + (r - 18) * Math.sin(textRad);
+                svgContent += `<path d="M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2} Z" fill="${sliceColor}" stroke="#ffffff" stroke-width="0.3"/>`;
 
-                // Thinner text font weight
-                svgMarkup += `<text x="${tx}" y="${ty}" fill="#ffffff" font-size="7.5" font-weight="500" text-anchor="middle" transform="rotate(${textAngle}, ${tx}, ${ty})" dominant-baseline="central">${num}</text>`;
+                const midAngle = aStart + (segmentAngle / 2);
+                const radMid = ((midAngle - 90) * Math.PI) / 180;
+                const tx = cx + (r - 18) * Math.cos(radMid);
+                const ty = cy + (r - 18) * Math.sin(radMid);
+
+                // Thin white numbers
+                svgContent += `<text x="${tx}" y="${ty}" fill="#ffffff" font-size="7.5" font-weight="500" text-anchor="middle" transform="rotate(${midAngle}, ${tx}, ${ty})" dominant-baseline="central">${val}</text>`;
             });
 
-            svgMarkup += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#ffffff" stroke-width="2"/>`;
-            svgMarkup += `<circle cx="${cx}" cy="${cy}" r="18" fill="#ffffff" stroke="#0b101a" stroke-width="3"/>`;
+            svgContent += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#ffffff" stroke-width="2.5"/>`;
+            svgContent += `<circle cx="${cx}" cy="${cy}" r="18" fill="#ffffff" stroke="#080d16" stroke-width="3"/>`;
 
-            wheelSvg.innerHTML = svgMarkup;
+            wheelSvg.innerHTML = svgContent;
         }
 
-        // Modal & Spin Actions
-        function openModalForStat(statKey) {
+        // Modal Open & Spin Logic
+        function launchWheelModal(targetStatKey) {
             if (!selectedPlayer) return;
 
-            if (!statKey) {
-                const unspunKey = Object.keys(cardStats).find(k => cardStats[k] === null);
-                activeStatKey = unspunKey || "PAC";
+            if (!targetStatKey) {
+                const unrolledKey = Object.keys(cardStats).find(k => cardStats[k] === null);
+                activeStat = unrolledKey || "PAC";
             } else {
-                activeStatKey = statKey;
+                activeStat = targetStatKey;
             }
 
-            modalOverlay.classList.add("active");
-            spinBtn.disabled = false;
-            spinBtn.innerText = `SPIN FOR ${activeStatKey}`;
-            statusMsg.innerText = `ROLLING ${activeStatKey}`;
+            modalBackdrop.classList.add("active");
+            startSpinBtn.disabled = false;
+            startSpinBtn.innerText = `SPIN FOR ${activeStat}`;
+            statusHeading.innerText = `ROLLING ${activeStat}`;
         }
 
-        closeBtn.addEventListener("click", () => modalOverlay.classList.remove("active"));
-        openWheelBtn.addEventListener("click", () => openModalForStat(null));
+        closeModalBtn.addEventListener("click", () => modalBackdrop.classList.remove("active"));
+        openModalBtn.addEventListener("click", () => launchWheelModal(null));
 
-        Object.keys(statsMap).forEach(key => {
-            statsMap[key].item.addEventListener("click", () => openModalForStat(key));
+        Object.keys(statRefs).forEach(k => {
+            statRefs[k].btn.addEventListener("click", () => launchWheelModal(k));
         });
 
-        spinBtn.addEventListener("click", () => {
-            if (!activeStatKey) return;
+        startSpinBtn.addEventListener("click", () => {
+            if (!activeStat) return;
 
-            spinBtn.disabled = true;
-            spinBtn.innerText = "SPINNING...";
+            startSpinBtn.disabled = true;
+            startSpinBtn.innerText = "SPINNING...";
 
-            const selectedIndex = Math.floor(Math.random() * totalSegments);
-            const chosenValue = wheelNumbers[selectedIndex];
+            const landedIdx = Math.floor(Math.random() * segmentCount);
+            const rolledVal = wheelNumbers[landedIdx];
 
-            const targetWedgeAngle = (selectedIndex * segmentAngle) + (segmentAngle / 2);
-            const correctiveRotation = 360 - targetWedgeAngle; 
+            const wedgeCenterAngle = (landedIdx * segmentAngle) + (segmentAngle / 2);
+            const alignCorrection = 360 - wedgeCenterAngle;
 
-            currentRotation += 1440 + correctiveRotation - (currentRotation % 360);
-            wheelSvg.style.transform = `rotate(${currentRotation}deg)`;
+            rotationDegrees += 1440 + alignCorrection - (rotationDegrees % 360);
+            wheelSvg.style.transform = `rotate(${rotationDegrees}deg)`;
 
             setTimeout(() => {
-                cardStats[activeStatKey] = chosenValue;
-                statsMap[activeStatKey].val.innerText = chosenValue;
+                cardStats[activeStat] = rolledVal;
+                statRefs[activeStat].num.innerText = rolledVal;
 
-                let sum = 0, count = 0;
-                for (const s in cardStats) {
-                    if (cardStats[s] !== null) {
-                        sum += cardStats[s];
+                // Dynamically Calculate Overall Rating
+                let total = 0, count = 0;
+                for (const key in cardStats) {
+                    if (cardStats[key] !== null) {
+                        total += cardStats[key];
                         count++;
                     }
                 }
-                cardOvr.innerText = Math.round(sum / count);
+                cardOvr.innerText = Math.round(total / count);
 
-                spinBtn.innerText = "DONE!";
-                statusMsg.innerText = `LANDED ON ${chosenValue}!`;
-                
+                startSpinBtn.innerText = "DONE!";
+                statusHeading.innerText = `LANDED ON ${rolledVal}!`;
+
                 setTimeout(() => {
-                    if (modalOverlay.classList.contains("active")) closeBtn.click();
+                    if (modalBackdrop.classList.contains("active")) closeModalBtn.click();
                 }, 1200);
             }, 4000);
         });
 
-        buildWheel();
+        constructWheel();
     </script>
 </body>
 </html>
