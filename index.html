@@ -22,7 +22,6 @@
             align-items: center;
             min-height: 100vh;
             padding: 30px 15px;
-            overflow-x: hidden;
         }
 
         h1 {
@@ -100,631 +99,174 @@
             gap: 20px;
         }
 
-        /* DEFAULT BLANK CARD */
-        .card-blank {
+        /* BASE CARD STYLES */
+        .card-base {
             width: 320px;
             height: 480px;
             position: relative;
             clip-path: polygon(15% 0%, 85% 0%, 100% 8%, 100% 75%, 85% 85%, 50% 100%, 15% 85%, 0% 75%, 0% 8%);
-            background: radial-gradient(circle at 50% 30%, #1c2430 0%, #0d121a 100%);
-            color: #5d6d88;
-            border: 3px solid #2a364f;
             overflow: hidden;
             user-select: none;
+            transition: all 0.3s ease;
         }
-        .card-blank .player-pic-wrapper {
+
+        .player-pic-wrapper {
             position: absolute;
-            top: 20px;
+            top: 25px;
             left: 50%;
             transform: translateX(-50%);
-            width: 260px;
-            height: 260px;
+            width: 250px;
+            height: 250px;
             z-index: 1;
         }
-        .card-blank .player-pic-wrapper img {
+
+        .player-pic-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: contain;
+            transition: opacity 0.3s ease;
         }
-        .card-blank .bottom-panel {
+
+        .bottom-panel {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 210px;
-            background: rgba(13, 18, 26, 0.95);
+            height: 215px;
             z-index: 3;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding-top: 10px;
         }
-        .card-blank .main-header {
+
+        .main-header {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
             width: 90%;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
-        .card-blank .ovr-badge { font-size: 38px; font-weight: 900; color: #5d6d88; }
-        .card-blank .pos-badge { font-size: 18px; font-weight: 900; color: #5d6d88; }
-        .card-blank .name-banner {
+
+        .ovr-badge {
+            font-size: 38px;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .pos-badge {
+            font-size: 18px;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .name-banner {
             width: 88%;
             text-align: center;
             font-size: 20px;
             font-weight: 900;
-            color: #5d6d88;
-            border-top: 1px solid #2a364f;
-            border-bottom: 1px solid #2a364f;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             padding: 3px 0;
             margin-bottom: 12px;
+            border-top: 1px solid currentColor;
+            border-bottom: 1px solid currentColor;
         }
-        .card-blank .stats-matrix {
+
+        .stats-matrix {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px 15px;
             width: 82%;
         }
-        .card-blank .stat-box { display: flex; align-items: center; justify-content: center; gap: 4px; }
-        .card-blank .stat-num { font-size: 16px; font-weight: 900; color: #5d6d88; }
-        .card-blank .stat-label { font-size: 12px; font-weight: 800; color: #5d6d88; }
 
-        /* ========================================================================== */
-        /* 1. RARE GOLD CARD STYLES - EXACTLY 100 LINES                               */
-        /* ========================================================================== */
+        .stat-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            cursor: pointer;
+            padding: 3px;
+            border-radius: 4px;
+        }
+
+        .stat-box:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .stat-num { font-size: 16px; font-weight: 900; color: #ffffff; }
+        .stat-label { font-size: 12px; font-weight: 800; }
+
+        /* TIER 1: RARE GOLD CARD */
         .card-gold {
-            width: 320px;
-            height: 480px;
-            position: relative;
-            clip-path: polygon(15% 0%, 85% 0%, 100% 8%, 100% 75%, 85% 85%, 50% 100%, 15% 85%, 0% 75%, 0% 8%);
             background: radial-gradient(circle at 50% 30%, #fff6d1 0%, #e1ba52 35%, #a27b1e 70%, #3a2a00 100%);
-            color: #2e2000;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.6);
             border: 3px solid #e1ba52;
-            overflow: hidden;
-            user-select: none;
-            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.6);
         }
-        .card-gold::before {
-            content: "";
-            position: absolute;
-            inset: 6px;
-            clip-path: polygon(15% 0%, 85% 0%, 100% 8%, 100% 75%, 85% 85%, 50% 100%, 15% 85%, 0% 75%, 0% 8%);
-            border: 1px solid rgba(255, 246, 209, 0.6);
-            pointer-events: none;
-            z-index: 2;
-        }
-        .card-gold .player-pic-wrapper {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 260px;
-            height: 260px;
-            z-index: 1;
-        }
-        .card-gold .player-pic-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.6));
-        }
-        .card-gold .bottom-panel {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 210px;
-            background: linear-gradient(180deg, rgba(74, 54, 0, 0) 0%, rgba(58, 42, 0, 0.85) 30%, rgba(35, 25, 0, 0.95) 100%);
-            z-index: 3;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 10px;
-        }
-        .card-gold .main-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            width: 90%;
-            margin-bottom: 5px;
-        }
-        .card-gold .ovr-badge {
-            font-size: 38px;
-            font-weight: 900;
-            line-height: 1;
-            color: #2e2000;
-            text-shadow: 0 1px 2px rgba(255,255,255,0.6);
-        }
-        .card-gold .pos-badge {
-            font-size: 18px;
-            font-weight: 900;
-            color: #4a3600;
-            text-transform: uppercase;
-        }
-        .card-gold .name-banner {
-            width: 88%;
-            text-align: center;
-            font-size: 20px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #fff4c2;
-            background: linear-gradient(90deg, transparent, rgba(225, 186, 82, 0.4), transparent);
-            border-top: 1px solid #e1ba52;
-            border-bottom: 1px solid #e1ba52;
-            padding: 3px 0;
-            margin-bottom: 12px;
-        }
-        .card-gold .stats-matrix {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px 15px;
-            width: 82%;
-        }
-        .card-gold .stat-box {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-        }
-        .card-gold .stat-num {
-            font-size: 16px;
-            font-weight: 900;
-            color: #ffffff;
-        }
-        .card-gold .stat-label {
-            font-size: 12px;
-            font-weight: 800;
-            color: #e1ba52;
-        }
+        .card-gold .bottom-panel { background: linear-gradient(180deg, rgba(74, 54, 0, 0) 0%, rgba(58, 42, 0, 0.85) 30%, rgba(35, 25, 0, 0.95) 100%); }
+        .card-gold .ovr-badge { color: #2e2000; text-shadow: 0 1px 2px rgba(255,255,255,0.6); }
+        .card-gold .pos-badge { color: #4a3600; }
+        .card-gold .name-banner { color: #fff4c2; border-color: #e1ba52; background: linear-gradient(90deg, transparent, rgba(225, 186, 82, 0.4), transparent); }
+        .card-gold .stat-label { color: #e1ba52; }
 
-        /* ========================================================================== */
-        /* 2. TOTY CARD STYLES - EXACTLY 100 LINES                                    */
-        /* ========================================================================== */
+        /* TIER 2: TOTY CARD */
         .card-toty {
-            width: 320px;
-            height: 480px;
-            position: relative;
-            clip-path: polygon(15% 0%, 85% 0%, 100% 8%, 100% 75%, 85% 85%, 50% 100%, 15% 85%, 0% 75%, 0% 8%);
             background: radial-gradient(circle at 50% 20%, #70eeff 0%, #004ae2 40%, #031038 75%, #010619 100%);
-            color: #ffffff;
-            box-shadow: 0 15px 35px rgba(0, 74, 226, 0.6), inset 0 0 15px rgba(112, 238, 255, 0.8);
             border: 3px solid #70eeff;
-            overflow: hidden;
-            user-select: none;
-            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 15px 35px rgba(0, 74, 226, 0.6), inset 0 0 15px rgba(112, 238, 255, 0.8);
         }
-        .card-toty::before {
-            content: "";
-            position: absolute;
-            inset: 6px;
-            clip-path: polygon(15% 0%, 85% 0%, 100% 8%, 100% 75%, 85% 85%, 50% 100%, 15% 85%, 0% 75%, 0% 8%);
-            border: 1px solid rgba(112, 238, 255, 0.7);
-            pointer-events: none;
-            z-index: 2;
-        }
-        .card-toty .player-pic-wrapper {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 260px;
-            height: 260px;
-            z-index: 1;
-        }
-        .card-toty .player-pic-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.8));
-        }
-        .card-toty .bottom-panel {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 210px;
-            background: linear-gradient(180deg, rgba(3, 16, 56, 0) 0%, rgba(3, 16, 56, 0.9) 30%, rgba(1, 6, 25, 0.98) 100%);
-            z-index: 3;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 10px;
-        }
-        .card-toty .main-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            width: 90%;
-            margin-bottom: 5px;
-        }
-        .card-toty .ovr-badge {
-            font-size: 38px;
-            font-weight: 900;
-            line-height: 1;
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(112, 238, 255, 0.8);
-        }
-        .card-toty .pos-badge {
-            font-size: 18px;
-            font-weight: 900;
-            color: #70eeff;
-            text-transform: uppercase;
-        }
-        .card-toty .name-banner {
-            width: 88%;
-            text-align: center;
-            font-size: 20px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #ffffff;
-            background: linear-gradient(90deg, transparent, rgba(0, 74, 226, 0.5), transparent);
-            border-top: 1px solid #70eeff;
-            border-bottom: 1px solid #70eeff;
-            padding: 3px 0;
-            margin-bottom: 12px;
-        }
-        .card-toty .stats-matrix {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px 15px;
-            width: 82%;
-        }
-        .card-toty .stat-box {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-        }
-        .card-toty .stat-num {
-            font-size: 16px;
-            font-weight: 900;
-            color: #ffffff;
-        }
-        .card-toty .stat-label {
-            font-size: 12px;
-            font-weight: 800;
-            color: #70eeff;
-        }
+        .card-toty .bottom-panel { background: linear-gradient(180deg, rgba(3, 16, 56, 0) 0%, rgba(3, 16, 56, 0.9) 30%, rgba(1, 6, 25, 0.98) 100%); }
+        .card-toty .ovr-badge { color: #ffffff; text-shadow: 0 0 10px rgba(112, 238, 255, 0.8); }
+        .card-toty .pos-badge { color: #70eeff; }
+        .card-toty .name-banner { color: #ffffff; border-color: #70eeff; background: linear-gradient(90deg, transparent, rgba(0, 74, 226, 0.5), transparent); }
+        .card-toty .stat-label { color: #70eeff; }
 
-        /* ========================================================================== */
-        /* 3. RARE SILVER CARD STYLES - EXACTLY 100 LINES                             */
-        /* ========================================================================== */
+        /* TIER 3: RARE SILVER CARD */
         .card-silver {
-            width: 320px;
-            height: 480px;
-            position: relative;
-            clip-path: polygon(15% 0%, 85% 0%, 100% 8%, 100% 75%, 85% 85%, 50% 100%, 15% 85%, 0% 75%, 0% 8%);
             background: radial-gradient(circle at 50% 30%, #ffffff 0%, #c0c0c0 40%, #707070 75%, #1a1a1a 100%);
-            color: #1a1a1a;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.7);
             border: 3px solid #c0c0c0;
-            overflow: hidden;
-            user-select: none;
-            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.7);
         }
-        .card-silver::before {
-            content: "";
-            position: absolute;
-            inset: 6px;
-            clip-path: polygon(15% 0%, 85% 0%, 100% 8%, 100% 75%, 85% 85%, 50% 100%, 15% 85%, 0% 75%, 0% 8%);
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            pointer-events: none;
-            z-index: 2;
-        }
-        .card-silver .player-pic-wrapper {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 260px;
-            height: 260px;
-            z-index: 1;
-        }
-        .card-silver .player-pic-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.6));
-        }
-        .card-silver .bottom-panel {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 210px;
-            background: linear-gradient(180deg, rgba(40, 40, 40, 0) 0%, rgba(40, 40, 40, 0.85) 30%, rgba(20, 20, 20, 0.95) 100%);
-            z-index: 3;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 10px;
-        }
-        .card-silver .main-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            width: 90%;
-            margin-bottom: 5px;
-        }
-        .card-silver .ovr-badge {
-            font-size: 38px;
-            font-weight: 900;
-            line-height: 1;
-            color: #1a1a1a;
-            text-shadow: 0 1px 2px rgba(255,255,255,0.8);
-        }
-        .card-silver .pos-badge {
-            font-size: 18px;
-            font-weight: 900;
-            color: #2b2b2b;
-            text-transform: uppercase;
-        }
-        .card-silver .name-banner {
-            width: 88%;
-            text-align: center;
-            font-size: 20px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #ffffff;
-            background: linear-gradient(90deg, transparent, rgba(192, 192, 192, 0.4), transparent);
-            border-top: 1px solid #c0c0c0;
-            border-bottom: 1px solid #c0c0c0;
-            padding: 3px 0;
-            margin-bottom: 12px;
-        }
-        .card-silver .stats-matrix {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px 15px;
-            width: 82%;
-        }
-        .card-silver .stat-box {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-        }
-        .card-silver .stat-num {
-            font-size: 16px;
-            font-weight: 900;
-            color: #ffffff;
-        }
-        .card-silver .stat-label {
-            font-size: 12px;
-            font-weight: 800;
-            color: #c0c0c0;
-        }
+        .card-silver .bottom-panel { background: linear-gradient(180deg, rgba(40, 40, 40, 0) 0%, rgba(40, 40, 40, 0.85) 30%, rgba(20, 20, 20, 0.95) 100%); }
+        .card-silver .ovr-badge { color: #1a1a1a; text-shadow: 0 1px 2px rgba(255,255,255,0.8); }
+        .card-silver .pos-badge { color: #2b2b2b; }
+        .card-silver .name-banner { color: #ffffff; border-color: #c0c0c0; background: linear-gradient(90deg, transparent, rgba(192, 192, 192, 0.4), transparent); }
+        .card-silver .stat-label { color: #c0c0c0; }
 
-        /* ========================================================================== */
-        /* 4. RARE BRONZE CARD STYLES - EXACTLY 100 LINES                            */
-        /* ========================================================================== */
+        /* TIER 4: RARE BRONZE CARD */
         .card-bronze {
-            width: 320px;
-            height: 480px;
-            position: relative;
-            clip-path: polygon(15% 0%, 85% 0%, 100% 8%, 100% 75%, 85% 85%, 50% 100%, 15% 85%, 0% 75%, 0% 8%);
             background: radial-gradient(circle at 50% 30%, #f3d1b5 0%, #b87333 40%, #6e3b12 75%, #210d00 100%);
-            color: #2b1200;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(243, 209, 181, 0.5);
             border: 3px solid #b87333;
-            overflow: hidden;
-            user-select: none;
-            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(243, 209, 181, 0.5);
         }
-        .card-bronze::before {
-            content: "";
-            position: absolute;
-            inset: 6px;
-            clip-path: polygon(15% 0%, 85% 0%, 100% 8%, 100% 75%, 85% 85%, 50% 100%, 15% 85%, 0% 75%, 0% 8%);
-            border: 1px solid rgba(243, 209, 181, 0.5);
-            pointer-events: none;
-            z-index: 2;
-        }
-        .card-bronze .player-pic-wrapper {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 260px;
-            height: 260px;
-            z-index: 1;
-        }
-        .card-bronze .player-pic-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.7));
-        }
-        .card-bronze .bottom-panel {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 210px;
-            background: linear-gradient(180deg, rgba(43, 18, 0, 0) 0%, rgba(43, 18, 0, 0.85) 30%, rgba(20, 8, 0, 0.95) 100%);
-            z-index: 3;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 10px;
-        }
-        .card-bronze .main-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            width: 90%;
-            margin-bottom: 5px;
-        }
-        .card-bronze .ovr-badge {
-            font-size: 38px;
-            font-weight: 900;
-            line-height: 1;
-            color: #2b1200;
-            text-shadow: 0 1px 2px rgba(255,255,255,0.4);
-        }
-        .card-bronze .pos-badge {
-            font-size: 18px;
-            font-weight: 900;
-            color: #3e1b00;
-            text-transform: uppercase;
-        }
-        .card-bronze .name-banner {
-            width: 88%;
-            text-align: center;
-            font-size: 20px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #f3d1b5;
-            background: linear-gradient(90deg, transparent, rgba(184, 115, 51, 0.4), transparent);
-            border-top: 1px solid #b87333;
-            border-bottom: 1px solid #b87333;
-            padding: 3px 0;
-            margin-bottom: 12px;
-        }
-        .card-bronze .stats-matrix {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px 15px;
-            width: 82%;
-        }
-        .card-bronze .stat-box {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-        }
-        .card-bronze .stat-num {
-            font-size: 16px;
-            font-weight: 900;
-            color: #ffffff;
-        }
-        .card-bronze .stat-label {
-            font-size: 12px;
-            font-weight: 800;
-            color: #b87333;
-        }
+        .card-bronze .bottom-panel { background: linear-gradient(180deg, rgba(43, 18, 0, 0) 0%, rgba(43, 18, 0, 0.85) 30%, rgba(20, 8, 0, 0.95) 100%); }
+        .card-bronze .ovr-badge { color: #2b1200; text-shadow: 0 1px 2px rgba(255,255,255,0.4); }
+        .card-bronze .pos-badge { color: #3e1b00; }
+        .card-bronze .name-banner { color: #f3d1b5; border-color: #b87333; background: linear-gradient(90deg, transparent, rgba(184, 115, 51, 0.4), transparent); }
+        .card-bronze .stat-label { color: #b87333; }
 
-        /* ========================================================================== */
-        /* 5. ICON CARD STYLES - EXACTLY 100 LINES                                   */
-        /* ========================================================================== */
+        /* TIER 5: ICON CARD */
         .card-icon {
-            width: 320px;
-            height: 480px;
-            position: relative;
-            clip-path: polygon(15% 0%, 85% 0%, 100% 8%, 100% 75%, 85% 85%, 50% 100%, 15% 85%, 0% 75%, 0% 8%);
             background: radial-gradient(circle at 50% 25%, #ffffff 0%, #f7f0dc 30%, #d4af37 70%, #1c180a 100%);
-            color: #1a1608;
-            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.9);
             border: 3px solid #e6c65c;
-            overflow: hidden;
-            user-select: none;
-            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.9);
         }
-        .card-icon::before {
-            content: "";
-            position: absolute;
-            inset: 6px;
-            clip-path: polygon(15% 0%, 85% 0%, 100% 8%, 100% 75%, 85% 85%, 50% 100%, 15% 85%, 0% 75%, 0% 8%);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            pointer-events: none;
-            z-index: 2;
-        }
-        .card-icon .player-pic-wrapper {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 260px;
-            height: 260px;
-            z-index: 1;
-        }
-        .card-icon .player-pic-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.6));
-        }
-        .card-icon .bottom-panel {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 210px;
-            background: linear-gradient(180deg, rgba(28, 24, 10, 0) 0%, rgba(28, 24, 10, 0.88) 30%, rgba(12, 10, 3, 0.96) 100%);
-            z-index: 3;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 10px;
-        }
-        .card-icon .main-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            width: 90%;
-            margin-bottom: 5px;
-        }
-        .card-icon .ovr-badge {
-            font-size: 38px;
-            font-weight: 900;
-            line-height: 1;
-            color: #1a1608;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-        }
-        .card-icon .pos-badge {
-            font-size: 18px;
-            font-weight: 900;
-            color: #3b3110;
-            text-transform: uppercase;
-        }
-        .card-icon .name-banner {
-            width: 88%;
-            text-align: center;
-            font-size: 20px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #ffffff;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
-            border-top: 1px solid #d4af37;
-            border-bottom: 1px solid #d4af37;
-            padding: 3px 0;
-            margin-bottom: 12px;
-        }
-        .card-icon .stats-matrix {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px 15px;
-            width: 82%;
-        }
-        .card-icon .stat-box {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-        }
-        .card-icon .stat-num {
-            font-size: 16px;
-            font-weight: 900;
-            color: #ffffff;
-        }
-        .card-icon .stat-label {
-            font-size: 12px;
-            font-weight: 800;
-            color: #d4af37;
-        }
+        .card-icon .bottom-panel { background: linear-gradient(180deg, rgba(28, 24, 10, 0) 0%, rgba(28, 24, 10, 0.88) 30%, rgba(12, 10, 3, 0.96) 100%); }
+        .card-icon .ovr-badge { color: #1a1608; text-shadow: 0 0 8px rgba(255, 255, 255, 0.8); }
+        .card-icon .pos-badge { color: #3b3110; }
+        .card-icon .name-banner { color: #ffffff; border-color: #d4af37; background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent); }
+        .card-icon .stat-label { color: #d4af37; }
 
+        /* BLANK CARD DEFAULT */
+        .card-blank {
+            background: radial-gradient(circle at 50% 30%, #1c2430 0%, #0d121a 100%);
+            border: 3px solid #2a364f;
+        }
+        .card-blank .bottom-panel { background: rgba(13, 18, 26, 0.95); }
+        .card-blank .ovr-badge, .card-blank .pos-badge, .card-blank .name-banner, .card-blank .stat-label { color: #5d6d88; border-color: #2a364f; }
+
+        /* TRIGGER BUTTON */
         .spin-wheel-trigger-btn {
             width: 100%;
             padding: 15px;
@@ -746,13 +288,10 @@
             cursor: not-allowed;
         }
 
-        /* MODAL OVERLAY & WHEEL */
+        /* MODAL WHEEL OVERLAY */
         .modal-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            top: 0; left: 0; width: 100vw; height: 100vh;
             background: rgba(4, 6, 10, 0.88);
             backdrop-filter: blur(8px);
             z-index: 9999;
@@ -764,87 +303,43 @@
             transition: opacity 0.3s ease;
         }
 
-        .modal-overlay.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .modal-overlay.visible { opacity: 1; pointer-events: auto; }
 
         .control-panel {
             background: #0f1522;
             border: 2px solid #00ff88;
             border-radius: 20px;
             padding: 20px;
-            width: min(90vw, 380px);
+            width: min(90vw, 360px);
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 15px;
         }
 
-        .wheel-header {
-            display: flex;
-            width: 100%;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .status-msg {
-            font-size: 18px;
-            color: #00ff88;
-            font-weight: 900;
-        }
-
-        .close-btn {
-            background: #ff4757;
-            color: white;
-            border: none;
-            font-size: 12px;
-            padding: 6px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+        .wheel-header { display: flex; width: 100%; justify-content: space-between; align-items: center; }
+        .status-msg { font-size: 18px; color: #00ff88; font-weight: 900; }
+        .close-btn { background: #ff4757; color: white; border: none; font-size: 12px; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; }
 
         .wheel-box {
             position: relative;
-            width: 280px; 
-            height: 280px;
+            width: 270px; height: 270px;
             overflow: hidden;
             border-radius: 50%;
             border: 4px solid #00ff88;
         }
 
-        .wheel-svg {
-            width: 100%;
-            height: 100%;
-            transform: rotate(0deg);
-            transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1);
-        }
-
+        .wheel-svg { width: 100%; height: 100%; transform: rotate(0deg); transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1); }
         .wheel-pointer {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-top: 25px solid #ffffff;
-            z-index: 10;
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 0; height: 0;
+            border-left: 15px solid transparent; border-right: 15px solid transparent;
+            border-top: 25px solid #ffffff; z-index: 10;
         }
 
         .spin-btn {
-            background: #00ff88;
-            color: #06090e;
-            font-size: 16px;
-            font-weight: 900;
-            border: none;
-            padding: 12px;
-            border-radius: 10px;
-            cursor: pointer;
-            width: 100%;
-            text-transform: uppercase;
+            background: #00ff88; color: #06090e; font-size: 16px; font-weight: 900;
+            border: none; padding: 12px; border-radius: 10px; cursor: pointer; width: 100%; text-transform: uppercase;
         }
     </style>
 </head>
@@ -858,7 +353,7 @@
     </div>
 
     <div class="game-container">
-        <div class="card-blank" id="fcCard">
+        <div class="card-base card-blank" id="fcCard">
             <div class="player-pic-wrapper">
                 <img src="" alt="Player Headshot" id="playerPic" style="opacity: 0;">
             </div>
@@ -931,27 +426,24 @@
 
         const defaultSilhouette = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='32' r='20' fill='%23ffffff'/><path d='M20 90 C20 60, 30 50, 50 50 C70 50, 80 60, 80 90 Z' fill='%23ffffff'/></svg>";
 
-        playerPic.onerror = function() {
-            this.src = defaultSilhouette;
-        };
+        playerPic.onerror = function() { this.src = defaultSilhouette; };
 
-        const wheelNumbers = [];
-        for (let i = 50; i <= 99; i++) wheelNumbers.push(i);
+        const wheelNumbers = Array.from({length: 50}, (_, i) => i + 50);
         const totalSegments = wheelNumbers.length;
         const segmentAngle = 360 / totalSegments;
 
-        // Player database with headshots via Wikimedia Commons / transparent player renders
+        // HIGH QUALITY PLAYER DATABASE WITH DIRECT ACCESSIBLE PICTURE LINKS
         const playersDb = [
-            { id: "pele", name: "Pelé", pos: "CAM", isIcon: true, img: "https://upload.wikimedia.org/wikipedia/commons/5/54/Pele_by_John_Mathew_Smith_crop.png" },
-            { id: "zidane", name: "Zidane", pos: "CM", isIcon: true, img: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Zinedine_Zidane_by_Tasnim_03.jpg" },
-            { id: "mbappe", name: "Mbappé", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/5/57/Kylian_Mbapp%C3%A9_2018.jpg" },
-            { id: "haaland", name: "Haaland", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/3/33/Erling_Haaland_2023.jpg" },
-            { id: "bellingham", name: "Bellingham", pos: "CAM", img: "https://upload.wikimedia.org/wikipedia/commons/e/eb/Jude_Bellingham_2023.jpg" },
-            { id: "messi", name: "Messi", pos: "CF", img: "https://upload.wikimedia.org/wikipedia/commons/b/b4/Lionel-Messi-Argentina-2022-World-Cup_%28cropped%29.jpg" },
-            { id: "ronaldo", name: "Ronaldo", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg" },
-            { id: "vini", name: "Vinícius Jr.", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Vinicius_Junior_2021.jpg" },
-            { id: "yamal", name: "Lamine Yamal", pos: "RW", img: "https://upload.wikimedia.org/wikipedia/commons/a/a2/Lamine_Yamal_2024.jpg" },
-            { id: "saka", name: "Saka", pos: "RW", img: "https://upload.wikimedia.org/wikipedia/commons/3/3d/Bukayo_Saka_2021.jpg" }
+            { id: "pele", name: "Pelé", pos: "CAM", tier: "icon", img: "https://upload.wikimedia.org/wikipedia/commons/5/54/Pele_by_John_Mathew_Smith_crop.png" },
+            { id: "zidane", name: "Zinedine Zidane", pos: "CM", tier: "icon", img: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Zinedine_Zidane_by_Tasnim_03.jpg" },
+            { id: "mbappe", name: "Kylian Mbappé", pos: "ST", tier: "toty", img: "https://upload.wikimedia.org/wikipedia/commons/5/57/Kylian_Mbapp%C3%A9_2018.jpg" },
+            { id: "haaland", name: "Erling Haaland", pos: "ST", tier: "gold", img: "https://upload.wikimedia.org/wikipedia/commons/3/33/Erling_Haaland_2023.jpg" },
+            { id: "bellingham", name: "Jude Bellingham", pos: "CAM", tier: "gold", img: "https://upload.wikimedia.org/wikipedia/commons/e/eb/Jude_Bellingham_2023.jpg" },
+            { id: "messi", name: "Lionel Messi", pos: "CF", tier: "gold", img: "https://upload.wikimedia.org/wikipedia/commons/b/b4/Lionel-Messi-Argentina-2022-World-Cup_%28cropped%29.jpg" },
+            { id: "ronaldo", name: "Cristiano Ronaldo", pos: "ST", tier: "gold", img: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg" },
+            { id: "vini", name: "Vinícius Jr.", pos: "LW", tier: "gold", img: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Vinicius_Junior_2021.jpg" },
+            { id: "yamal", name: "Lamine Yamal", pos: "RW", tier: "gold", img: "https://upload.wikimedia.org/wikipedia/commons/a/a2/Lamine_Yamal_2024.jpg" },
+            { id: "saka", name: "Bukayo Saka", pos: "RW", tier: "silver", img: "https://upload.wikimedia.org/wikipedia/commons/3/3d/Bukayo_Saka_2021.jpg" }
         ];
 
         playerSearch.addEventListener("input", () => {
@@ -993,7 +485,7 @@
 
             openWheelBtn.disabled = false;
             resetCardStats();
-            updateCardTier(85);
+            updateCardTier(player.tier);
         }
 
         function resetCardStats() {
@@ -1004,28 +496,14 @@
             }
         }
 
-        function updateCardTier(ovr) {
-            fcCard.className = "";
+        function updateCardTier(tier) {
+            fcCard.className = "card-base";
 
-            if (selectedPlayer && selectedPlayer.isIcon) {
-                fcCard.classList.add("card-icon");
-                return;
-            }
-
-            if (ovr === null || isNaN(ovr)) {
-                fcCard.classList.add("card-blank");
-                return;
-            }
-
-            if (ovr < 65) {
-                fcCard.classList.add("card-bronze");
-            } else if (ovr < 75) {
-                fcCard.classList.add("card-silver");
-            } else if (ovr < 92) {
-                fcCard.classList.add("card-gold");
-            } else {
-                fcCard.classList.add("card-toty");
-            }
+            if (tier === "icon") fcCard.classList.add("card-icon");
+            else if (tier === "toty") fcCard.classList.add("card-toty");
+            else if (tier === "silver") fcCard.classList.add("card-silver");
+            else if (tier === "bronze") fcCard.classList.add("card-bronze");
+            else fcCard.classList.add("card-gold");
         }
 
         function buildNumberedWheel() {
@@ -1116,8 +594,6 @@
                 }
                 const finalOvr = Math.round(sum / count);
                 cardOvr.innerText = finalOvr;
-                
-                updateCardTier(finalOvr);
 
                 spinBtn.innerText = "DONE!";
                 statusMsg.innerText = `LANDED ON ${chosenValue}!`;
