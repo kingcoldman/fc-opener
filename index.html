@@ -8,7 +8,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,900&display=swap');
 
         /* ==========================================================================
-           1. RESET & VARS
+           1. RESET & THEME VARIABLES
            ========================================================================== */
         *, *::before, *::after {
             box-sizing: border-box;
@@ -17,41 +17,29 @@
         }
 
         :root {
-            --bg-main-dark: #06090e;
-            --bg-card-panel: #111723;
+            --bg-main-dark: #05080e;
+            --bg-card-panel: #0d131d;
             --accent-green-primary: #00ff88;
             --accent-green-hover: #00e67a;
             --accent-green-dark: #00b359;
             --text-pure-white: #ffffff;
-            --text-muted-slate: #5d6d88;
-            --border-dark-slate: #2a364f;
+            --text-muted-slate: #6b7c96;
+            --border-dark-slate: #1e2838;
             
-            --gold-primary: #e1ba52;
-            --gold-light: #fff6d1;
-            --gold-mid: #a27b1e;
-            --gold-dark: #3a2a00;
-            --gold-text-dark: #2e2000;
-            --gold-text-muted: #4a3600;
+            --gold-primary: #ffd700;
+            --gold-light: #fff8d6;
+            --gold-mid: #c59b27;
+            --gold-dark: #4a3800;
+            --gold-text-dark: #221800;
 
-            --toty-primary: #70eeff;
-            --toty-blue-bright: #004ae2;
-            --toty-blue-dark: #031038;
-            --toty-black: #010619;
+            --toty-primary: #00f0ff;
+            --toty-blue-bright: #0051ff;
+            --toty-blue-dark: #020b2d;
 
-            --silver-primary: #c0c0c0;
-            --silver-light: #ffffff;
-            --silver-mid: #707070;
-            --silver-dark: #1a1a1a;
-
-            --bronze-primary: #b87333;
-            --bronze-light: #f3d1b5;
-            --bronze-mid: #6e3b12;
-            --bronze-dark: #210d00;
-
-            --icon-primary: #d4af37;
-            --icon-light: #f7f0dc;
-            --icon-accent: #e6c65c;
-            --icon-dark: #1c180a;
+            --silver-primary: #e0e0e0;
+            --bronze-primary: #cd7f32;
+            --icon-primary: #f3e5ab;
+            --icon-accent: #d4af37;
         }
 
         body {
@@ -74,42 +62,41 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             margin-bottom: 24px;
         }
 
         .app-title {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             color: var(--accent-green-primary);
-            text-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+            text-shadow: 0 0 25px rgba(0, 255, 136, 0.5);
             text-align: center;
         }
 
         .app-subtitle {
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 800;
             color: var(--text-muted-slate);
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             margin-top: 4px;
         }
 
         .search-wrapper {
             position: relative;
-            width: 320px;
+            width: 380px;
             margin-bottom: 30px;
             z-index: 50;
         }
 
         .search-input-field {
             width: 100%;
-            padding: 16px 20px;
-            font-size: 14px;
+            padding: 18px 24px;
+            font-size: 15px;
             font-weight: 900;
-            border-radius: 14px;
+            border-radius: 16px;
             background-color: var(--bg-card-panel);
             color: var(--text-pure-white);
             border: 2px solid var(--accent-green-primary);
@@ -120,30 +107,30 @@
         }
 
         .search-input-field:focus {
-            box-shadow: 0 6px 25px rgba(0, 255, 136, 0.4);
+            box-shadow: 0 6px 30px rgba(0, 255, 136, 0.45);
             border-color: var(--accent-green-hover);
         }
 
         .suggestions-dropdown {
             position: absolute;
-            top: 60px;
+            top: 66px;
             left: 0;
             right: 0;
             background-color: var(--bg-card-panel);
             border: 1px solid var(--accent-green-primary);
-            border-radius: 14px;
-            max-height: 250px;
+            border-radius: 16px;
+            max-height: 280px;
             overflow-y: auto;
             display: none;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
             z-index: 100;
         }
 
         .suggestions-dropdown.visible { display: block; }
 
         .suggestion-row {
-            padding: 14px 18px;
-            font-size: 13px;
+            padding: 14px 20px;
+            font-size: 14px;
             cursor: pointer;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
@@ -158,19 +145,19 @@
         }
 
         /* ==========================================================================
-           3. CARD STRUCTURE
+           3. ENHANCED & LARGER CARD STRUCTURE
            ========================================================================== */
         .workspace {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 320px;
-            gap: 24px;
+            width: 380px;
+            gap: 28px;
         }
 
         .fut-card-base {
-            width: 320px;
-            height: 480px;
+            width: 380px;
+            height: 570px;
             position: relative;
             clip-path: polygon(15% 0%, 85% 0%, 100% 8%, 100% 75%, 85% 85%, 50% 100%, 15% 85%, 0% 75%, 0% 8%);
             overflow: hidden;
@@ -179,24 +166,27 @@
         }
 
         .fut-card-base:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.01);
         }
 
         .headshot-frame {
             position: absolute;
-            top: 25px;
+            top: 30px;
             left: 50%;
             transform: translateX(-50%);
-            width: 250px;
-            height: 250px;
+            width: 290px;
+            height: 290px;
             z-index: 2;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
         }
 
         .headshot-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.6));
             transition: opacity 0.3s ease-in-out;
         }
 
@@ -205,31 +195,32 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 215px;
+            height: 260px;
             z-index: 5;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-top: 12px;
+            padding-top: 16px;
         }
 
         .header-info-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 16px;
             width: 90%;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .overall-rating-value {
-            font-size: 38px;
+            font-size: 46px;
             font-weight: 900;
             line-height: 1;
+            letter-spacing: -1px;
         }
 
         .position-label-text {
-            font-size: 18px;
+            font-size: 22px;
             font-weight: 900;
             text-transform: uppercase;
         }
@@ -237,106 +228,108 @@
         .player-name-ribbon {
             width: 88%;
             text-align: center;
-            font-size: 19px;
+            font-size: 22px;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 3px 0;
-            margin-bottom: 12px;
-            border-top: 1px solid;
-            border-bottom: 1px solid;
+            letter-spacing: 1.5px;
+            padding: 5px 0;
+            margin-bottom: 14px;
+            border-top: 2px solid;
+            border-bottom: 2px solid;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .attribute-matrix-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px 16px;
-            width: 84%;
+            gap: 10px 20px;
+            width: 86%;
         }
 
         .attribute-tile {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 4px;
+            gap: 6px;
             cursor: pointer;
-            padding: 4px;
-            border-radius: 6px;
-            transition: background-color 0.2s ease;
+            padding: 6px;
+            border-radius: 8px;
+            transition: background-color 0.2s ease, transform 0.15s ease;
         }
 
         .attribute-tile:hover {
-            background-color: rgba(255, 255, 255, 0.15);
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
         }
 
         .stat-value-num {
-            font-size: 16px;
+            font-size: 20px;
             font-weight: 900;
             color: var(--text-pure-white);
         }
 
         .stat-key-label {
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 800;
         }
 
         /* ==========================================================================
-           4. CARD THEMES
+           4. UPGRADED METALLIC CARD THEMES
            ========================================================================== */
         .tier-gold {
-            background: radial-gradient(circle at 50% 30%, var(--gold-light) 0%, var(--gold-primary) 35%, var(--gold-mid) 70%, var(--gold-dark) 100%);
-            border: 3px solid var(--gold-primary);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+            background: linear-gradient(135deg, #fce074 0%, #e1ba52 25%, #a27b1e 60%, #3a2a00 100%);
+            box-shadow: 0 20px 45px rgba(225, 186, 82, 0.4);
+            border: 3px solid #ffea9f;
         }
-        .tier-gold .card-bottom-section { background: linear-gradient(180deg, rgba(74, 54, 0, 0) 0%, rgba(58, 42, 0, 0.85) 30%, rgba(35, 25, 0, 0.95) 100%); }
-        .tier-gold .overall-rating-value { color: var(--gold-text-dark); }
-        .tier-gold .position-label-text { color: var(--gold-text-muted); }
-        .tier-gold .player-name-ribbon { color: #fff4c2; border-color: var(--gold-primary); }
-        .tier-gold .stat-key-label { color: var(--gold-primary); }
+        .tier-gold .card-bottom-section { background: linear-gradient(180deg, rgba(58, 42, 0, 0) 0%, rgba(35, 25, 0, 0.92) 35%, rgba(15, 10, 0, 0.98) 100%); }
+        .tier-gold .overall-rating-value { color: #2e2000; text-shadow: 0 1px 2px rgba(255,255,255,0.4); }
+        .tier-gold .position-label-text { color: #4a3600; }
+        .tier-gold .player-name-ribbon { color: #ffffff; border-color: #ffd700; }
+        .tier-gold .stat-key-label { color: #ffea9f; }
 
         .tier-toty {
-            background: radial-gradient(circle at 50% 20%, var(--toty-primary) 0%, var(--toty-blue-bright) 40%, var(--toty-blue-dark) 75%, var(--toty-black) 100%);
-            border: 3px solid var(--toty-primary);
-            box-shadow: 0 15px 35px rgba(0, 74, 226, 0.6);
+            background: linear-gradient(135deg, #70eeff 0%, #0077ff 30%, #001f70 70%, #010619 100%);
+            box-shadow: 0 20px 45px rgba(0, 119, 255, 0.6);
+            border: 3px solid #a8f5ff;
         }
-        .tier-toty .card-bottom-section { background: linear-gradient(180deg, rgba(3, 16, 56, 0) 0%, rgba(3, 16, 56, 0.9) 30%, rgba(1, 6, 25, 0.98) 100%); }
-        .tier-toty .overall-rating-value { color: #ffffff; }
-        .tier-toty .position-label-text { color: var(--toty-primary); }
-        .tier-toty .player-name-ribbon { color: #ffffff; border-color: var(--toty-primary); }
-        .tier-toty .stat-key-label { color: var(--toty-primary); }
+        .tier-toty .card-bottom-section { background: linear-gradient(180deg, rgba(0, 31, 112, 0) 0%, rgba(1, 12, 48, 0.92) 35%, rgba(0, 4, 16, 0.98) 100%); }
+        .tier-toty .overall-rating-value { color: #ffffff; text-shadow: 0 0 10px rgba(112, 238, 255, 0.8); }
+        .tier-toty .position-label-text { color: #70eeff; }
+        .tier-toty .player-name-ribbon { color: #ffffff; border-color: #70eeff; }
+        .tier-toty .stat-key-label { color: #70eeff; }
 
         .tier-silver {
-            background: radial-gradient(circle at 50% 30%, var(--silver-light) 0%, var(--silver-primary) 40%, var(--silver-mid) 75%, var(--silver-dark) 100%);
-            border: 3px solid var(--silver-primary);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+            background: linear-gradient(135deg, #ffffff 0%, #c0c0c0 30%, #707070 70%, #1a1a1a 100%);
+            box-shadow: 0 20px 45px rgba(192, 192, 192, 0.3);
+            border: 3px solid #ffffff;
         }
-        .tier-silver .card-bottom-section { background: linear-gradient(180deg, rgba(40, 40, 40, 0) 0%, rgba(40, 40, 40, 0.85) 30%, rgba(20, 20, 20, 0.95) 100%); }
+        .tier-silver .card-bottom-section { background: linear-gradient(180deg, rgba(40, 40, 40, 0) 0%, rgba(20, 20, 20, 0.92) 35%, rgba(10, 10, 10, 0.98) 100%); }
         .tier-silver .overall-rating-value { color: #1a1a1a; }
-        .tier-silver .position-label-text { color: #2b2b2b; }
-        .tier-silver .player-name-ribbon { color: #ffffff; border-color: var(--silver-primary); }
-        .tier-silver .stat-key-label { color: var(--silver-primary); }
+        .tier-silver .position-label-text { color: #333333; }
+        .tier-silver .player-name-ribbon { color: #ffffff; border-color: #ffffff; }
+        .tier-silver .stat-key-label { color: #e0e0e0; }
 
         .tier-bronze {
-            background: radial-gradient(circle at 50% 30%, var(--bronze-light) 0%, var(--bronze-primary) 40%, var(--bronze-mid) 75%, var(--bronze-dark) 100%);
-            border: 3px solid var(--bronze-primary);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+            background: linear-gradient(135deg, #f3d1b5 0%, #b87333 30%, #6e3b12 70%, #210d00 100%);
+            box-shadow: 0 20px 45px rgba(184, 115, 51, 0.3);
+            border: 3px solid #f3d1b5;
         }
-        .tier-bronze .card-bottom-section { background: linear-gradient(180deg, rgba(43, 18, 0, 0) 0%, rgba(43, 18, 0, 0.85) 30%, rgba(20, 8, 0, 0.95) 100%); }
+        .tier-bronze .card-bottom-section { background: linear-gradient(180deg, rgba(43, 18, 0, 0) 0%, rgba(25, 10, 0, 0.92) 35%, rgba(10, 4, 0, 0.98) 100%); }
         .tier-bronze .overall-rating-value { color: #2b1200; }
-        .tier-bronze .position-label-text { color: #3e1b00; }
-        .tier-bronze .player-name-ribbon { color: var(--bronze-light); border-color: var(--bronze-primary); }
-        .tier-bronze .stat-key-label { color: var(--bronze-primary); }
+        .tier-bronze .position-label-text { color: #4a2100; }
+        .tier-bronze .player-name-ribbon { color: #ffffff; border-color: #f3d1b5; }
+        .tier-bronze .stat-key-label { color: #f3d1b5; }
 
         .tier-icon {
-            background: radial-gradient(circle at 50% 25%, var(--icon-light) 0%, var(--icon-primary) 50%, var(--icon-dark) 100%);
-            border: 3px solid var(--icon-accent);
-            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.5);
+            background: linear-gradient(135deg, #ffffff 0%, #f7f0dc 20%, #d4af37 50%, #8c7118 80%, #1c180a 100%);
+            box-shadow: 0 20px 45px rgba(212, 175, 55, 0.5);
+            border: 3px solid #fff3c4;
         }
-        .tier-icon .card-bottom-section { background: linear-gradient(180deg, rgba(28, 24, 10, 0) 0%, rgba(28, 24, 10, 0.88) 30%, rgba(12, 10, 3, 0.96) 100%); }
-        .tier-icon .overall-rating-value { color: #1a1608; }
-        .tier-icon .position-label-text { color: #3b3110; }
-        .tier-icon .player-name-ribbon { color: #ffffff; border-color: var(--icon-primary); }
-        .tier-icon .stat-key-label { color: var(--icon-primary); }
+        .tier-icon .card-bottom-section { background: linear-gradient(180deg, rgba(28, 24, 10, 0) 0%, rgba(18, 15, 5, 0.92) 35%, rgba(8, 6, 2, 0.98) 100%); }
+        .tier-icon .overall-rating-value { color: #1c180a; }
+        .tier-icon .position-label-text { color: #4a3f18; }
+        .tier-icon .player-name-ribbon { color: #ffffff; border-color: #d4af37; }
+        .tier-icon .stat-key-label { color: #f7f0dc; }
 
         .tier-blank {
             background: radial-gradient(circle at 50% 30%, #1c2430 0%, #0d121a 100%);
@@ -346,25 +339,25 @@
         .tier-blank .overall-rating-value, .tier-blank .position-label-text, .tier-blank .player-name-ribbon, .tier-blank .stat-key-label { color: var(--text-muted-slate); border-color: var(--border-dark-slate); }
 
         /* ==========================================================================
-           5. BUTTONS & MODAL
+           5. BUTTONS & LARGER RED/BLUE WHEEL MODAL
            ========================================================================== */
         .trigger-wheel-action-btn {
             width: 100%;
-            padding: 16px 0;
+            padding: 18px 0;
             background: linear-gradient(135deg, var(--accent-green-primary) 0%, var(--accent-green-dark) 100%);
             color: var(--bg-main-dark);
             border: none;
-            border-radius: 14px;
-            font-size: 15px;
+            border-radius: 16px;
+            font-size: 16px;
             font-weight: 900;
             text-transform: uppercase;
             cursor: pointer;
-            box-shadow: 0 6px 20px rgba(0, 255, 136, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.35);
             transition: all 0.2s ease;
         }
 
         .trigger-wheel-action-btn:disabled {
-            background: #253346;
+            background: #1e2838;
             color: var(--text-muted-slate);
             box-shadow: none;
             cursor: not-allowed;
@@ -373,8 +366,8 @@
         .wheel-modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(4, 6, 10, 0.88);
-            backdrop-filter: blur(8px);
+            background: rgba(3, 5, 10, 0.92);
+            backdrop-filter: blur(10px);
             z-index: 9999;
             display: flex;
             align-items: center;
@@ -387,40 +380,44 @@
         .wheel-modal-overlay.active { opacity: 1; pointer-events: auto; }
 
         .wheel-dialog-box {
-            background: #0f1522;
+            background: #0b101a;
             border: 2px solid var(--accent-green-primary);
-            border-radius: 20px;
-            padding: 24px;
-            width: min(90vw, 360px);
+            border-radius: 24px;
+            padding: 28px;
+            width: min(92vw, 440px);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 16px;
+            gap: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
         }
 
         .modal-top-bar { display: flex; width: 100%; justify-content: space-between; align-items: center; }
-        .modal-title-text { font-size: 18px; color: var(--accent-green-primary); font-weight: 900; }
-        .dismiss-modal-btn { background: #ff4757; color: white; border: none; font-size: 12px; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .modal-title-text { font-size: 20px; color: var(--accent-green-primary); font-weight: 900; }
+        .dismiss-modal-btn { background: #ff3b3b; color: white; border: none; font-size: 13px; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: bold; }
 
         .wheel-viewport {
             position: relative;
-            width: 270px; height: 270px;
+            width: 340px; height: 340px;
             overflow: hidden;
             border-radius: 50%;
-            border: 4px solid var(--accent-green-primary);
+            border: 5px solid #ffffff;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
         }
 
         .wheel-svg-element { width: 100%; height: 100%; transform: rotate(0deg); transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1); }
         .wheel-top-pointer {
             position: absolute; top: 0; left: 50%; transform: translateX(-50%);
             width: 0; height: 0;
-            border-left: 15px solid transparent; border-right: 15px solid transparent;
-            border-top: 25px solid #ffffff; z-index: 10;
+            border-left: 18px solid transparent; border-right: 18px solid transparent;
+            border-top: 30px solid #ffffff; z-index: 10;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
         }
 
         .execute-spin-btn {
-            background: var(--accent-green-primary); color: var(--bg-main-dark); font-size: 16px; font-weight: 900;
-            border: none; padding: 14px; border-radius: 12px; cursor: pointer; width: 100%; text-transform: uppercase;
+            background: var(--accent-green-primary); color: var(--bg-main-dark); font-size: 18px; font-weight: 900;
+            border: none; padding: 16px; border-radius: 14px; cursor: pointer; width: 100%; text-transform: uppercase;
+            box-shadow: 0 6px 20px rgba(0,255,136,0.3);
         }
     </style>
 </head>
@@ -479,70 +476,50 @@
     </div>
 
     <script>
-        // Real Player & Legend Database
+        // Real Player & Legend Database with Direct Cutout Image Links
         const realPlayers = [
             // --- ICONS ---
-            { name: "Pelé", pos: "CAM", tier: "icon" },
-            { name: "Zinedine Zidane", pos: "CM", tier: "icon" },
-            { name: "Ronaldo Nazário", pos: "ST", tier: "icon" },
-            { name: "Johan Cruyff", pos: "CF", tier: "icon" },
-            { name: "Ronaldinho", pos: "LW", tier: "icon" },
-            { name: "Paolo Maldini", pos: "CB", tier: "icon" },
-            { name: "Lev Yashin", pos: "GK", tier: "icon" },
-            { name: "Thierry Henry", pos: "ST", tier: "icon" },
-            { name: "Ruud Gullit", pos: "CF", tier: "icon" },
-            { name: "Mia Hamm", pos: "ST", tier: "icon" },
-            { name: "Kaká", pos: "CAM", tier: "icon" },
-            { name: "David Beckham", pos: "RM", tier: "icon" },
-            { name: "Wayne Rooney", pos: "ST", tier: "icon" },
-            { name: "Andrea Pirlo", pos: "CM", tier: "icon" },
-            { name: "Roberto Carlos", pos: "LB", tier: "icon" },
+            { name: "Pelé", pos: "CAM", tier: "icon", img: "https://pngimg.com/uploads/pele/pele_PNG15.png" },
+            { name: "Zinedine Zidane", pos: "CM", tier: "icon", img: "https://pngimg.com/uploads/zidane/zidane_PNG19.png" },
+            { name: "Ronaldo Nazário", pos: "ST", tier: "icon", img: "https://pngimg.com/uploads/ronaldo/ronaldo_PNG29.png" },
+            { name: "Ronaldinho", pos: "LW", tier: "icon", img: "https://pngimg.com/uploads/ronaldinho/ronaldinho_PNG23.png" },
+            { name: "Thierry Henry", pos: "ST", tier: "icon", img: "https://pngimg.com/uploads/henry/henry_PNG11.png" },
+            { name: "David Beckham", pos: "RM", tier: "icon", img: "https://pngimg.com/uploads/beckham/beckham_PNG19.png" },
 
             // --- CURRENT STARS ---
-            { name: "Kylian Mbappé", pos: "ST", tier: "toty" },
-            { name: "Erling Haaland", pos: "ST", tier: "gold" },
-            { name: "Jude Bellingham", pos: "CAM", tier: "gold" },
-            { name: "Lionel Messi", pos: "CF", tier: "gold" },
-            { name: "Cristiano Ronaldo", pos: "ST", tier: "gold" },
-            { name: "Vinícius Jr.", pos: "LW", tier: "gold" },
-            { name: "Lamine Yamal", pos: "RW", tier: "gold" },
-            { name: "Bukayo Saka", pos: "RW", tier: "gold" },
-            { name: "Kevin De Bruyne", pos: "CM", tier: "gold" },
-            { name: "Mohamed Salah", pos: "RW", tier: "gold" },
-            { name: "Virgil van Dijk", pos: "CB", tier: "gold" },
-            { name: "Rodri", pos: "CDM", tier: "gold" },
-            { name: "Harry Kane", pos: "ST", tier: "gold" },
-            { name: "Antoine Griezmann", pos: "ST", tier: "gold" },
-            { name: "Pedri", pos: "CM", tier: "gold" },
-            { name: "Cole Palmer", pos: "RW", tier: "gold" },
-            { name: "Florian Wirtz", pos: "CAM", tier: "gold" },
-            { name: "Jamal Musiala", pos: "CAM", tier: "gold" },
-            { name: "Federico Valverde", pos: "CM", tier: "gold" },
-            { name: "Lautaro Martínez", pos: "ST", tier: "gold" }
+            { name: "Kylian Mbappé", pos: "ST", tier: "toty", img: "https://pngimg.com/uploads/mbappe/mbappe_PNG21.png" },
+            { name: "Lionel Messi", pos: "CF", tier: "gold", img: "https://pngimg.com/uploads/messi/messi_PNG14.png" },
+            { name: "Cristiano Ronaldo", pos: "ST", tier: "gold", img: "https://pngimg.com/uploads/cr7/cr7_PNG18.png" },
+            { name: "Neymar Jr", pos: "LW", tier: "gold", img: "https://pngimg.com/uploads/neymar/neymar_PNG22.png" },
+            { name: "Mohamed Salah", pos: "RW", tier: "gold", img: "https://pngimg.com/uploads/salah/salah_PNG12.png" },
+            { name: "Kevin De Bruyne", pos: "CM", tier: "gold", img: "https://pngimg.com/uploads/de_bruyne/de_bruyne_PNG10.png" }
         ];
+
+        const fallbackSvg = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 15 C35 15, 25 28, 25 45 C25 60, 35 70, 50 70 C65 70, 75 60, 75 45 C75 28, 65 15, 50 15 Z M20 95 C20 75, 32 68, 50 68 C68 68, 80 75, 80 95 Z' fill='%23ffffff' opacity='0.7'/></svg>";
 
         const positions = ["ST", "RW", "LW", "CAM", "CM", "CDM", "CB", "LB", "RB", "GK"];
         const tiers = ["gold", "silver", "bronze", "toty", "icon"];
+        
         const playersDb = realPlayers.map((p, idx) => ({
             id: `p${idx + 1}`,
             name: p.name,
             pos: p.pos,
             tier: p.tier,
-            img: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=400&auto=format&fit=crop"
+            img: p.img
         }));
 
-        // Fill up database to 500 total entries
+        // Fill up remaining database entries to 500
         for (let i = playersDb.length + 1; i <= 500; i++) {
             playersDb.push({
                 id: `p${i}`,
                 name: `Player ${i}`,
                 pos: positions[i % positions.length],
                 tier: tiers[i % tiers.length],
-                img: `https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=400&auto=format&fit=crop`
+                img: fallbackSvg
             });
         }
 
-        // DOM References
+        // DOM Elements
         const playerSearch = document.getElementById("playerSearch");
         const suggestionsList = document.getElementById("suggestionsList");
         const spinBtn = document.getElementById("spinBtn");
@@ -567,20 +544,18 @@
             PHY: { val: document.getElementById("statPHY"), item: document.getElementById("itemPHY") }
         };
 
-        // State Tracking
         let selectedPlayer = null;
         let activeStatKey = "PAC";
         let cardStats = { PAC: null, DRI: null, SHO: null, DEF: null, PAS: null, PHY: null };
         let currentRotation = 0;
 
-        const fallbackSvg = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='32' r='20' fill='%23ffffff'/><path d='M20 90 C20 60, 30 50, 50 50 C70 50, 80 60, 80 90 Z' fill='%23ffffff'/></svg>";
         playerPic.onerror = function() { this.src = fallbackSvg; };
 
         const wheelNumbers = Array.from({ length: 50 }, (_, i) => i + 50);
         const totalSegments = wheelNumbers.length;
         const segmentAngle = 360 / totalSegments;
 
-        // Search & Selection Handler
+        // Search & Suggestions
         playerSearch.addEventListener("input", () => {
             const query = playerSearch.value.trim().toLowerCase();
             suggestionsList.innerHTML = "";
@@ -631,10 +606,10 @@
             }
         }
 
-        // Generate SVG Wheel Slices
+        // Build Red & Blue Wheel with Thinner Numbers
         function buildWheel() {
             let svgMarkup = "";
-            const cx = 150, cy = 150, r = 140;
+            const cx = 150, cy = 150, r = 142;
 
             wheelNumbers.forEach((num, idx) => {
                 const startAngle = idx * segmentAngle;
@@ -648,25 +623,27 @@
                 const x2 = cx + r * Math.cos(radEnd);
                 const y2 = cy + r * Math.sin(radEnd);
 
-                const color = idx % 2 === 0 ? "#0f2027" : "#203a43";
+                // Alternating Red and Blue Colors
+                const color = idx % 2 === 0 ? "#e61938" : "#0055ff";
                 
-                svgMarkup += `<path d="M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2} Z" fill="${color}" stroke="#00ff88" stroke-width="0.5"/>`;
+                svgMarkup += `<path d="M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2} Z" fill="${color}" stroke="#ffffff" stroke-width="0.3"/>`;
 
                 const textAngle = startAngle + (segmentAngle / 2);
                 const textRad = ((textAngle - 90) * Math.PI) / 180;
-                const tx = cx + (r - 20) * Math.cos(textRad);
-                const ty = cy + (r - 20) * Math.sin(textRad);
+                const tx = cx + (r - 18) * Math.cos(textRad);
+                const ty = cy + (r - 18) * Math.sin(textRad);
 
-                svgMarkup += `<text x="${tx}" y="${ty}" fill="#00ff88" font-size="8" font-weight="900" text-anchor="middle" transform="rotate(${textAngle}, ${tx}, ${ty})" dominant-baseline="central">${num}</text>`;
+                // Thinner text font weight
+                svgMarkup += `<text x="${tx}" y="${ty}" fill="#ffffff" font-size="7.5" font-weight="500" text-anchor="middle" transform="rotate(${textAngle}, ${tx}, ${ty})" dominant-baseline="central">${num}</text>`;
             });
 
-            svgMarkup += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#00ff88" stroke-width="3"/>`;
-            svgMarkup += `<circle cx="${cx}" cy="${cy}" r="20" fill="#00ff88" stroke="#06090e" stroke-width="3"/>`;
+            svgMarkup += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#ffffff" stroke-width="2"/>`;
+            svgMarkup += `<circle cx="${cx}" cy="${cy}" r="18" fill="#ffffff" stroke="#0b101a" stroke-width="3"/>`;
 
             wheelSvg.innerHTML = svgMarkup;
         }
 
-        // Wheel Control Logic
+        // Modal & Spin Actions
         function openModalForStat(statKey) {
             if (!selectedPlayer) return;
 
