@@ -36,6 +36,7 @@
             text-align: center;
         }
 
+        /* SEARCH BAR */
         .search-container {
             position: relative;
             width: 310px;
@@ -99,13 +100,11 @@
             gap: 20px;
         }
 
-        /* ACCURATE EA SPORTS FC CARD SHAPE */
+        /* EA SPORTS FC SHIELD SHAPE & FRAME */
         .fc-card {
             width: 300px;
             height: 460px;
             position: relative;
-            background-size: cover;
-            background-position: center;
             clip-path: polygon(18% 0%, 82% 0%, 100% 9%, 100% 78%, 50% 100%, 0% 78%, 0% 9%);
             transition: all 0.3s ease;
             user-select: none;
@@ -120,7 +119,7 @@
 
         .card-gold {
             background: radial-gradient(ellipse at 50% 30%, #fff4c2 0%, #e1ba52 40%, #a27b1e 75%, #4a3600 100%);
-            color: #312300;
+            color: #2e2000;
         }
 
         .card-toty {
@@ -128,7 +127,7 @@
             color: #ffffff;
         }
 
-        /* CARD DETAILS */
+        /* UPPER LEFT STAT CLUSTER */
         .card-top-panel {
             position: absolute;
             top: 45px;
@@ -154,6 +153,7 @@
             text-transform: uppercase;
         }
 
+        /* PLAYER PORTRAIT */
         .player-img-container {
             position: absolute;
             width: 250px;
@@ -172,6 +172,7 @@
             transition: opacity 0.3s ease;
         }
 
+        /* NAME BANNER */
         .player-name-banner {
             position: absolute;
             width: 86%;
@@ -188,6 +189,7 @@
             border-bottom: 2px solid currentColor;
         }
 
+        /* ATTRIBUTE GRID */
         .stats-grid {
             position: absolute;
             bottom: 38px;
@@ -263,7 +265,7 @@
             cursor: not-allowed;
         }
 
-        /* MODAL OVERLAY */
+        /* WHEEL MODAL */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -451,10 +453,9 @@
         let cardStats = { PAC: null, DRI: null, SHO: null, DEF: null, PAS: null, PHY: null };
         let currentRotation = 0;
 
-        // Fallback Vector Silhouette Image if a link breaks
+        // Fallback Silhouette SVG if image links fail
         const defaultSilhouette = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='32' r='20' fill='%23ffffff'/><path d='M20 90 C20 60, 30 50, 50 50 C70 50, 80 60, 80 90 Z' fill='%23ffffff'/></svg>";
 
-        // Automatic fallback on image loading error
         playerPic.onerror = function() {
             this.src = defaultSilhouette;
         };
@@ -464,18 +465,15 @@
         const totalSegments = wheelNumbers.length;
         const segmentAngle = 360 / totalSegments;
 
-        /*
-          To use GitHub hosted images, upload .png cutouts to a GitHub repository, 
-          then use raw content URLs like:
-          "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/mbappe.png"
-        */
         const playersDb = [
-            { id: "mbappe", name: "Mbappé", pos: "ST", img: "https://raw.githubusercontent.com/fawazahmed0/currency-api/main/favicon.png" }, // Example GitHub direct image
-            { id: "haaland", name: "Haaland", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Erling_Haaland_2023_%28cropped%29.png/250px-Erling_Haaland_2023_%28cropped%29.png" },
-            { id: "bellingham", name: "Bellingham", pos: "CAM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Jude_Bellingham_2024_%28cropped%29.png/250px-Jude_Bellingham_2024_%28cropped%29.png" },
-            { id: "messi", name: "Messi", pos: "CF", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.png/250px-Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.png" },
-            { id: "ronaldo", name: "Ronaldo", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Cristiano_Ronaldo_playing_for_Al_Nassr_FC_sign_against_Al-Fateh_FC_on_3_February_2023_%28cropped%29.png/250px-Cristiano_Ronaldo_playing_for_Al_Nassr_FC_sign_against_Al-Fateh_FC_on_3_February_2023_%28cropped%29.png" },
-            { id: "vini", name: "Vinícius Jr.", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Vinicius_Jr_2024_%28cropped%29.png/250px-Vinicius_Jr_2024_%28cropped%29.png" }
+            { id: "mbappe", name: "Mbappé", pos: "ST", img: "" },
+            { id: "haaland", name: "Haaland", pos: "ST", img: "" },
+            { id: "bellingham", name: "Bellingham", pos: "CAM", img: "" },
+            { id: "messi", name: "Messi", pos: "CF", img: "" },
+            { id: "ronaldo", name: "Ronaldo", pos: "ST", img: "" },
+            { id: "vini", name: "Vinícius Jr.", pos: "LW", img: "" },
+            { id: "yamal", name: "Lamine Yamal", pos: "RW", img: "" },
+            { id: "saka", name: "Saka", pos: "RW", img: "" }
         ];
 
         playerSearch.addEventListener("input", () => {
@@ -512,7 +510,7 @@
             cardPos.innerText = player.pos;
 
             playerPic.style.opacity = "0";
-            playerPic.src = player.img;
+            playerPic.src = player.img || defaultSilhouette;
             playerPic.onload = () => { playerPic.style.opacity = "1"; };
 
             openWheelBtn.disabled = false;
