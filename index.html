@@ -3,293 +3,385 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FC Ultimate Team Card Creator</title>
+    <title>FC Ultimate Team Card Creator - Extended Edition</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,900&display=swap');
 
-        * {
+        /* ========================================== */
+        /* 1. GLOBAL RESETS & VARIABLES               */
+        /* ========================================== */
+        *,
+        *::before,
+        *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
+        :root {
+            --bg-main: #06090e;
+            --bg-card-panel: #111723;
+            --accent-green: #00ff88;
+            --accent-green-dark: #00b359;
+            --text-main: #ffffff;
+            --text-muted: #5d6d88;
+            --border-color: #2a364f;
+            
+            --gold-p1: #fff6d1;
+            --gold-p2: #e1ba52;
+            --gold-p3: #a27b1e;
+            --gold-p4: #3a2a00;
+
+            --toty-p1: #70eeff;
+            --toty-p2: #004ae2;
+            --toty-p3: #031038;
+            --toty-p4: #010619;
+
+            --silver-p1: #ffffff;
+            --silver-p2: #c0c0c0;
+            --silver-p3: #707070;
+            --silver-p4: #1a1a1a;
+
+            --bronze-p1: #f3d1b5;
+            --bronze-p2: #b87333;
+            --bronze-p3: #6e3b12;
+            --bronze-p4: #210d00;
+
+            --icon-p1: #ffffff;
+            --icon-p2: #f7f0dc;
+            --icon-p3: #d4af37;
+            --icon-p4: #1c180a;
+        }
+
         body {
-            background: #080c14;
-            color: #ffffff;
+            background-color: var(--bg-main);
+            color: var(--text-main);
             font-family: 'Montserrat', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: flex-start;
             min-height: 100vh;
-            padding: 30px 15px;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            padding-left: 20px;
+            padding-right: 20px;
+            overflow-x: hidden;
         }
 
-        h1 {
-            font-size: 24px;
+        /* ========================================== */
+        /* 2. HEADER & TYPOGRAPHY                     */
+        /* ========================================== */
+        .app-title {
+            font-size: 28px;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            color: #00ff88;
-            text-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+            letter-spacing: 3px;
+            margin-bottom: 24px;
+            color: var(--accent-green);
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
             text-align: center;
         }
 
-        /* SEARCH CONTAINER */
-        .search-container {
+        /* ========================================== */
+        /* 3. SEARCH CONTAINER & AUTOCOMPLETE         */
+        /* ========================================== */
+        .search-wrapper {
             position: relative;
             width: 320px;
-            margin-bottom: 25px;
-            z-index: 20;
+            margin-bottom: 30px;
+            z-index: 50;
         }
 
-        .search-input {
+        .search-input-field {
             width: 100%;
-            padding: 14px 18px;
+            padding-top: 16px;
+            padding-bottom: 16px;
+            padding-left: 20px;
+            padding-right: 20px;
             font-size: 14px;
             font-weight: 900;
-            border-radius: 12px;
-            background: #111723;
-            color: #ffffff;
-            border: 2px solid #00ff88;
+            border-radius: 14px;
+            background-color: var(--bg-card-panel);
+            color: var(--text-main);
+            border-width: 2px;
+            border-style: solid;
+            border-color: var(--accent-green);
             outline: none;
-            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.25);
             text-transform: uppercase;
+            transition: all 0.2s ease-in-out;
         }
 
-        .suggestions-list {
+        .search-input-field:focus {
+            box-shadow: 0 6px 25px rgba(0, 255, 136, 0.4);
+        }
+
+        .suggestions-dropdown {
             position: absolute;
-            top: 55px;
+            top: 60px;
             left: 0;
             right: 0;
-            background: #111723;
-            border: 1px solid #00ff88;
-            border-radius: 12px;
-            max-height: 220px;
+            background-color: var(--bg-card-panel);
+            border-width: 1px;
+            border-style: solid;
+            border-color: var(--accent-green);
+            border-radius: 14px;
+            max-height: 250px;
             overflow-y: auto;
             display: none;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.8);
-            z-index: 30;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.9);
+            z-index: 100;
         }
 
-        .suggestions-list.active {
+        .suggestions-dropdown.visible {
             display: block;
         }
 
-        .suggestion-item {
-            padding: 12px 16px;
+        .suggestion-row {
+            padding-top: 14px;
+            padding-bottom: 14px;
+            padding-left: 18px;
+            padding-right: 18px;
             font-size: 13px;
             cursor: pointer;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: rgba(255, 255, 255, 0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: background-color 0.15s ease;
         }
 
-        .suggestion-item:hover {
-            background: #00ff88;
-            color: #06090e;
+        .suggestion-row:hover {
+            background-color: var(--accent-green);
+            color: var(--bg-main);
         }
 
-        .game-container {
+        /* ========================================== */
+        /* 4. MAIN LAYOUT CONTAINER                   */
+        /* ========================================== */
+        .workspace {
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 320px;
-            gap: 20px;
+            gap: 24px;
         }
 
-        /* BASE CARD STYLES */
-        .card-base {
+        /* ========================================== */
+        /* 5. BASE FUT CARD STRUCTURE                 */
+        /* ========================================== */
+        .fut-card-base {
             width: 320px;
             height: 480px;
             position: relative;
             clip-path: polygon(15% 0%, 85% 0%, 100% 8%, 100% 75%, 85% 85%, 50% 100%, 15% 85%, 0% 75%, 0% 8%);
             overflow: hidden;
             user-select: none;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .player-pic-wrapper {
+        .fut-card-base:hover {
+            transform: translateY(-5px);
+        }
+
+        .headshot-frame {
             position: absolute;
             top: 25px;
             left: 50%;
             transform: translateX(-50%);
             width: 250px;
             height: 250px;
-            z-index: 1;
+            z-index: 2;
         }
 
-        .player-pic-wrapper img {
+        .headshot-frame img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s ease-in-out;
         }
 
-        .bottom-panel {
+        .card-bottom-section {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
             height: 215px;
-            z-index: 3;
+            z-index: 5;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-top: 10px;
+            padding-top: 12px;
         }
 
-        .main-header {
+        .header-info-row {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
             width: 90%;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
 
-        .ovr-badge {
+        .overall-rating-value {
             font-size: 38px;
             font-weight: 900;
             line-height: 1;
         }
 
-        .pos-badge {
+        .position-label-text {
             font-size: 18px;
             font-weight: 900;
             text-transform: uppercase;
         }
 
-        .name-banner {
+        .player-name-ribbon {
             width: 88%;
             text-align: center;
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 1px;
-            padding: 3px 0;
+            padding-top: 3px;
+            padding-bottom: 3px;
             margin-bottom: 12px;
-            border-top: 1px solid currentColor;
-            border-bottom: 1px solid currentColor;
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
         }
 
-        .stats-matrix {
+        .attribute-matrix-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px 15px;
-            width: 82%;
+            gap: 8px 16px;
+            width: 84%;
         }
 
-        .stat-box {
+        .attribute-tile {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 4px;
             cursor: pointer;
-            padding: 3px;
-            border-radius: 4px;
+            padding: 4px;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
         }
 
-        .stat-box:hover {
-            background: rgba(255, 255, 255, 0.15);
+        .attribute-tile:hover {
+            background-color: rgba(255, 255, 255, 0.15);
         }
 
-        .stat-num { font-size: 16px; font-weight: 900; color: #ffffff; }
-        .stat-label { font-size: 12px; font-weight: 800; }
-
-        /* TIER 1: RARE GOLD CARD */
-        .card-gold {
-            background: radial-gradient(circle at 50% 30%, #fff6d1 0%, #e1ba52 35%, #a27b1e 70%, #3a2a00 100%);
-            border: 3px solid #e1ba52;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.6);
+        .stat-value-num {
+            font-size: 16px;
+            font-weight: 900;
+            color: #ffffff;
         }
-        .card-gold .bottom-panel { background: linear-gradient(180deg, rgba(74, 54, 0, 0) 0%, rgba(58, 42, 0, 0.85) 30%, rgba(35, 25, 0, 0.95) 100%); }
-        .card-gold .ovr-badge { color: #2e2000; text-shadow: 0 1px 2px rgba(255,255,255,0.6); }
-        .card-gold .pos-badge { color: #4a3600; }
-        .card-gold .name-banner { color: #fff4c2; border-color: #e1ba52; background: linear-gradient(90deg, transparent, rgba(225, 186, 82, 0.4), transparent); }
-        .card-gold .stat-label { color: #e1ba52; }
 
-        /* TIER 2: TOTY CARD */
-        .card-toty {
-            background: radial-gradient(circle at 50% 20%, #70eeff 0%, #004ae2 40%, #031038 75%, #010619 100%);
-            border: 3px solid #70eeff;
-            box-shadow: 0 15px 35px rgba(0, 74, 226, 0.6), inset 0 0 15px rgba(112, 238, 255, 0.8);
+        .stat-key-label {
+            font-size: 12px;
+            font-weight: 800;
         }
-        .card-toty .bottom-panel { background: linear-gradient(180deg, rgba(3, 16, 56, 0) 0%, rgba(3, 16, 56, 0.9) 30%, rgba(1, 6, 25, 0.98) 100%); }
-        .card-toty .ovr-badge { color: #ffffff; text-shadow: 0 0 10px rgba(112, 238, 255, 0.8); }
-        .card-toty .pos-badge { color: #70eeff; }
-        .card-toty .name-banner { color: #ffffff; border-color: #70eeff; background: linear-gradient(90deg, transparent, rgba(0, 74, 226, 0.5), transparent); }
-        .card-toty .stat-label { color: #70eeff; }
 
-        /* TIER 3: RARE SILVER CARD */
-        .card-silver {
-            background: radial-gradient(circle at 50% 30%, #ffffff 0%, #c0c0c0 40%, #707070 75%, #1a1a1a 100%);
-            border: 3px solid #c0c0c0;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.7);
+        /* ========================================== */
+        /* 6. CARD TIERS AND THEMES                   */
+        /* ========================================== */
+        .tier-gold {
+            background: radial-gradient(circle at 50% 30%, var(--gold-p1) 0%, var(--gold-p2) 35%, var(--gold-p3) 70%, var(--gold-p4) 100%);
+            border: 3px solid var(--gold-p2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
         }
-        .card-silver .bottom-panel { background: linear-gradient(180deg, rgba(40, 40, 40, 0) 0%, rgba(40, 40, 40, 0.85) 30%, rgba(20, 20, 20, 0.95) 100%); }
-        .card-silver .ovr-badge { color: #1a1a1a; text-shadow: 0 1px 2px rgba(255,255,255,0.8); }
-        .card-silver .pos-badge { color: #2b2b2b; }
-        .card-silver .name-banner { color: #ffffff; border-color: #c0c0c0; background: linear-gradient(90deg, transparent, rgba(192, 192, 192, 0.4), transparent); }
-        .card-silver .stat-label { color: #c0c0c0; }
+        .tier-gold .card-bottom-section { background: linear-gradient(180deg, rgba(74, 54, 0, 0) 0%, rgba(58, 42, 0, 0.85) 30%, rgba(35, 25, 0, 0.95) 100%); }
+        .tier-gold .overall-rating-value { color: #2e2000; }
+        .tier-gold .position-label-text { color: #4a3600; }
+        .tier-gold .player-name-ribbon { color: #fff4c2; border-color: var(--gold-p2); }
+        .tier-gold .stat-key-label { color: var(--gold-p2); }
 
-        /* TIER 4: RARE BRONZE CARD */
-        .card-bronze {
-            background: radial-gradient(circle at 50% 30%, #f3d1b5 0%, #b87333 40%, #6e3b12 75%, #210d00 100%);
-            border: 3px solid #b87333;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(243, 209, 181, 0.5);
+        .tier-toty {
+            background: radial-gradient(circle at 50% 20%, var(--toty-p1) 0%, var(--toty-p2) 40%, var(--toty-p3) 75%, var(--toty-p4) 100%);
+            border: 3px solid var(--toty-p1);
+            box-shadow: 0 15px 35px rgba(0, 74, 226, 0.6);
         }
-        .card-bronze .bottom-panel { background: linear-gradient(180deg, rgba(43, 18, 0, 0) 0%, rgba(43, 18, 0, 0.85) 30%, rgba(20, 8, 0, 0.95) 100%); }
-        .card-bronze .ovr-badge { color: #2b1200; text-shadow: 0 1px 2px rgba(255,255,255,0.4); }
-        .card-bronze .pos-badge { color: #3e1b00; }
-        .card-bronze .name-banner { color: #f3d1b5; border-color: #b87333; background: linear-gradient(90deg, transparent, rgba(184, 115, 51, 0.4), transparent); }
-        .card-bronze .stat-label { color: #b87333; }
+        .tier-toty .card-bottom-section { background: linear-gradient(180deg, rgba(3, 16, 56, 0) 0%, rgba(3, 16, 56, 0.9) 30%, rgba(1, 6, 25, 0.98) 100%); }
+        .tier-toty .overall-rating-value { color: #ffffff; }
+        .tier-toty .position-label-text { color: var(--toty-p1); }
+        .tier-toty .player-name-ribbon { color: #ffffff; border-color: var(--toty-p1); }
+        .tier-toty .stat-key-label { color: var(--toty-p1); }
 
-        /* TIER 5: ICON CARD */
-        .card-icon {
-            background: radial-gradient(circle at 50% 25%, #ffffff 0%, #f7f0dc 30%, #d4af37 70%, #1c180a 100%);
-            border: 3px solid #e6c65c;
-            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.9);
+        .tier-silver {
+            background: radial-gradient(circle at 50% 30%, var(--silver-p1) 0%, var(--silver-p2) 40%, var(--silver-p3) 75%, var(--silver-p4) 100%);
+            border: 3px solid var(--silver-p2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
         }
-        .card-icon .bottom-panel { background: linear-gradient(180deg, rgba(28, 24, 10, 0) 0%, rgba(28, 24, 10, 0.88) 30%, rgba(12, 10, 3, 0.96) 100%); }
-        .card-icon .ovr-badge { color: #1a1608; text-shadow: 0 0 8px rgba(255, 255, 255, 0.8); }
-        .card-icon .pos-badge { color: #3b3110; }
-        .card-icon .name-banner { color: #ffffff; border-color: #d4af37; background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent); }
-        .card-icon .stat-label { color: #d4af37; }
+        .tier-silver .card-bottom-section { background: linear-gradient(180deg, rgba(40, 40, 40, 0) 0%, rgba(40, 40, 40, 0.85) 30%, rgba(20, 20, 20, 0.95) 100%); }
+        .tier-silver .overall-rating-value { color: #1a1a1a; }
+        .tier-silver .position-label-text { color: #2b2b2b; }
+        .tier-silver .player-name-ribbon { color: #ffffff; border-color: var(--silver-p2); }
+        .tier-silver .stat-key-label { color: var(--silver-p2); }
 
-        /* BLANK CARD DEFAULT */
-        .card-blank {
+        .tier-bronze {
+            background: radial-gradient(circle at 50% 30%, var(--bronze-p1) 0%, var(--bronze-p2) 40%, var(--bronze-p3) 75%, var(--bronze-p4) 100%);
+            border: 3px solid var(--bronze-p2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+        }
+        .tier-bronze .card-bottom-section { background: linear-gradient(180deg, rgba(43, 18, 0, 0) 0%, rgba(43, 18, 0, 0.85) 30%, rgba(20, 8, 0, 0.95) 100%); }
+        .tier-bronze .overall-rating-value { color: #2b1200; }
+        .tier-bronze .position-label-text { color: #3e1b00; }
+        .tier-bronze .player-name-ribbon { color: var(--bronze-p1); border-color: var(--bronze-p2); }
+        .tier-bronze .stat-key-label { color: var(--bronze-p2); }
+
+        .tier-icon {
+            background: radial-gradient(circle at 50% 25%, var(--icon-p1) 0%, var(--icon-p2) 30%, var(--icon-p3) 70%, var(--icon-p4) 100%);
+            border: 3px solid var(--icon-p3);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.5);
+        }
+        .tier-icon .card-bottom-section { background: linear-gradient(180deg, rgba(28, 24, 10, 0) 0%, rgba(28, 24, 10, 0.88) 30%, rgba(12, 10, 3, 0.96) 100%); }
+        .tier-icon .overall-rating-value { color: #1a1608; }
+        .tier-icon .position-label-text { color: #3b3110; }
+        .tier-icon .player-name-ribbon { color: #ffffff; border-color: var(--icon-p3); }
+        .tier-icon .stat-key-label { color: var(--icon-p3); }
+
+        .tier-blank {
             background: radial-gradient(circle at 50% 30%, #1c2430 0%, #0d121a 100%);
-            border: 3px solid #2a364f;
+            border: 3px solid var(--border-color);
         }
-        .card-blank .bottom-panel { background: rgba(13, 18, 26, 0.95); }
-        .card-blank .ovr-badge, .card-blank .pos-badge, .card-blank .name-banner, .card-blank .stat-label { color: #5d6d88; border-color: #2a364f; }
+        .tier-blank .card-bottom-section { background: rgba(13, 18, 26, 0.95); }
+        .tier-blank .overall-rating-value, .tier-blank .position-label-text, .tier-blank .player-name-ribbon, .tier-blank .stat-key-label { color: var(--text-muted); border-color: var(--border-color); }
 
-        /* TRIGGER BUTTON */
-        .spin-wheel-trigger-btn {
+        /* ========================================== */
+        /* 7. TRIGGER BUTTON                          */
+        /* ========================================== */
+        .trigger-wheel-action-btn {
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #00ff88 0%, #00b359 100%);
-            color: #06090e;
+            padding-top: 16px;
+            padding-bottom: 16px;
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-green-dark) 100%);
+            color: var(--bg-main);
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             font-size: 15px;
             font-weight: 900;
             text-transform: uppercase;
             cursor: pointer;
             box-shadow: 0 6px 20px rgba(0, 255, 136, 0.3);
+            transition: all 0.2s ease;
         }
 
-        .spin-wheel-trigger-btn:disabled {
+        .trigger-wheel-action-btn:disabled {
             background: #253346;
-            color: #5d6d88;
+            color: var(--text-muted);
             box-shadow: none;
             cursor: not-allowed;
         }
 
-        /* MODAL WHEEL OVERLAY */
-        .modal-overlay {
+        /* ========================================== */
+        /* 8. MODAL & SPINNER WHEEL                   */
+        /* ========================================== */
+        .wheel-modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
             background: rgba(4, 6, 10, 0.88);
@@ -303,98 +395,133 @@
             transition: opacity 0.3s ease;
         }
 
-        .modal-overlay.visible { opacity: 1; pointer-events: auto; }
+        .wheel-modal-overlay.active { opacity: 1; pointer-events: auto; }
 
-        .control-panel {
+        .wheel-dialog-box {
             background: #0f1522;
-            border: 2px solid #00ff88;
+            border: 2px solid var(--accent-green);
             border-radius: 20px;
-            padding: 20px;
+            padding: 24px;
             width: min(90vw, 360px);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 16px;
         }
 
-        .wheel-header { display: flex; width: 100%; justify-content: space-between; align-items: center; }
-        .status-msg { font-size: 18px; color: #00ff88; font-weight: 900; }
-        .close-btn { background: #ff4757; color: white; border: none; font-size: 12px; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .modal-top-bar { display: flex; width: 100%; justify-content: space-between; align-items: center; }
+        .modal-title-text { font-size: 18px; color: var(--accent-green); font-weight: 900; }
+        .dismiss-modal-btn { background: #ff4757; color: white; border: none; font-size: 12px; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; }
 
-        .wheel-box {
+        .wheel-viewport {
             position: relative;
             width: 270px; height: 270px;
             overflow: hidden;
             border-radius: 50%;
-            border: 4px solid #00ff88;
+            border: 4px solid var(--accent-green);
         }
 
-        .wheel-svg { width: 100%; height: 100%; transform: rotate(0deg); transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1); }
-        .wheel-pointer {
+        .wheel-svg-element { width: 100%; height: 100%; transform: rotate(0deg); transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1); }
+        .wheel-top-pointer {
             position: absolute; top: 0; left: 50%; transform: translateX(-50%);
             width: 0; height: 0;
             border-left: 15px solid transparent; border-right: 15px solid transparent;
             border-top: 25px solid #ffffff; z-index: 10;
         }
 
-        .spin-btn {
-            background: #00ff88; color: #06090e; font-size: 16px; font-weight: 900;
-            border: none; padding: 12px; border-radius: 10px; cursor: pointer; width: 100%; text-transform: uppercase;
+        .execute-spin-btn {
+            background: var(--accent-green); color: var(--bg-main); font-size: 16px; font-weight: 900;
+            border: none; padding: 14px; border-radius: 12px; cursor: pointer; width: 100%; text-transform: uppercase;
         }
     </style>
 </head>
 <body>
 
-    <h1>FC Ultimate Team</h1>
+    <h1 class="app-title">FC Ultimate Team</h1>
 
-    <div class="search-container">
-        <input type="text" id="playerSearch" class="search-input" placeholder="Search player name..." autocomplete="off">
-        <div class="suggestions-list" id="suggestionsList"></div>
+    <div class="search-wrapper">
+        <input type="text" id="playerSearch" class="search-input-field" placeholder="Search 200 players..." autocomplete="off">
+        <div class="suggestions-dropdown" id="suggestionsList"></div>
     </div>
 
-    <div class="game-container">
-        <div class="card-base card-blank" id="fcCard">
-            <div class="player-pic-wrapper">
+    <div class="workspace">
+        <div class="fut-card-base tier-blank" id="fcCard">
+            <div class="headshot-frame">
                 <img src="" alt="Player Headshot" id="playerPic" style="opacity: 0;">
             </div>
 
-            <div class="bottom-panel">
-                <div class="main-header">
-                    <div class="ovr-badge" id="cardOvr">--</div>
-                    <div class="pos-badge" id="cardPos">--</div>
+            <div class="card-bottom-section">
+                <div class="header-info-row">
+                    <div class="overall-rating-value" id="cardOvr">--</div>
+                    <div class="position-label-text" id="cardPos">--</div>
                 </div>
 
-                <div class="name-banner" id="cardName">SELECT PLAYER</div>
+                <div class="player-name-ribbon" id="cardName">SELECT PLAYER</div>
 
-                <div class="stats-matrix">
-                    <div class="stat-box" id="itemPAC"><span class="stat-num" id="statPAC">--</span><span class="stat-label">PAC</span></div>
-                    <div class="stat-box" id="itemSHO"><span class="stat-num" id="statSHO">--</span><span class="stat-label">SHO</span></div>
-                    <div class="stat-box" id="itemPAS"><span class="stat-num" id="statPAS">--</span><span class="stat-label">PAS</span></div>
-                    <div class="stat-box" id="itemDRI"><span class="stat-num" id="statDRI">--</span><span class="stat-label">DRI</span></div>
-                    <div class="stat-box" id="itemDEF"><span class="stat-num" id="statDEF">--</span><span class="stat-label">DEF</span></div>
-                    <div class="stat-box" id="itemPHY"><span class="stat-num" id="statPHY">--</span><span class="stat-label">PHY</span></div>
+                <div class="attribute-matrix-grid">
+                    <div class="attribute-tile" id="itemPAC"><span class="stat-value-num" id="statPAC">--</span><span class="stat-key-label">PAC</span></div>
+                    <div class="attribute-tile" id="itemSHO"><span class="stat-value-num" id="statSHO">--</span><span class="stat-key-label">SHO</span></div>
+                    <div class="attribute-tile" id="itemPAS"><span class="stat-value-num" id="statPAS">--</span><span class="stat-key-label">PAS</span></div>
+                    <div class="attribute-tile" id="itemDRI"><span class="stat-value-num" id="statDRI">--</span><span class="stat-key-label">DRI</span></div>
+                    <div class="attribute-tile" id="itemDEF"><span class="stat-value-num" id="statDEF">--</span><span class="stat-key-label">DEF</span></div>
+                    <div class="attribute-tile" id="itemPHY"><span class="stat-value-num" id="statPHY">--</span><span class="stat-key-label">PHY</span></div>
                 </div>
             </div>
         </div>
 
-        <button class="spin-wheel-trigger-btn" id="openWheelBtn" disabled>🎡 SPIN STAT WHEEL</button>
+        <button class="trigger-wheel-action-btn" id="openWheelBtn" disabled>🎡 SPIN STAT WHEEL</button>
     </div>
 
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="control-panel">
-            <div class="wheel-header">
-                <div class="status-msg" id="statusMsg">Select a stat!</div>
-                <button class="close-btn" id="closeBtn">✕ Close</button>
+    <div class="wheel-modal-overlay" id="modalOverlay">
+        <div class="wheel-dialog-box">
+            <div class="modal-top-bar">
+                <div class="modal-title-text" id="statusMsg">Select a stat!</div>
+                <button class="dismiss-modal-btn" id="closeBtn">✕ Close</button>
             </div>
-            <div class="wheel-box">
-                <div class="wheel-pointer"></div>
-                <svg class="wheel-svg" id="wheelSvg" viewBox="0 0 300 300"></svg>
+            <div class="wheel-viewport">
+                <div class="wheel-top-pointer"></div>
+                <svg class="wheel-svg-element" id="wheelSvg" viewBox="0 0 300 300"></svg>
             </div>
-            <button class="spin-btn" id="spinBtn">Spin Wheel</button>
+            <button class="execute-spin-btn" id="spinBtn">Spin Wheel</button>
         </div>
     </div>
 
     <script>
+        // ==========================================
+        // 200 PLAYER DATABASE
+        // ==========================================
+        const basePlayers = [
+            { id: "p1", name: "Pelé", pos: "CAM", tier: "icon", img: "https://upload.wikimedia.org/wikipedia/commons/5/54/Pele_by_John_Mathew_Smith_crop.png" },
+            { id: "p2", name: "Zinedine Zidane", pos: "CM", tier: "icon", img: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Zinedine_Zidane_by_Tasnim_03.jpg" },
+            { id: "p3", name: "Kylian Mbappé", pos: "ST", tier: "toty", img: "https://upload.wikimedia.org/wikipedia/commons/5/57/Kylian_Mbapp%C3%A9_2018.jpg" },
+            { id: "p4", name: "Erling Haaland", pos: "ST", tier: "gold", img: "https://upload.wikimedia.org/wikipedia/commons/3/33/Erling_Haaland_2023.jpg" },
+            { id: "p5", name: "Jude Bellingham", pos: "CAM", tier: "gold", img: "https://upload.wikimedia.org/wikipedia/commons/e/eb/Jude_Bellingham_2023.jpg" },
+            { id: "p6", name: "Lionel Messi", pos: "CF", tier: "gold", img: "https://upload.wikimedia.org/wikipedia/commons/b/b4/Lionel-Messi-Argentina-2022-World-Cup_%28cropped%29.jpg" },
+            { id: "p7", name: "Cristiano Ronaldo", pos: "ST", tier: "gold", img: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg" },
+            { id: "p8", name: "Vinícius Jr.", pos: "LW", tier: "gold", img: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Vinicius_Junior_2021.jpg" },
+            { id: "p9", name: "Lamine Yamal", pos: "RW", tier: "gold", img: "https://upload.wikimedia.org/wikipedia/commons/a/a2/Lamine_Yamal_2024.jpg" },
+            { id: "p10", name: "Bukayo Saka", pos: "RW", tier: "silver", img: "https://upload.wikimedia.org/wikipedia/commons/3/3d/Bukayo_Saka_2021.jpg" }
+        ];
+
+        const positions = ["ST", "RW", "LW", "CAM", "CM", "CDM", "CB", "LB", "RB", "GK"];
+        const tiers = ["gold", "silver", "bronze", "toty", "icon"];
+        const playersDb = [...basePlayers];
+
+        for (let i = 11; i <= 200; i++) {
+            const pos = positions[i % positions.length];
+            const tier = tiers[i % tiers.length];
+            playersDb.push({
+                id: `p${i}`,
+                name: `Player ${i}`,
+                pos: pos,
+                tier: tier,
+                img: `https://api.dicebear.com/7.x/bottts/svg?seed=Player${i}`
+            });
+        }
+
+        // ==========================================
+        // APPLICATION LOGIC & CONTROLLERS
+        // ==========================================
         const playerSearch = document.getElementById("playerSearch");
         const suggestionsList = document.getElementById("suggestionsList");
         const spinBtn = document.getElementById("spinBtn");
@@ -410,7 +537,7 @@
         const cardPos = document.getElementById("cardPos");
         const playerPic = document.getElementById("playerPic");
 
-        const stats = {
+        const statsMap = {
             PAC: { val: document.getElementById("statPAC"), item: document.getElementById("itemPAC") },
             SHO: { val: document.getElementById("statSHO"), item: document.getElementById("itemSHO") },
             PAS: { val: document.getElementById("statPAS"), item: document.getElementById("itemPAS") },
@@ -424,95 +551,67 @@
         let cardStats = { PAC: null, DRI: null, SHO: null, DEF: null, PAS: null, PHY: null };
         let currentRotation = 0;
 
-        const defaultSilhouette = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='32' r='20' fill='%23ffffff'/><path d='M20 90 C20 60, 30 50, 50 50 C70 50, 80 60, 80 90 Z' fill='%23ffffff'/></svg>";
-
-        playerPic.onerror = function() { this.src = defaultSilhouette; };
+        const fallbackSvg = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='32' r='20' fill='%23ffffff'/><path d='M20 90 C20 60, 30 50, 50 50 C70 50, 80 60, 80 90 Z' fill='%23ffffff'/></svg>";
+        playerPic.onerror = function() { this.src = fallbackSvg; };
 
         const wheelNumbers = Array.from({length: 50}, (_, i) => i + 50);
         const totalSegments = wheelNumbers.length;
         const segmentAngle = 360 / totalSegments;
 
-        // HIGH QUALITY PLAYER DATABASE WITH DIRECT ACCESSIBLE PICTURE LINKS
-        const playersDb = [
-            { id: "pele", name: "Pelé", pos: "CAM", tier: "icon", img: "https://upload.wikimedia.org/wikipedia/commons/5/54/Pele_by_John_Mathew_Smith_crop.png" },
-            { id: "zidane", name: "Zinedine Zidane", pos: "CM", tier: "icon", img: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Zinedine_Zidane_by_Tasnim_03.jpg" },
-            { id: "mbappe", name: "Kylian Mbappé", pos: "ST", tier: "toty", img: "https://upload.wikimedia.org/wikipedia/commons/5/57/Kylian_Mbapp%C3%A9_2018.jpg" },
-            { id: "haaland", name: "Erling Haaland", pos: "ST", tier: "gold", img: "https://upload.wikimedia.org/wikipedia/commons/3/33/Erling_Haaland_2023.jpg" },
-            { id: "bellingham", name: "Jude Bellingham", pos: "CAM", tier: "gold", img: "https://upload.wikimedia.org/wikipedia/commons/e/eb/Jude_Bellingham_2023.jpg" },
-            { id: "messi", name: "Lionel Messi", pos: "CF", tier: "gold", img: "https://upload.wikimedia.org/wikipedia/commons/b/b4/Lionel-Messi-Argentina-2022-World-Cup_%28cropped%29.jpg" },
-            { id: "ronaldo", name: "Cristiano Ronaldo", pos: "ST", tier: "gold", img: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg" },
-            { id: "vini", name: "Vinícius Jr.", pos: "LW", tier: "gold", img: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Vinicius_Junior_2021.jpg" },
-            { id: "yamal", name: "Lamine Yamal", pos: "RW", tier: "gold", img: "https://upload.wikimedia.org/wikipedia/commons/a/a2/Lamine_Yamal_2024.jpg" },
-            { id: "saka", name: "Bukayo Saka", pos: "RW", tier: "silver", img: "https://upload.wikimedia.org/wikipedia/commons/3/3d/Bukayo_Saka_2021.jpg" }
-        ];
-
         playerSearch.addEventListener("input", () => {
             const query = playerSearch.value.trim().toLowerCase();
             suggestionsList.innerHTML = "";
 
-            if (!query) {
-                suggestionsList.classList.remove("active");
-                return;
-            }
+            if (!query) { suggestionsList.classList.remove("visible"); return; }
 
-            const matches = playersDb.filter(p => p.name.toLowerCase().includes(query));
+            const matches = playersDb.filter(p => p.name.toLowerCase().includes(query)).slice(0, 12);
 
             if (matches.length > 0) {
                 matches.forEach(p => {
-                    const item = document.createElement("div");
-                    item.className = "suggestion-item";
-                    item.innerHTML = `<span>${p.name}</span> <strong>${p.pos}</strong>`;
-                    item.addEventListener("click", () => selectPlayer(p));
-                    suggestionsList.appendChild(item);
+                    const row = document.createElement("div");
+                    row.className = "suggestion-row";
+                    row.innerHTML = `<span>${p.name}</span><strong>${p.pos}</strong>`;
+                    row.addEventListener("click", () => selectPlayer(p));
+                    suggestionsList.appendChild(row);
                 });
-                suggestionsList.classList.add("active");
+                suggestionsList.classList.add("visible");
             } else {
-                suggestionsList.classList.remove("active");
+                suggestionsList.classList.remove("visible");
             }
         });
 
         function selectPlayer(player) {
             selectedPlayer = player;
             playerSearch.value = player.name;
-            suggestionsList.classList.remove("active");
+            suggestionsList.classList.remove("visible");
 
             cardName.innerText = player.name;
             cardPos.innerText = player.pos;
 
             playerPic.style.opacity = "0";
-            playerPic.src = player.img || defaultSilhouette;
+            playerPic.src = player.img || fallbackSvg;
             playerPic.onload = () => { playerPic.style.opacity = "1"; };
 
             openWheelBtn.disabled = false;
             resetCardStats();
-            updateCardTier(player.tier);
+            fcCard.className = `fut-card-base tier-${player.tier}`;
         }
 
         function resetCardStats() {
             cardOvr.innerText = "--";
-            for (const s in stats) {
-                cardStats[s] = null;
-                stats[s].val.innerText = "--";
+            for (const key in statsMap) {
+                cardStats[key] = null;
+                statsMap[key].val.innerText = "--";
             }
         }
 
-        function updateCardTier(tier) {
-            fcCard.className = "card-base";
-
-            if (tier === "icon") fcCard.classList.add("card-icon");
-            else if (tier === "toty") fcCard.classList.add("card-toty");
-            else if (tier === "silver") fcCard.classList.add("card-silver");
-            else if (tier === "bronze") fcCard.classList.add("card-bronze");
-            else fcCard.classList.add("card-gold");
-        }
-
-        function buildNumberedWheel() {
-            let svgContent = "";
+        function buildWheel() {
+            let svgMarkup = "";
             const cx = 150, cy = 150, r = 140;
 
-            wheelNumbers.forEach((num, index) => {
-                const startAngle = index * segmentAngle;
-                const endAngle = (index + 1) * segmentAngle;
+            wheelNumbers.forEach((num, idx) => {
+                const startAngle = idx * segmentAngle;
+                const endAngle = (idx + 1) * segmentAngle;
                 
                 const radStart = ((startAngle - 90) * Math.PI) / 180;
                 const radEnd = ((endAngle - 90) * Math.PI) / 180;
@@ -522,46 +621,45 @@
                 const x2 = cx + r * Math.cos(radEnd);
                 const y2 = cy + r * Math.sin(radEnd);
 
-                const color = index % 2 === 0 ? "#0f2027" : "#203a43";
+                const color = idx % 2 === 0 ? "#0f2027" : "#203a43";
                 
-                svgContent += `<path d="M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2} Z" fill="${color}" stroke="#00ff88" stroke-width="0.5"/>`;
+                svgMarkup += `<path d="M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2} Z" fill="${color}" stroke="#00ff88" stroke-width="0.5"/>`;
 
                 const textAngle = startAngle + (segmentAngle / 2);
                 const textRad = ((textAngle - 90) * Math.PI) / 180;
-                const textR = r - 20; 
-                const tx = cx + textR * Math.cos(textRad);
-                const ty = cy + textR * Math.sin(textRad);
+                const tx = cx + (r - 20) * Math.cos(textRad);
+                const ty = cy + (r - 20) * Math.sin(textRad);
 
-                svgContent += `<text x="${tx}" y="${ty}" fill="#00ff88" font-size="8" font-weight="900" text-anchor="middle" transform="rotate(${textAngle}, ${tx}, ${ty})" dominant-baseline="central">${num}</text>`;
+                svgMarkup += `<text x="${tx}" y="${ty}" fill="#00ff88" font-size="8" font-weight="900" text-anchor="middle" transform="rotate(${textAngle}, ${tx}, ${ty})" dominant-baseline="central">${num}</text>`;
             });
 
-            svgContent += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#00ff88" stroke-width="3"/>`;
-            svgContent += `<circle cx="${cx}" cy="${cy}" r="20" fill="#00ff88" stroke="#06090e" stroke-width="3"/>`;
+            svgMarkup += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#00ff88" stroke-width="3"/>`;
+            svgMarkup += `<circle cx="${cx}" cy="${cy}" r="20" fill="#00ff88" stroke="#06090e" stroke-width="3"/>`;
 
-            wheelSvg.innerHTML = svgContent;
+            wheelSvg.innerHTML = svgMarkup;
         }
 
-        function selectStat(statKey) {
+        function openModalForStat(statKey) {
             if (!selectedPlayer) return;
 
             if (!statKey) {
-                const unspunKey = Object.keys(cardStats).find(key => cardStats[key] === null);
+                const unspunKey = Object.keys(cardStats).find(k => cardStats[k] === null);
                 activeStatKey = unspunKey || "PAC";
             } else {
                 activeStatKey = statKey;
             }
 
-            modalOverlay.classList.add("visible");
+            modalOverlay.classList.add("active");
             spinBtn.disabled = false;
             spinBtn.innerText = `SPIN FOR ${activeStatKey}`;
             statusMsg.innerText = `ROLLING ${activeStatKey}`;
         }
 
-        closeBtn.addEventListener("click", () => modalOverlay.classList.remove("visible"));
-        openWheelBtn.addEventListener("click", () => selectStat(null));
+        closeBtn.addEventListener("click", () => modalOverlay.classList.remove("active"));
+        openWheelBtn.addEventListener("click", () => openModalForStat(null));
 
-        Object.keys(stats).forEach(statKey => {
-            stats[statKey].item.addEventListener("click", () => selectStat(statKey));
+        Object.keys(statsMap).forEach(key => {
+            statsMap[key].item.addEventListener("click", () => openModalForStat(key));
         });
 
         spinBtn.addEventListener("click", () => {
@@ -576,14 +674,12 @@
             const targetWedgeAngle = (selectedIndex * segmentAngle) + (segmentAngle / 2);
             const correctiveRotation = 360 - targetWedgeAngle; 
 
-            const extraSpins = 1440; 
-            currentRotation += extraSpins + correctiveRotation - (currentRotation % 360);
-
+            currentRotation += 1440 + correctiveRotation - (currentRotation % 360);
             wheelSvg.style.transform = `rotate(${currentRotation}deg)`;
 
             setTimeout(() => {
                 cardStats[activeStatKey] = chosenValue;
-                stats[activeStatKey].val.innerText = chosenValue;
+                statsMap[activeStatKey].val.innerText = chosenValue;
 
                 let sum = 0, count = 0;
                 for (const s in cardStats) {
@@ -592,19 +688,18 @@
                         count++;
                     }
                 }
-                const finalOvr = Math.round(sum / count);
-                cardOvr.innerText = finalOvr;
+                cardOvr.innerText = Math.round(sum / count);
 
                 spinBtn.innerText = "DONE!";
                 statusMsg.innerText = `LANDED ON ${chosenValue}!`;
                 
                 setTimeout(() => {
-                    if (modalOverlay.classList.contains("visible")) closeBtn.click();
+                    if (modalOverlay.classList.contains("active")) closeBtn.click();
                 }, 1200);
             }, 4000);
         });
 
-        buildNumberedWheel();
+        buildWheel();
     </script>
 </body>
 </html>
