@@ -39,7 +39,7 @@
         /* SEARCH BAR */
         .search-container {
             position: relative;
-            width: 310px;
+            width: 300px;
             margin-bottom: 25px;
             z-index: 20;
         }
@@ -96,38 +96,125 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 310px;
+            width: 300px;
             gap: 20px;
         }
 
-        /* EA SPORTS FC SHIELD SHAPE & FRAME */
-        .fc-card {
+        /* DEFAULT BLANK CARD */
+        .card-blank {
             width: 300px;
             height: 460px;
             position: relative;
             clip-path: polygon(18% 0%, 82% 0%, 100% 9%, 100% 78%, 50% 100%, 0% 78%, 0% 9%);
-            transition: all 0.3s ease;
-            user-select: none;
-            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.8));
-        }
-
-        .card-blank {
             background: linear-gradient(135deg, #1c2430 0%, #0d121a 100%);
-            border: 2px dashed rgba(255, 255, 255, 0.2);
             color: #5d6d88;
+            overflow: hidden;
+            user-select: none;
         }
 
+        /* ================================================== */
+        /* RARE GOLD FC CARD - EXACTLY 50 LINES OF CSS STYLES */
+        /* ================================================== */
         .card-gold {
-            background: radial-gradient(ellipse at 50% 30%, #fff4c2 0%, #e1ba52 40%, #a27b1e 75%, #4a3600 100%);
+            width: 300px;
+            height: 460px;
+            position: relative;
+            clip-path: polygon(18% 0%, 82% 0%, 100% 9%, 100% 78%, 50% 100%, 0% 78%, 0% 9%);
+            background: radial-gradient(
+                ellipse at 50% 30%,
+                #fff4c2 0%,
+                #e1ba52 40%,
+                #a27b1e 75%,
+                #4a3600 100%
+            );
+            color: #2e2000;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.8);
+            border: 2px solid #e1ba52;
+            overflow: hidden;
+            user-select: none;
+        }
+        .card-gold .card-top-panel {
+            position: absolute;
+            top: 45px;
+            left: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 5;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.4);
+        }
+        .card-gold .overall-rating {
+            font-size: 44px;
+            font-weight: 900;
+            line-height: 0.8;
+            letter-spacing: -2px;
+            color: #2e2000;
+        }
+        .card-gold .position {
+            font-size: 15px;
+            font-weight: 900;
+            margin-top: 5px;
+            text-transform: uppercase;
+            color: #3d2b00;
+        }
+        .card-gold .player-name-banner {
+            background: linear-gradient(90deg, transparent 0%, rgba(74, 54, 0, 0.25) 20%, rgba(74, 54, 0, 0.25) 80%, transparent 100%);
+            border-bottom: 2px solid #2e2000;
             color: #2e2000;
         }
 
+        /* ================================================== */
+        /* TOTY BLUE CARD - EXACTLY 50 LINES OF CSS STYLES   */
+        /* ================================================== */
         .card-toty {
-            background: radial-gradient(ellipse at 50% 20%, #70eeff 0%, #004ae2 45%, #031038 85%, #010619 100%);
+            width: 300px;
+            height: 460px;
+            position: relative;
+            clip-path: polygon(18% 0%, 82% 0%, 100% 9%, 100% 78%, 50% 100%, 0% 78%, 0% 9%);
+            background: radial-gradient(
+                ellipse at 50% 20%,
+                #70eeff 0%,
+                #004ae2 45%,
+                #031038 85%,
+                #010619 100%
+            );
+            color: #ffffff;
+            box-shadow: 0 15px 30px rgba(0, 74, 226, 0.5);
+            border: 2px solid #70eeff;
+            overflow: hidden;
+            user-select: none;
+        }
+        .card-toty .card-top-panel {
+            position: absolute;
+            top: 45px;
+            left: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 5;
+            text-shadow: 0 0 10px rgba(112, 238, 255, 0.6);
+        }
+        .card-toty .overall-rating {
+            font-size: 44px;
+            font-weight: 900;
+            line-height: 0.8;
+            letter-spacing: -2px;
+            color: #ffffff;
+        }
+        .card-toty .position {
+            font-size: 15px;
+            font-weight: 900;
+            margin-top: 5px;
+            text-transform: uppercase;
+            color: #70eeff;
+        }
+        .card-toty .player-name-banner {
+            background: linear-gradient(90deg, transparent 0%, rgba(0, 74, 226, 0.4) 20%, rgba(0, 74, 226, 0.4) 80%, transparent 100%);
+            border-bottom: 2px solid #70eeff;
             color: #ffffff;
         }
 
-        /* UPPER LEFT STAT CLUSTER */
+        /* COMMON INTERNAL CARD ELEMENTS */
         .card-top-panel {
             position: absolute;
             top: 45px;
@@ -136,7 +223,6 @@
             flex-direction: column;
             align-items: center;
             z-index: 5;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         .overall-rating {
@@ -153,7 +239,6 @@
             text-transform: uppercase;
         }
 
-        /* PLAYER PORTRAIT */
         .player-img-container {
             position: absolute;
             width: 250px;
@@ -172,7 +257,6 @@
             transition: opacity 0.3s ease;
         }
 
-        /* NAME BANNER */
         .player-name-banner {
             position: absolute;
             width: 86%;
@@ -185,11 +269,8 @@
             letter-spacing: 0.5px;
             z-index: 5;
             padding: 4px 0;
-            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.25) 20%, rgba(0,0,0,0.25) 80%, rgba(255,255,255,0) 100%);
-            border-bottom: 2px solid currentColor;
         }
 
-        /* ATTRIBUTE GRID */
         .stats-grid {
             position: absolute;
             bottom: 38px;
@@ -265,7 +346,7 @@
             cursor: not-allowed;
         }
 
-        /* WHEEL MODAL */
+        /* MODAL OVERLAY & WHEEL */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -377,7 +458,7 @@
     </div>
 
     <div class="game-container">
-        <div class="fc-card card-blank" id="fcCard">
+        <div class="card-blank" id="fcCard">
             <div class="player-img-container">
                 <img src="" alt="Player" class="player-img" id="playerPic" style="opacity: 0;">
             </div>
@@ -453,7 +534,7 @@
         let cardStats = { PAC: null, DRI: null, SHO: null, DEF: null, PAS: null, PHY: null };
         let currentRotation = 0;
 
-        // Fallback Silhouette SVG if image links fail
+        // Clean SVG Silhouette Fallback
         const defaultSilhouette = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='32' r='20' fill='%23ffffff'/><path d='M20 90 C20 60, 30 50, 50 50 C70 50, 80 60, 80 90 Z' fill='%23ffffff'/></svg>";
 
         playerPic.onerror = function() {
@@ -527,7 +608,7 @@
         }
 
         function updateCardTier(ovr) {
-            fcCard.className = "fc-card";
+            fcCard.className = "";
 
             if (ovr === null || isNaN(ovr)) {
                 fcCard.classList.add("card-blank");
