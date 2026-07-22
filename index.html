@@ -14,7 +14,7 @@
         }
 
         body {
-            background: #080c14;
+            background: #06090e;
             color: #ffffff;
             font-family: 'Montserrat', sans-serif;
             display: flex;
@@ -100,278 +100,29 @@
             gap: 20px;
         }
 
-        /* DEFAULT BLANK CARD */
-        .card-blank {
+        /* ASSET-BASED CARD FRAME WRAPPER */
+        .card-wrapper {
             width: 300px;
             height: 460px;
             position: relative;
-            clip-path: polygon(18% 0%, 82% 0%, 100% 9%, 100% 78%, 50% 100%, 0% 78%, 0% 9%);
-            background: linear-gradient(135deg, #1c2430 0%, #0d121a 100%);
-            color: #5d6d88;
-            overflow: hidden;
             user-select: none;
+            filter: drop-shadow(0px 15px 25px rgba(0, 0, 0, 0.8));
         }
 
-        /* ================================================== */
-        /* 1. RARE GOLD CARD - EXACTLY 50 LINES OF CSS STYLES */
-        /* ================================================== */
-        .card-gold {
-            width: 300px;
-            height: 460px;
-            position: relative;
-            clip-path: polygon(18% 0%, 82% 0%, 100% 9%, 100% 78%, 50% 100%, 0% 78%, 0% 9%);
-            background: radial-gradient(
-                ellipse at 50% 30%,
-                #fff4c2 0%,
-                #e1ba52 40%,
-                #a27b1e 75%,
-                #4a3600 100%
-            );
-            color: #2e2000;
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.8);
-            border: 2px solid #e1ba52;
-            overflow: hidden;
-            user-select: none;
-        }
-        .card-gold .card-top-panel {
+        .card-bg-svg {
             position: absolute;
-            top: 45px;
-            left: 25px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 5;
-            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.4);
-        }
-        .card-gold .overall-rating {
-            font-size: 44px;
-            font-weight: 900;
-            line-height: 0.8;
-            letter-spacing: -2px;
-            color: #2e2000;
-        }
-        .card-gold .position {
-            font-size: 15px;
-            font-weight: 900;
-            margin-top: 5px;
-            text-transform: uppercase;
-            color: #3d2b00;
-        }
-        .card-gold .player-name-banner {
-            background: linear-gradient(90deg, transparent 0%, rgba(74, 54, 0, 0.25) 20%, rgba(74, 54, 0, 0.25) 80%, transparent 100%);
-            border-bottom: 2px solid #2e2000;
-            color: #2e2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
         }
 
-        /* ================================================== */
-        /* 2. TOTY BLUE CARD - EXACTLY 50 LINES OF CSS STYLES */
-        /* ================================================== */
-        .card-toty {
-            width: 300px;
-            height: 460px;
-            position: relative;
-            clip-path: polygon(18% 0%, 82% 0%, 100% 9%, 100% 78%, 50% 100%, 0% 78%, 0% 9%);
-            background: radial-gradient(
-                ellipse at 50% 20%,
-                #70eeff 0%,
-                #004ae2 45%,
-                #031038 85%,
-                #010619 100%
-            );
-            color: #ffffff;
-            box-shadow: 0 15px 30px rgba(0, 74, 226, 0.5);
-            border: 2px solid #70eeff;
-            overflow: hidden;
-            user-select: none;
-        }
-        .card-toty .card-top-panel {
-            position: absolute;
-            top: 45px;
-            left: 25px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 5;
-            text-shadow: 0 0 10px rgba(112, 238, 255, 0.6);
-        }
-        .card-toty .overall-rating {
-            font-size: 44px;
-            font-weight: 900;
-            line-height: 0.8;
-            letter-spacing: -2px;
-            color: #ffffff;
-        }
-        .card-toty .position {
-            font-size: 15px;
-            font-weight: 900;
-            margin-top: 5px;
-            text-transform: uppercase;
-            color: #70eeff;
-        }
-        .card-toty .player-name-banner {
-            background: linear-gradient(90deg, transparent 0%, rgba(0, 74, 226, 0.4) 20%, rgba(0, 74, 226, 0.4) 80%, transparent 100%);
-            border-bottom: 2px solid #70eeff;
-            color: #ffffff;
-        }
-
-        /* ================================================== */
-        /* 3. RARE SILVER CARD - EXACTLY 50 LINES OF CSS      */
-        /* ================================================== */
-        .card-silver {
-            width: 300px;
-            height: 460px;
-            position: relative;
-            clip-path: polygon(18% 0%, 82% 0%, 100% 9%, 100% 78%, 50% 100%, 0% 78%, 0% 9%);
-            background: radial-gradient(
-                ellipse at 50% 30%,
-                #ffffff 0%,
-                #c0c0c0 40%,
-                #707070 75%,
-                #2a2a2a 100%
-            );
-            color: #1a1a1a;
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.8);
-            border: 2px solid #c0c0c0;
-            overflow: hidden;
-            user-select: none;
-        }
-        .card-silver .card-top-panel {
-            position: absolute;
-            top: 45px;
-            left: 25px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 5;
-            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
-        }
-        .card-silver .overall-rating {
-            font-size: 44px;
-            font-weight: 900;
-            line-height: 0.8;
-            letter-spacing: -2px;
-            color: #1a1a1a;
-        }
-        .card-silver .position {
-            font-size: 15px;
-            font-weight: 900;
-            margin-top: 5px;
-            text-transform: uppercase;
-            color: #2b2b2b;
-        }
-        .card-silver .player-name-banner {
-            background: linear-gradient(90deg, transparent 0%, rgba(40, 40, 40, 0.25) 20%, rgba(40, 40, 40, 0.25) 80%, transparent 100%);
-            border-bottom: 2px solid #1a1a1a;
-            color: #1a1a1a;
-        }
-
-        /* ================================================== */
-        /* 4. RARE BRONZE CARD - EXACTLY 50 LINES OF CSS      */
-        /* ================================================== */
-        .card-bronze {
-            width: 300px;
-            height: 460px;
-            position: relative;
-            clip-path: polygon(18% 0%, 82% 0%, 100% 9%, 100% 78%, 50% 100%, 0% 78%, 0% 9%);
-            background: radial-gradient(
-                ellipse at 50% 30%,
-                #f3d1b5 0%,
-                #b87333 40%,
-                #6e3b12 75%,
-                #2b1200 100%
-            );
-            color: #2b1200;
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.8);
-            border: 2px solid #b87333;
-            overflow: hidden;
-            user-select: none;
-        }
-        .card-bronze .card-top-panel {
-            position: absolute;
-            top: 45px;
-            left: 25px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 5;
-            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
-        }
-        .card-bronze .overall-rating {
-            font-size: 44px;
-            font-weight: 900;
-            line-height: 0.8;
-            letter-spacing: -2px;
-            color: #2b1200;
-        }
-        .card-bronze .position {
-            font-size: 15px;
-            font-weight: 900;
-            margin-top: 5px;
-            text-transform: uppercase;
-            color: #3e1b00;
-        }
-        .card-bronze .player-name-banner {
-            background: linear-gradient(90deg, transparent 0%, rgba(43, 18, 0, 0.25) 20%, rgba(43, 18, 0, 0.25) 80%, transparent 100%);
-            border-bottom: 2px solid #2b1200;
-            color: #2b1200;
-        }
-
-        /* ================================================== */
-        /* 5. ICON CARD - EXACTLY 50 LINES OF CSS STYLES      */
-        /* ================================================== */
-        .card-icon {
-            width: 300px;
-            height: 460px;
-            position: relative;
-            clip-path: polygon(18% 0%, 82% 0%, 100% 9%, 100% 78%, 50% 100%, 0% 78%, 0% 9%);
-            background: radial-gradient(
-                ellipse at 50% 25%,
-                #ffffff 0%,
-                #f7f0dc 35%,
-                #d4af37 75%,
-                #1c180a 100%
-            );
-            color: #1a1608;
-            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
-            border: 2px solid #e6c65c;
-            overflow: hidden;
-            user-select: none;
-        }
-        .card-icon .card-top-panel {
-            position: absolute;
-            top: 45px;
-            left: 25px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 5;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-        }
-        .card-icon .overall-rating {
-            font-size: 44px;
-            font-weight: 900;
-            line-height: 0.8;
-            letter-spacing: -2px;
-            color: #1a1608;
-        }
-        .card-icon .position {
-            font-size: 15px;
-            font-weight: 900;
-            margin-top: 5px;
-            text-transform: uppercase;
-            color: #3b3110;
-        }
-        .card-icon .player-name-banner {
-            background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.3) 20%, rgba(212, 175, 55, 0.3) 80%, transparent 100%);
-            border-bottom: 2px solid #1a1608;
-            color: #1a1608;
-        }
-
-        /* SHARED INTERNAL CARD ELEMENTS */
+        /* CARD CONTENT OVERLAYS */
         .card-top-panel {
             position: absolute;
-            top: 45px;
-            left: 25px;
+            top: 48px;
+            left: 32px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -379,25 +130,25 @@
         }
 
         .overall-rating {
-            font-size: 44px;
+            font-size: 42px;
             font-weight: 900;
-            line-height: 0.8;
+            line-height: 0.85;
             letter-spacing: -2px;
         }
 
         .position {
             font-size: 15px;
             font-weight: 900;
-            margin-top: 5px;
+            margin-top: 4px;
             text-transform: uppercase;
         }
 
         .player-img-container {
             position: absolute;
-            width: 250px;
-            height: 250px;
-            bottom: 140px;
-            right: -20px;
+            width: 230px;
+            height: 230px;
+            bottom: 150px;
+            right: -10px;
             z-index: 3;
             pointer-events: none;
         }
@@ -412,23 +163,23 @@
 
         .player-name-banner {
             position: absolute;
-            width: 86%;
-            left: 7%;
-            top: 270px;
+            width: 80%;
+            left: 10%;
+            top: 268px;
             text-align: center;
             font-size: 19px;
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             z-index: 5;
-            padding: 4px 0;
+            padding: 3px 0;
         }
 
         .stats-grid {
             position: absolute;
-            bottom: 38px;
-            left: 30px;
-            right: 30px;
+            bottom: 42px;
+            left: 35px;
+            right: 35px;
             display: grid;
             grid-template-columns: 1fr auto 1fr;
             align-items: center;
@@ -457,14 +208,14 @@
 
         .stat-val {
             font-weight: 900;
-            font-size: 18px;
+            font-size: 17px;
             width: 24px;
             text-align: right;
         }
 
         .stat-lbl {
             font-weight: 800;
-            font-size: 13px;
+            font-size: 12px;
             opacity: 0.85;
             width: 30px;
             text-align: left;
@@ -472,11 +223,19 @@
 
         .stat-divider {
             width: 1px;
-            height: 70px;
-            margin: 0 8px;
+            height: 65px;
+            margin: 0 6px;
             background: currentColor;
             opacity: 0.35;
         }
+
+        /* CARD TIER COLOR THEMES */
+        .theme-blank { color: #5d6d88; }
+        .theme-bronze { color: #231103; }
+        .theme-silver { color: #1a1a1a; }
+        .theme-gold { color: #2e2000; }
+        .theme-toty { color: #ffffff; text-shadow: 0 0 8px rgba(112, 238, 255, 0.6); }
+        .theme-icon { color: #1a1608; text-shadow: 0 0 6px rgba(255, 255, 255, 0.5); }
 
         .spin-wheel-trigger-btn {
             width: 100%;
@@ -611,7 +370,9 @@
     </div>
 
     <div class="game-container">
-        <div class="card-blank" id="fcCard">
+        <div class="card-wrapper theme-blank" id="fcCard">
+            <div class="card-bg-svg" id="cardBgSvg"></div>
+
             <div class="player-img-container">
                 <img src="" alt="Player" class="player-img" id="playerPic" style="opacity: 0;">
             </div>
@@ -668,6 +429,7 @@
         const statusMsg = document.getElementById("statusMsg");
 
         const fcCard = document.getElementById("fcCard");
+        const cardBgSvg = document.getElementById("cardBgSvg");
         const cardName = document.getElementById("cardName");
         const cardOvr = document.getElementById("cardOvr");
         const cardPos = document.getElementById("cardPos");
@@ -710,6 +472,67 @@
             { id: "yamal", name: "Lamine Yamal", pos: "RW" },
             { id: "saka", name: "Saka", pos: "RW" }
         ];
+
+        /* DETAILED SVG CARD TEMPLATES (OPTION B) */
+        const cardTemplates = {
+            blank: `<svg viewBox="0 0 300 460" xmlns="http://www.w3.org/2000/svg"><path d="M 54 0 L 246 0 L 300 41 L 300 359 L 150 460 L 0 359 L 0 41 Z" fill="#121824" stroke="#2a364f" stroke-width="4"/><path d="M 18 30 L 282 30 L 282 340 L 150 435 L 18 340 Z" fill="#0d121a"/></svg>`,
+            
+            bronze: `<svg viewBox="0 0 300 460" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="bronzeBorder" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f3d1b5"/><stop offset="50%" stop-color="#8a4d1d"/><stop offset="100%" stop-color="#3d1e05"/></linearGradient>
+                    <radialGradient id="bronzeBg" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#c4834d"/><stop offset="60%" stop-color="#693710"/><stop offset="100%" stop-color="#231103"/></radialGradient>
+                </defs>
+                <path d="M 54 0 L 246 0 L 300 41 L 300 359 L 150 460 L 0 359 L 0 41 Z" fill="url(#bronzeBg)" stroke="url(#bronzeBorder)" stroke-width="6"/>
+                <path d="M 18 30 L 282 30 L 282 345 L 150 435 L 18 345 Z" fill="none" stroke="#f3d1b5" stroke-width="1.5" stroke-opacity="0.4"/>
+                <line x1="20" y1="265" x2="280" y2="265" stroke="#231103" stroke-width="3"/>
+                <line x1="20" y1="295" x2="280" y2="295" stroke="#231103" stroke-width="3"/>
+            </svg>`,
+
+            silver: `<svg viewBox="0 0 300 460" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="silverBorder" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ffffff"/><stop offset="50%" stop-color="#a0a0a0"/><stop offset="100%" stop-color="#404040"/></linearGradient>
+                    <radialGradient id="silverBg" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#e6e6e6"/><stop offset="50%" stop-color="#999999"/><stop offset="100%" stop-color="#2b2b2b"/></radialGradient>
+                </defs>
+                <path d="M 54 0 L 246 0 L 300 41 L 300 359 L 150 460 L 0 359 L 0 41 Z" fill="url(#silverBg)" stroke="url(#silverBorder)" stroke-width="6"/>
+                <path d="M 18 30 L 282 30 L 282 345 L 150 435 L 18 345 Z" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.5"/>
+                <line x1="20" y1="265" x2="280" y2="265" stroke="#1a1a1a" stroke-width="3"/>
+                <line x1="20" y1="295" x2="280" y2="295" stroke="#1a1a1a" stroke-width="3"/>
+            </svg>`,
+
+            gold: `<svg viewBox="0 0 300 460" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffe89c"/><stop offset="30%" stop-color="#dfb241"/><stop offset="70%" stop-color="#8a640f"/><stop offset="100%" stop-color="#422e00"/></linearGradient>
+                    <radialGradient id="goldInner" cx="50%" cy="25%" r="75%"><stop offset="0%" stop-color="#fff8d6"/><stop offset="45%" stop-color="#cca031"/><stop offset="85%" stop-color="#694b00"/></radialGradient>
+                </defs>
+                <path d="M 54 0 L 246 0 L 300 41 L 300 359 L 150 460 L 0 359 L 0 41 Z" fill="url(#goldInner)" stroke="url(#goldGrad)" stroke-width="6"/>
+                <polygon points="150,15 285,45 285,345 150,440 15,345 15,45" fill="none" stroke="#ffe89c" stroke-width="2" stroke-opacity="0.6"/>
+                <line x1="20" y1="265" x2="280" y2="265" stroke="#2e2000" stroke-width="3"/>
+                <line x1="20" y1="295" x2="280" y2="295" stroke="#2e2000" stroke-width="3"/>
+            </svg>`,
+
+            toty: `<svg viewBox="0 0 300 460" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="totyBorder" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#70eeff"/><stop offset="50%" stop-color="#0055ff"/><stop offset="100%" stop-color="#001147"/></linearGradient>
+                    <radialGradient id="totyBg" cx="50%" cy="20%" r="80%"><stop offset="0%" stop-color="#00d9ff"/><stop offset="35%" stop-color="#003cd6"/><stop offset="75%" stop-color="#020d38"/><stop offset="100%" stop-color="#010517"/></radialGradient>
+                </defs>
+                <path d="M 54 0 L 246 0 L 300 41 L 300 359 L 150 460 L 0 359 L 0 41 Z" fill="url(#totyBg)" stroke="url(#totyBorder)" stroke-width="7"/>
+                <polygon points="150,12 288,43 288,348 150,444 12,348 12,43" fill="none" stroke="#70eeff" stroke-width="2.5" stroke-opacity="0.8"/>
+                <path d="M 30 180 L 150 20 L 270 180" fill="none" stroke="#70eeff" stroke-width="1" stroke-opacity="0.3"/>
+                <line x1="20" y1="265" x2="280" y2="265" stroke="#70eeff" stroke-width="3"/>
+                <line x1="20" y1="295" x2="280" y2="295" stroke="#70eeff" stroke-width="3"/>
+            </svg>`,
+
+            icon: `<svg viewBox="0 0 300 460" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="iconBorder" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ffffff"/><stop offset="50%" stop-color="#e6c65c"/><stop offset="100%" stop-color="#544413"/></linearGradient>
+                    <radialGradient id="iconBg" cx="50%" cy="25%" r="75%"><stop offset="0%" stop-color="#ffffff"/><stop offset="40%" stop-color="#f5e8be"/><stop offset="80%" stop-color="#c9a238"/><stop offset="100%" stop-color="#241c03"/></radialGradient>
+                </defs>
+                <path d="M 54 0 L 246 0 L 300 41 L 300 359 L 150 460 L 0 359 L 0 41 Z" fill="url(#iconBg)" stroke="url(#iconBorder)" stroke-width="6"/>
+                <polygon points="150,14 286,44 286,346 150,442 14,346 14,44" fill="none" stroke="#ffffff" stroke-width="2" stroke-opacity="0.7"/>
+                <line x1="20" y1="265" x2="280" y2="265" stroke="#1a1608" stroke-width="3"/>
+                <line x1="20" y1="295" x2="280" y2="295" stroke="#1a1608" stroke-width="3"/>
+            </svg>`
+        };
 
         playerSearch.addEventListener("input", () => {
             const query = playerSearch.value.trim().toLowerCase();
@@ -762,26 +585,32 @@
         }
 
         function updateCardTier(ovr) {
-            fcCard.className = "";
+            fcCard.className = "card-wrapper";
 
             if (selectedPlayer && selectedPlayer.isIcon) {
-                fcCard.classList.add("card-icon");
+                fcCard.classList.add("theme-icon");
+                cardBgSvg.innerHTML = cardTemplates.icon;
                 return;
             }
 
             if (ovr === null || isNaN(ovr)) {
-                fcCard.classList.add("card-blank");
+                fcCard.classList.add("theme-blank");
+                cardBgSvg.innerHTML = cardTemplates.blank;
                 return;
             }
 
             if (ovr < 65) {
-                fcCard.classList.add("card-bronze");
+                fcCard.classList.add("theme-bronze");
+                cardBgSvg.innerHTML = cardTemplates.bronze;
             } else if (ovr < 75) {
-                fcCard.classList.add("card-silver");
+                fcCard.classList.add("theme-silver");
+                cardBgSvg.innerHTML = cardTemplates.silver;
             } else if (ovr < 92) {
-                fcCard.classList.add("card-gold");
+                fcCard.classList.add("theme-gold");
+                cardBgSvg.innerHTML = cardTemplates.gold;
             } else {
-                fcCard.classList.add("card-toty");
+                fcCard.classList.add("theme-toty");
+                cardBgSvg.innerHTML = cardTemplates.toty;
             }
         }
 
@@ -885,6 +714,8 @@
             }, 4000);
         });
 
+        // Initialize default blank frame
+        cardBgSvg.innerHTML = cardTemplates.blank;
         buildNumberedWheel();
     </script>
 </body>
