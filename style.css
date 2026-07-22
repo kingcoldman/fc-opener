@@ -1,18 +1,6 @@
-I hear you loud and clear—you want a massive, fully expanded file! The tricky part is that LLMs have a hard output character limit per single message (usually around 4,000–8,000 tokens), which caps code at roughly 400 to 700 lines before the message cuts off mid-sentence.
-
-If you want an actual 2,000+ line project, we can easily break it into separate modular files or parts so nothing gets cut off!
-
-Here is Part 1, containing the expanded, fully uncompressed HTML and the complete 2,000-line equivalent CSS stylesheet.
-
-Part 1: index.html & Complete Stylesheet (styles.css)
-Save this CSS as styles.css:
-
-CSS
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,900&display=swap');
 
-/* ==========================================================================
-   1. GLOBAL RESET & ROOT VARIABLES
-   ========================================================================== */
+/* Reset & Variables */
 *,
 *::before,
 *::after {
@@ -31,7 +19,6 @@ CSS
     --text-muted-slate: #5d6d88;
     --border-dark-slate: #2a364f;
     
-    /* Gold Tier Colors */
     --gold-primary: #e1ba52;
     --gold-light: #fff6d1;
     --gold-mid: #a27b1e;
@@ -39,25 +26,21 @@ CSS
     --gold-text-dark: #2e2000;
     --gold-text-muted: #4a3600;
 
-    /* TOTY Tier Colors */
     --toty-primary: #70eeff;
     --toty-blue-bright: #004ae2;
     --toty-blue-dark: #031038;
     --toty-black: #010619;
 
-    /* Silver Tier Colors */
     --silver-primary: #c0c0c0;
     --silver-light: #ffffff;
     --silver-mid: #707070;
     --silver-dark: #1a1a1a;
 
-    /* Bronze Tier Colors */
     --bronze-primary: #b87333;
     --bronze-light: #f3d1b5;
     --bronze-mid: #6e3b12;
     --bronze-dark: #210d00;
 
-    /* Icon Tier Colors */
     --icon-primary: #d4af37;
     --icon-light: #f7f0dc;
     --icon-accent: #e6c65c;
@@ -73,16 +56,11 @@ body {
     align-items: center;
     justify-content: flex-start;
     min-height: 100vh;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 40px 20px;
     overflow-x: hidden;
 }
 
-/* ==========================================================================
-   2. HEADER & TYPOGRAPHY
-   ========================================================================== */
+/* Layout & Typography */
 .app-header-container {
     display: flex;
     flex-direction: column;
@@ -110,9 +88,7 @@ body {
     margin-top: 4px;
 }
 
-/* ==========================================================================
-   3. SEARCH COMPONENT STYLES
-   ========================================================================== */
+/* Search Bar */
 .search-wrapper {
     position: relative;
     width: 320px;
@@ -122,18 +98,13 @@ body {
 
 .search-input-field {
     width: 100%;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 16px 20px;
     font-size: 14px;
     font-weight: 900;
     border-radius: 14px;
     background-color: var(--bg-card-panel);
     color: var(--text-pure-white);
-    border-width: 2px;
-    border-style: solid;
-    border-color: var(--accent-green-primary);
+    border: 2px solid var(--accent-green-primary);
     outline: none;
     box-shadow: 0 4px 20px rgba(0, 255, 136, 0.25);
     text-transform: uppercase;
@@ -151,9 +122,7 @@ body {
     left: 0;
     right: 0;
     background-color: var(--bg-card-panel);
-    border-width: 1px;
-    border-style: solid;
-    border-color: var(--accent-green-primary);
+    border: 1px solid var(--accent-green-primary);
     border-radius: 14px;
     max-height: 250px;
     overflow-y: auto;
@@ -167,15 +136,10 @@ body {
 }
 
 .suggestion-row {
-    padding-top: 14px;
-    padding-bottom: 14px;
-    padding-left: 18px;
-    padding-right: 18px;
+    padding: 14px 18px;
     font-size: 13px;
     cursor: pointer;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -187,9 +151,7 @@ body {
     color: var(--bg-main-dark);
 }
 
-/* ==========================================================================
-   4. CARD BASE STRUCTURE
-   ========================================================================== */
+/* FUT Card Styling */
 .workspace {
     display: flex;
     flex-direction: column;
@@ -270,13 +232,10 @@ body {
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding-top: 3px;
-    padding-bottom: 3px;
+    padding: 3px 0;
     margin-bottom: 12px;
-    border-top-width: 1px;
-    border-top-style: solid;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
 }
 
 .attribute-matrix-grid {
@@ -312,10 +271,7 @@ body {
     font-weight: 800;
 }
 
-/* ==========================================================================
-   5. TIER THEMING (GOLD, TOTY, SILVER, BRONZE, ICON)
-   ========================================================================== */
-/* GOLD TIER */
+/* Card Themes */
 .tier-gold {
     background: radial-gradient(circle at 50% 30%, var(--gold-light) 0%, var(--gold-primary) 35%, var(--gold-mid) 70%, var(--gold-dark) 100%);
     border: 3px solid var(--gold-primary);
@@ -327,7 +283,6 @@ body {
 .tier-gold .player-name-ribbon { color: #fff4c2; border-color: var(--gold-primary); }
 .tier-gold .stat-key-label { color: var(--gold-primary); }
 
-/* TOTY TIER */
 .tier-toty {
     background: radial-gradient(circle at 50% 20%, var(--toty-primary) 0%, var(--toty-blue-bright) 40%, var(--toty-blue-dark) 75%, var(--toty-black) 100%);
     border: 3px solid var(--toty-primary);
@@ -339,7 +294,6 @@ body {
 .tier-toty .player-name-ribbon { color: #ffffff; border-color: var(--toty-primary); }
 .tier-toty .stat-key-label { color: var(--toty-primary); }
 
-/* SILVER TIER */
 .tier-silver {
     background: radial-gradient(circle at 50% 30%, var(--silver-light) 0%, var(--silver-primary) 40%, var(--silver-mid) 75%, var(--silver-dark) 100%);
     border: 3px solid var(--silver-primary);
@@ -351,7 +305,6 @@ body {
 .tier-silver .player-name-ribbon { color: #ffffff; border-color: var(--silver-primary); }
 .tier-silver .stat-key-label { color: var(--silver-primary); }
 
-/* BRONZE TIER */
 .tier-bronze {
     background: radial-gradient(circle at 50% 30%, var(--bronze-light) 0%, var(--bronze-primary) 40%, var(--bronze-mid) 75%, var(--bronze-dark) 100%);
     border: 3px solid var(--bronze-primary);
@@ -363,7 +316,6 @@ body {
 .tier-bronze .player-name-ribbon { color: var(--bronze-light); border-color: var(--bronze-primary); }
 .tier-bronze .stat-key-label { color: var(--bronze-primary); }
 
-/* ICON TIER */
 .tier-icon {
     background: radial-gradient(circle at 50% 25%, var(--icon-light) 0%, var(--icon-primary) 50%, var(--icon-dark) 100%);
     border: 3px solid var(--icon-accent);
@@ -375,7 +327,6 @@ body {
 .tier-icon .player-name-ribbon { color: #ffffff; border-color: var(--icon-primary); }
 .tier-icon .stat-key-label { color: var(--icon-primary); }
 
-/* BLANK TIER */
 .tier-blank {
     background: radial-gradient(circle at 50% 30%, #1c2430 0%, #0d121a 100%);
     border: 3px solid var(--border-dark-slate);
@@ -383,13 +334,10 @@ body {
 .tier-blank .card-bottom-section { background: rgba(13, 18, 26, 0.95); }
 .tier-blank .overall-rating-value, .tier-blank .position-label-text, .tier-blank .player-name-ribbon, .tier-blank .stat-key-label { color: var(--text-muted-slate); border-color: var(--border-dark-slate); }
 
-/* ==========================================================================
-   6. WHEEL MODAL & BUTTON STYLES
-   ========================================================================== */
+/* Buttons & Modal */
 .trigger-wheel-action-btn {
     width: 100%;
-    padding-top: 16px;
-    padding-bottom: 16px;
+    padding: 16px 0;
     background: linear-gradient(135deg, var(--accent-green-primary) 0%, var(--accent-green-dark) 100%);
     color: var(--bg-main-dark);
     border: none;
