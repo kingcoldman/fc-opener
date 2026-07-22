@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FC 26 Ultimate Team Card Creator</title>
+    <title>FC Ultimate Team Card Creator</title>
     <style>
         * {
             box-sizing: border-box;
@@ -103,9 +103,7 @@
             position: relative;
         }
 
-        /* ---------------------------------------------------- */
-        /* EA FC CARD SHAPE & DETAILED TIERS                   */
-        /* ---------------------------------------------------- */
+        /* CARD SHAPE & TIERS */
         .fc-card {
             width: 310px;
             height: 470px;
@@ -120,35 +118,30 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.8);
         }
 
-        /* CARD TIER DESIGNS */
         .card-blank {
             background: linear-gradient(135deg, #1c2430 0%, #0d121a 100%);
             border: 2px dashed rgba(255, 255, 255, 0.2);
             color: #5d6d88;
         }
 
-        /* BRONZE 50-69 */
         .card-bronze {
             background: radial-gradient(circle at 50% 30%, #a86942 0%, #5e381e 60%, #291508 100%);
             color: #fcebe1;
             box-shadow: 0 0 25px rgba(168, 105, 66, 0.4);
         }
 
-        /* SILVER 70-79 */
         .card-silver {
             background: radial-gradient(circle at 50% 30%, #e0e6ed 0%, #95a5a6 60%, #2c3e50 100%);
             color: #1a252f;
             box-shadow: 0 0 25px rgba(224, 230, 237, 0.4);
         }
 
-        /* GOLD 80-89 */
         .card-gold {
             background: radial-gradient(circle at 50% 30%, #ffeaa7 0%, #d4af37 50%, #684f00 100%);
             color: #2b1f00;
             box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
         }
 
-        /* TOTY HONORABLE MENTION 90-94 */
         .card-toty-hm {
             background: radial-gradient(circle at 50% 30%, #00d2ff 0%, #0052d4 60%, #001f3f 100%);
             color: #ffffff;
@@ -156,7 +149,6 @@
             text-shadow: 0 0 8px rgba(0, 210, 255, 0.9);
         }
 
-        /* TOTY 95-99 */
         .card-toty {
             background: radial-gradient(circle at 50% 30%, #ffe066 0%, #002266 45%, #000c28 100%);
             color: #ffffff;
@@ -304,7 +296,7 @@
             cursor: not-allowed;
         }
 
-        /* WHEEL MODAL OVERLAY */
+        /* MODAL OVERLAY */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -514,14 +506,38 @@
         const totalSegments = wheelNumbers.length;
         const segmentAngle = 360 / totalSegments;
 
-        // HIGH QUALITY DIRECT PNG PLAYERS
+        // 30 TOP PLAYERS WITH DIRECT WIKIMEDIA PNG CUTOUT LINKS
         const playersDb = [
             { id: "mbappe", name: "Kylian Mbappé", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Kylian_Mbapp%C3%A9_Dec_2023_%28cropped%29.png/250px-Kylian_Mbapp%C3%A9_Dec_2023_%28cropped%29.png" },
             { id: "haaland", name: "Erling Haaland", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Erling_Haaland_2023_%28cropped%29.png/250px-Erling_Haaland_2023_%28cropped%29.png" },
             { id: "bellingham", name: "Jude Bellingham", pos: "CAM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Jude_Bellingham_2024_%28cropped%29.png/250px-Jude_Bellingham_2024_%28cropped%29.png" },
             { id: "messi", name: "Lionel Messi", pos: "CF", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.png/250px-Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.png" },
             { id: "ronaldo", name: "Cristiano Ronaldo", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Cristiano_Ronaldo_playing_for_Al_Nassr_FC_sign_against_Al-Fateh_FC_on_3_February_2023_%28cropped%29.png/250px-Cristiano_Ronaldo_playing_for_Al_Nassr_FC_sign_against_Al-Fateh_FC_on_3_February_2023_%28cropped%29.png" },
-            { id: "yamal", name: "Lamine Yamal", pos: "RW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Lamine_Yamal_2024_%28cropped%29.png/250px-Lamine_Yamal_2024_%28cropped%29.png" }
+            { id: "vini", name: "Vinícius Jr.", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Vinicius_Jr_2024_%28cropped%29.png/250px-Vinicius_Jr_2024_%28cropped%29.png" },
+            { id: "yamal", name: "Lamine Yamal", pos: "RW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Lamine_Yamal_2024_%28cropped%29.png/250px-Lamine_Yamal_2024_%28cropped%29.png" },
+            { id: "saka", name: "Bukayo Saka", pos: "RW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Bukayo_Saka_2024_%28cropped%29.png/250px-Bukayo_Saka_2024_%28cropped%29.png" },
+            { id: "palmer", name: "Cole Palmer", pos: "CAM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Cole_Palmer_2024_%28cropped%29.png/250px-Cole_Palmer_2024_%28cropped%29.png" },
+            { id: "musiala", name: "Jamal Musiala", pos: "CAM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Jamal_Musiala_2024_%28cropped%29.png/250px-Jamal_Musiala_2024_%28cropped%29.png" },
+            { id: "wirtz", name: "Florian Wirtz", pos: "CAM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Florian_Wirtz_2024_%28cropped%29.png/250px-Florian_Wirtz_2024_%28cropped%29.png" },
+            { id: "kane", name: "Harry Kane", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Harry_Kane_2024_%28cropped%29.png/250px-Harry_Kane_2024_%28cropped%29.png" },
+            { id: "debruyne", name: "Kevin De Bruyne", pos: "CM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Kevin_De_Bruyne_2024_%28cropped%29.png/250px-Kevin_De_Bruyne_2024_%28cropped%29.png" },
+            { id: "rodri", name: "Rodri", pos: "CDM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Rodrigo_Hern%C3%A1ndez_Cascante_2024_%28cropped%29.png/250px-Rodrigo_Hern%C3%A1ndez_Cascante_2024_%28cropped%29.png" },
+            { id: "salah", name: "Mohamed Salah", pos: "RW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Mohamed_Salah_2023_%28cropped%29.png/250px-Mohamed_Salah_2023_%28cropped%29.png" },
+            { id: "lewandowski", name: "Robert Lewandowski", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Robert_Lewandowski_2024_%28cropped%29.png/250px-Robert_Lewandowski_2024_%28cropped%29.png" },
+            { id: "pedri", name: "Pedri", pos: "CM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Pedri_2022.png/250px-Pedri_2022.png" },
+            { id: "gavi", name: "Gavi", pos: "CM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Gavi_2022.png/250px-Gavi_2022.png" },
+            { id: "modric", name: "Luka Modrić", pos: "CM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Luka_Modri%C3%A1_2022.png/250px-Luka_Modri%C3%A1_2022.png" },
+            { id: "son", name: "Son Heung-min", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Son_Heung-min_2022.png/250px-Son_Heung-min_2022.png" },
+            { id: "griezmann", name: "Antoine Griezmann", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Antoine_Griezmann_2022.png/250px-Antoine_Griezmann_2022.png" },
+            { id: "neymar", name: "Neymar Jr", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Neymar_JR_2022.png/250px-Neymar_JR_2022.png" },
+            { id: "vanDijk", name: "Virgil van Dijk", pos: "CB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Virgil_van_Dijk_2022.png/250px-Virgil_van_Dijk_2022.png" },
+            { id: "rudiger", name: "Antonio Rüdiger", pos: "CB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Antonio_R%C3%BCdiger_2022.png/250px-Antonio_R%C3%BCdiger_2022.png" },
+            { id: "saliba", name: "William Saliba", pos: "CB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/William_Saliba_2024_%28cropped%29.png/250px-William_Saliba_2024_%28cropped%29.png" },
+            { id: "courtois", name: "Thibaut Courtois", pos: "GK", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Thibaut_Courtois_2018.png/250px-Thibaut_Courtois_2018.png" },
+            { id: "alisson", name: "Alisson Becker", pos: "GK", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Alisson_Becker_2018.png/250px-Alisson_Becker_2018.png" },
+            { id: "foden", name: "Phil Foden", pos: "RW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Phil_Foden_2022.png/250px-Phil_Foden_2022.png" },
+            { id: "lautaro", name: "Lautaro Martínez", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Lautaro_Mart%C3%ADnez_2022.png/250px-Lautaro_Mart%C3%ADnez_2022.png" },
+            { id: "rice", name: "Declan Rice", pos: "CDM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Declan_Rice_2022.png/250px-Declan_Rice_2022.png" }
         ];
 
         playerSearch.addEventListener("input", () => {
