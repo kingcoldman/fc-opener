@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FC Ultimate Team Card Creator</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,900&display=swap');
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -12,9 +14,9 @@
         }
 
         body {
-            background: #06090e;
+            background: #080c14;
             color: #ffffff;
-            font-family: 'Arial Black', -apple-system, sans-serif;
+            font-family: 'Montserrat', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -24,7 +26,8 @@
         }
 
         h1 {
-            font-size: 26px;
+            font-size: 24px;
+            font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 20px;
@@ -33,10 +36,9 @@
             text-align: center;
         }
 
-        /* SEARCH BAR */
         .search-container {
             position: relative;
-            width: 320px;
+            width: 310px;
             margin-bottom: 25px;
             z-index: 20;
         }
@@ -44,7 +46,7 @@
         .search-input {
             width: 100%;
             padding: 14px 18px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 900;
             border-radius: 12px;
             background: #111723;
@@ -53,11 +55,6 @@
             outline: none;
             box-shadow: 0 4px 20px rgba(0, 255, 136, 0.2);
             text-transform: uppercase;
-        }
-
-        .search-input::placeholder {
-            color: #5d6d88;
-            font-weight: 700;
         }
 
         .suggestions-list {
@@ -81,7 +78,7 @@
 
         .suggestion-item {
             padding: 12px 16px;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
             border-bottom: 1px solid rgba(255,255,255,0.05);
             display: flex;
@@ -98,99 +95,82 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 320px;
+            width: 310px;
             gap: 20px;
-            position: relative;
         }
 
-        /* CARD SHAPE & TIERS */
+        /* ACCURATE EA SPORTS FC CARD SHAPE & SHINE */
         .fc-card {
-            width: 310px;
-            height: 470px;
+            width: 300px;
+            height: 460px;
             position: relative;
-            font-family: 'Arial Black', sans-serif;
-            text-transform: uppercase;
             background-size: cover;
             background-position: center;
-            clip-path: polygon(16% 0%, 84% 0%, 100% 11%, 100% 77%, 50% 100%, 0% 77%, 0% 11%);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            clip-path: polygon(18% 0%, 82% 0%, 100% 9%, 100% 78%, 50% 100%, 0% 78%, 0% 9%);
+            transition: all 0.3s ease;
             user-select: none;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.8));
         }
 
+        /* CARD STYLES */
         .card-blank {
             background: linear-gradient(135deg, #1c2430 0%, #0d121a 100%);
             border: 2px dashed rgba(255, 255, 255, 0.2);
             color: #5d6d88;
         }
 
-        .card-bronze {
-            background: radial-gradient(circle at 50% 30%, #a86942 0%, #5e381e 60%, #291508 100%);
-            color: #fcebe1;
-            box-shadow: 0 0 25px rgba(168, 105, 66, 0.4);
-        }
-
-        .card-silver {
-            background: radial-gradient(circle at 50% 30%, #e0e6ed 0%, #95a5a6 60%, #2c3e50 100%);
-            color: #1a252f;
-            box-shadow: 0 0 25px rgba(224, 230, 237, 0.4);
-        }
-
         .card-gold {
-            background: radial-gradient(circle at 50% 30%, #ffeaa7 0%, #d4af37 50%, #684f00 100%);
-            color: #2b1f00;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
-        }
-
-        .card-toty-hm {
-            background: radial-gradient(circle at 50% 30%, #00d2ff 0%, #0052d4 60%, #001f3f 100%);
-            color: #ffffff;
-            box-shadow: 0 0 35px rgba(0, 210, 255, 0.7);
-            text-shadow: 0 0 8px rgba(0, 210, 255, 0.9);
+            background: radial-gradient(ellipse at 50% 30%, #fff4c2 0%, #e1ba52 40%, #a27b1e 75%, #4a3600 100%);
+            color: #312300;
         }
 
         .card-toty {
-            background: radial-gradient(circle at 50% 30%, #ffe066 0%, #002266 45%, #000c28 100%);
+            background: radial-gradient(ellipse at 50% 20%, #70eeff 0%, #004ae2 45%, #031038 85%, #010619 100%);
             color: #ffffff;
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.9);
         }
 
-        /* CARD DETAILS */
-        .card-badge-column {
+        /* TOP RATING & POSITION BADGE PANEL */
+        .card-top-panel {
             position: absolute;
-            top: 40px;
-            left: 22px;
+            top: 45px;
+            left: 25px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            z-index: 4;
-            width: 55px;
+            z-index: 5;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         .overall-rating {
-            font-size: 46px;
+            font-size: 44px;
             font-weight: 900;
-            line-height: 0.85;
-            letter-spacing: -1px;
+            line-height: 0.8;
+            letter-spacing: -2px;
         }
 
         .position {
             font-size: 15px;
             font-weight: 900;
-            margin-top: 4px;
-            border-bottom: 2px solid currentColor;
-            padding-bottom: 2px;
-            width: 100%;
-            text-align: center;
+            margin-top: 5px;
+            text-transform: uppercase;
         }
 
+        .nation-flag {
+            width: 26px;
+            height: 17px;
+            margin-top: 8px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 2px;
+            object-fit: cover;
+        }
+
+        /* PLAYER IMAGE CUTOUT */
         .player-img-container {
             position: absolute;
-            width: 260px;
-            height: 260px;
-            bottom: 150px;
-            right: -25px;
+            width: 250px;
+            height: 250px;
+            bottom: 140px;
+            right: -20px;
             z-index: 3;
             pointer-events: none;
         }
@@ -199,94 +179,94 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.7));
+            filter: drop-shadow(0px 8px 12px rgba(0, 0, 0, 0.6));
             transition: opacity 0.3s ease;
         }
 
-        .player-name {
+        /* NAME RIBBON BANNER */
+        .player-name-banner {
             position: absolute;
-            width: 84%;
-            left: 8%;
+            width: 86%;
+            left: 7%;
+            top: 270px;
             text-align: center;
-            top: 275px;
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 900;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
-            z-index: 4;
+            z-index: 5;
             padding: 4px 0;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.25) 20%, rgba(0,0,0,0.25) 80%, rgba(255,255,255,0) 100%);
             border-bottom: 2px solid currentColor;
         }
 
+        /* STATS GRID */
         .stats-grid {
             position: absolute;
-            bottom: 45px;
-            left: 35px;
-            right: 35px;
+            bottom: 38px;
+            left: 30px;
+            right: 30px;
             display: grid;
             grid-template-columns: 1fr auto 1fr;
             align-items: center;
-            z-index: 4;
+            z-index: 5;
         }
 
         .stats-col {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 2px;
         }
 
         .stat-item {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             cursor: pointer;
-            padding: 3px 6px;
-            border-radius: 6px;
-            transition: background 0.2s ease, transform 0.1s ease;
+            padding: 2px 4px;
+            border-radius: 4px;
         }
 
         .stat-item:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .stat-val {
             font-weight: 900;
-            font-size: 19px;
-            width: 25px;
+            font-size: 18px;
+            width: 24px;
             text-align: right;
         }
 
         .stat-lbl {
-            font-weight: 700;
-            font-size: 14px;
-            opacity: 0.9;
+            font-weight: 800;
+            font-size: 13px;
+            opacity: 0.85;
             width: 30px;
             text-align: left;
         }
 
         .stat-divider {
-            width: 2px;
-            height: 75px;
-            margin: 0 10px;
+            width: 1px;
+            height: 70px;
+            margin: 0 8px;
             background: currentColor;
-            opacity: 0.3;
+            opacity: 0.35;
         }
 
         .spin-wheel-trigger-btn {
             width: 100%;
-            padding: 16px;
+            padding: 15px;
             background: linear-gradient(135deg, #00ff88 0%, #00b359 100%);
             color: #06090e;
             border: none;
             border-radius: 12px;
-            font-size: 17px;
+            font-size: 15px;
             font-weight: 900;
             text-transform: uppercase;
             cursor: pointer;
-            letter-spacing: 1px;
-            box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4);
-            transition: all 0.2s ease;
+            box-shadow: 0 6px 20px rgba(0, 255, 136, 0.3);
         }
 
         .spin-wheel-trigger-btn:disabled {
@@ -296,7 +276,7 @@
             cursor: not-allowed;
         }
 
-        /* MODAL OVERLAY */
+        /* WHEEL MODAL OVERLAY */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -304,7 +284,7 @@
             width: 100vw;
             height: 100vh;
             background: rgba(4, 6, 10, 0.88);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(8px);
             z-index: 9999;
             display: flex;
             align-items: center;
@@ -322,20 +302,13 @@
         .control-panel {
             background: #0f1522;
             border: 2px solid #00ff88;
-            border-radius: 24px;
-            padding: 25px;
-            width: min(92vw, 420px);
+            border-radius: 20px;
+            padding: 20px;
+            width: min(90vw, 380px);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
-            transform: scale(0.9);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.2);
-        }
-
-        .modal-overlay.visible .control-panel {
-            transform: scale(1);
+            gap: 15px;
         }
 
         .wheel-header {
@@ -346,7 +319,7 @@
         }
 
         .status-msg {
-            font-size: 20px;
+            font-size: 18px;
             color: #00ff88;
             font-weight: 900;
         }
@@ -355,21 +328,20 @@
             background: #ff4757;
             color: white;
             border: none;
-            font-size: 14px;
-            padding: 8px 16px;
-            border-radius: 8px;
+            font-size: 12px;
+            padding: 6px 12px;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
         }
 
         .wheel-box {
             position: relative;
-            width: min(72vw, 320px); 
-            height: min(72vw, 320px);
+            width: 280px; 
+            height: 280px;
             overflow: hidden;
             border-radius: 50%;
             border: 4px solid #00ff88;
-            box-shadow: 0 0 25px rgba(0, 255, 136, 0.3);
         }
 
         .wheel-svg {
@@ -386,32 +358,23 @@
             transform: translateX(-50%);
             width: 0;
             height: 0;
-            border-left: 18px solid transparent;
-            border-right: 18px solid transparent;
-            border-top: 30px solid #ffffff;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 25px solid #ffffff;
             z-index: 10;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.8));
         }
 
         .spin-btn {
             background: #00ff88;
             color: #06090e;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 900;
             border: none;
-            padding: 15px;
-            border-radius: 12px;
+            padding: 12px;
+            border-radius: 10px;
             cursor: pointer;
             width: 100%;
             text-transform: uppercase;
-            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4);
-        }
-
-        .spin-btn:disabled {
-            background: #2d3748;
-            color: #718096;
-            cursor: not-allowed;
-            box-shadow: none;
         }
     </style>
 </head>
@@ -430,12 +393,12 @@
                 <img src="" alt="Player" class="player-img" id="playerPic" style="opacity: 0;">
             </div>
 
-            <div class="card-badge-column">
+            <div class="card-top-panel">
                 <div class="overall-rating" id="cardOvr">--</div>
                 <div class="position" id="cardPos">--</div>
             </div>
 
-            <div class="player-name" id="cardName">SEARCH PLAYER</div>
+            <div class="player-name-banner" id="cardName">SELECT PLAYER</div>
             
             <div class="stats-grid">
                 <div class="stats-col">
@@ -506,109 +469,15 @@
         const totalSegments = wheelNumbers.length;
         const segmentAngle = 360 / totalSegments;
 
-        // 100 PLAYERS DATABASE WITH WORKING PNG CUTOUT LINKS
         const playersDb = [
-            { id: "mbappe", name: "Kylian Mbappé", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Kylian_Mbapp%C3%A9_Dec_2023_%28cropped%29.png/250px-Kylian_Mbapp%C3%A9_Dec_2023_%28cropped%29.png" },
-            { id: "haaland", name: "Erling Haaland", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Erling_Haaland_2023_%28cropped%29.png/250px-Erling_Haaland_2023_%28cropped%29.png" },
-            { id: "bellingham", name: "Jude Bellingham", pos: "CAM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Jude_Bellingham_2024_%28cropped%29.png/250px-Jude_Bellingham_2024_%28cropped%29.png" },
-            { id: "messi", name: "Lionel Messi", pos: "CF", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.png/250px-Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.png" },
-            { id: "ronaldo", name: "Cristiano Ronaldo", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Cristiano_Ronaldo_playing_for_Al_Nassr_FC_sign_against_Al-Fateh_FC_on_3_February_2023_%28cropped%29.png/250px-Cristiano_Ronaldo_playing_for_Al_Nassr_FC_sign_against_Al-Fateh_FC_on_3_February_2023_%28cropped%29.png" },
+            { id: "mbappe", name: "Mbappé", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Kylian_Mbapp%C3%A9_Dec_2023_%28cropped%29.png/250px-Kylian_Mbapp%C3%A9_Dec_2023_%28cropped%29.png" },
+            { id: "haaland", name: "Haaland", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Erling_Haaland_2023_%28cropped%29.png/250px-Erling_Haaland_2023_%28cropped%29.png" },
+            { id: "bellingham", name: "Bellingham", pos: "CAM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Jude_Bellingham_2024_%28cropped%29.png/250px-Jude_Bellingham_2024_%28cropped%29.png" },
+            { id: "messi", name: "Messi", pos: "CF", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.png/250px-Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.png" },
+            { id: "ronaldo", name: "Ronaldo", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Cristiano_Ronaldo_playing_for_Al_Nassr_FC_sign_against_Al-Fateh_FC_on_3_February_2023_%28cropped%29.png/250px-Cristiano_Ronaldo_playing_for_Al_Nassr_FC_sign_against_Al-Fateh_FC_on_3_February_2023_%28cropped%29.png" },
             { id: "vini", name: "Vinícius Jr.", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Vinicius_Jr_2024_%28cropped%29.png/250px-Vinicius_Jr_2024_%28cropped%29.png" },
             { id: "yamal", name: "Lamine Yamal", pos: "RW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Lamine_Yamal_2024_%28cropped%29.png/250px-Lamine_Yamal_2024_%28cropped%29.png" },
-            { id: "saka", name: "Bukayo Saka", pos: "RW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Bukayo_Saka_2024_%28cropped%29.png/250px-Bukayo_Saka_2024_%28cropped%29.png" },
-            { id: "palmer", name: "Cole Palmer", pos: "CAM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Cole_Palmer_2024_%28cropped%29.png/250px-Cole_Palmer_2024_%28cropped%29.png" },
-            { id: "musiala", name: "Jamal Musiala", pos: "CAM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Jamal_Musiala_2024_%28cropped%29.png/250px-Jamal_Musiala_2024_%28cropped%29.png" },
-            { id: "wirtz", name: "Florian Wirtz", pos: "CAM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Florian_Wirtz_2024_%28cropped%29.png/250px-Florian_Wirtz_2024_%28cropped%29.png" },
-            { id: "kane", name: "Harry Kane", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Harry_Kane_2024_%28cropped%29.png/250px-Harry_Kane_2024_%28cropped%29.png" },
-            { id: "debruyne", name: "Kevin De Bruyne", pos: "CM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Kevin_De_Bruyne_2024_%28cropped%29.png/250px-Kevin_De_Bruyne_2024_%28cropped%29.png" },
-            { id: "rodri", name: "Rodri", pos: "CDM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Rodrigo_Hern%C3%A1ndez_Cascante_2024_%28cropped%29.png/250px-Rodrigo_Hern%C3%A1ndez_Cascante_2024_%28cropped%29.png" },
-            { id: "salah", name: "Mohamed Salah", pos: "RW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Mohamed_Salah_2023_%28cropped%29.png/250px-Mohamed_Salah_2023_%28cropped%29.png" },
-            { id: "lewandowski", name: "Robert Lewandowski", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Robert_Lewandowski_2024_%28cropped%29.png/250px-Robert_Lewandowski_2024_%28cropped%29.png" },
-            { id: "pedri", name: "Pedri", pos: "CM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Pedri_2022.png/250px-Pedri_2022.png" },
-            { id: "gavi", name: "Gavi", pos: "CM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Gavi_2022.png/250px-Gavi_2022.png" },
-            { id: "modric", name: "Luka Modrić", pos: "CM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Luka_Modri%C3%A1_2022.png/250px-Luka_Modri%C3%A1_2022.png" },
-            { id: "son", name: "Son Heung-min", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Son_Heung-min_2022.png/250px-Son_Heung-min_2022.png" },
-            { id: "griezmann", name: "Antoine Griezmann", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Antoine_Griezmann_2022.png/250px-Antoine_Griezmann_2022.png" },
-            { id: "neymar", name: "Neymar Jr", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Neymar_JR_2022.png/250px-Neymar_JR_2022.png" },
-            { id: "vanDijk", name: "Virgil van Dijk", pos: "CB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Virgil_van_Dijk_2022.png/250px-Virgil_van_Dijk_2022.png" },
-            { id: "rudiger", name: "Antonio Rüdiger", pos: "CB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Antonio_R%C3%BCdiger_2022.png/250px-Antonio_R%C3%BCdiger_2022.png" },
-            { id: "saliba", name: "William Saliba", pos: "CB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/William_Saliba_2024_%28cropped%29.png/250px-William_Saliba_2024_%28cropped%29.png" },
-            { id: "courtois", name: "Thibaut Courtois", pos: "GK", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Thibaut_Courtois_2018.png/250px-Thibaut_Courtois_2018.png" },
-            { id: "alisson", name: "Alisson Becker", pos: "GK", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Alisson_Becker_2018.png/250px-Alisson_Becker_2018.png" },
-            { id: "foden", name: "Phil Foden", pos: "RW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Phil_Foden_2022.png/250px-Phil_Foden_2022.png" },
-            { id: "lautaro", name: "Lautaro Martínez", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Lautaro_Mart%C3%ADnez_2022.png/250px-Lautaro_Mart%C3%ADnez_2022.png" },
-            { id: "rice", name: "Declan Rice", pos: "CDM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Declan_Rice_2022.png/250px-Declan_Rice_2022.png" },
-            { id: "valverde", name: "Federico Valverde", pos: "CM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Federico_Valverde_2022.png/250px-Federico_Valverde_2022.png" },
-            { id: "camavinga", name: "Eduardo Camavinga", pos: "CM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Eduardo_Camavinga_2022.png/250px-Eduardo_Camavinga_2022.png" },
-            { id: "tchouameni", name: "Aurélien Tchouaméni", pos: "CDM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Aur%C3%A9lien_Tchouam%C3%A9ni_2022.png/250px-Aur%C3%A9lien_Tchouam%C3%A9ni_2022.png" },
-            { id: "carvajal", name: "Dani Carvajal", pos: "RB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Dani_Carvajal_2022.png/250px-Dani_Carvajal_2022.png" },
-            { id: "militao", name: "Éder Militão", pos: "CB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/%C3%89der_Milit%C3%A3o_2022.png/250px-%C3%89der_Milit%C3%A3o_2022.png" },
-            { id: "alvarez", name: "Julián Álvarez", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Juli%C3%A1n_%C3%81lvarez_2022.png/250px-Juli%C3%A1n_%C3%81lvarez_2022.png" },
-            { id: "macallister", name: "Alexis Mac Allister", pos: "CM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Alexis_Mac_Allister_2022.png/250px-Alexis_Mac_Allister_2022.png" },
-            { id: "enzo", name: "Enzo Fernández", pos: "CM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Enzo_Fern%C3%A1ndez_2022.png/250px-Enzo_Fern%C3%A1ndez_2022.png" },
-            { id: "emartinez", name: "Emiliano Martínez", pos: "GK", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Emiliano_Mart%C3%ADnez_2022.png/250px-Emiliano_Mart%C3%ADnez_2022.png" },
-            { id: "romero", name: "Cristian Romero", pos: "CB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Cristian_Romero_2022.png/250px-Cristian_Romero_2022.png" },
-            { id: "dimaria", name: "Ángel Di María", pos: "RW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Ángel_Di_María_2022.png/250px-Ángel_Di_María_2022.png" },
-            { id: "raphinha", name: "Raphinha", pos: "RW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Raphinha_2022.png/250px-Raphinha_2022.png" },
-            { id: "olmo", name: "Dani Olmo", pos: "CAM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Dani_Olmo_2024_%28cropped%29.png/250px-Dani_Olmo_2024_%28cropped%29.png" },
-            { id: "kounde", name: "Jules Koundé", pos: "RB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Jules_Kound%C3%A9_2022.png/250px-Jules_Kound%C3%A9_2022.png" },
-            { id: "araujo", name: "Ronald Araújo", pos: "CB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Ronald_Ara%C3%BAjo_2022.png/250px-Ronald_Ara%C3%BAjo_2022.png" },
-            { id: "terstegen", name: "Marc-André ter Stegen", pos: "GK", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Marc-Andr%C3%A9_ter_Stegen_2018.png/250px-Marc-Andr%C3%A9_ter_Stegen_2018.png" },
-            { id: "cubarsi", name: "Pau Cubarsí", pos: "CB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Pau_Cubars%C3%AD_2024_%28cropped%29.png/250px-Pau_Cubars%C3%AD_2024_%28cropped%29.png" },
-            { id: "gundogan", name: "Ilkay Gündogan", pos: "CM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Ilkay_G%C3%BCndogan_2022.png/250px-Ilkay_G%C3%BCndogan_2022.png" },
-            { id: "kimmich", name: "Joshua Kimmich", pos: "RB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Joshua_Kimmich_2022.png/250px-Joshua_Kimmich_2022.png" },
-            { id: "sancho", name: "Jadon Sancho", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Jadon_Sancho_2021.png/250px-Jadon_Sancho_2021.png" },
-            { id: "rashford", name: "Marcus Rashford", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Marcus_Rashford_2022.png/250px-Marcus_Rashford_2022.png" },
-            { id: "bruno", name: "Bruno Fernandes", pos: "CAM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Bruno_Fernandes_2022.png/250px-Bruno_Fernandes_2022.png" },
-            { id: "garnacho", name: "Alejandro Garnacho", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Alejandro_Garnacho_2023.png/250px-Alejandro_Garnacho_2023.png" },
-            { id: "mainoo", name: "Kobbie Mainoo", pos: "CM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Kobbie_Mainoo_2024_%28cropped%29.png/250px-Kobbie_Mainoo_2024_%28cropped%29.png" },
-            { id: "onana", name: "André Onana", pos: "GK", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Andr%C3%A9_Onana_2022.png/250px-Andr%C3%A9_Onana_2022.png" },
-            { id: "walker", name: "Kyle Walker", pos: "RB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Kyle_Walker_2022.png/250px-Kyle_Walker_2022.png" },
-            { id: "doku", name: "Jérémy Doku", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/J%C3%A9r%C3%A9my_Doku_2022.png/250px-J%C3%A9r%C3%A9my_Doku_2022.png" },
-            { id: "grealish", name: "Jack Grealish", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Jack_Grealish_2022.png/250px-Jack_Grealish_2022.png" },
-            { id: "ederson", name: "Ederson", pos: "GK", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Ederson_Moraes_2018.png/250px-Ederson_Moraes_2018.png" },
-            { id: "dias", name: "Rúben Dias", pos: "CB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/R%C3%BAben_Dias_2022.png/250px-R%C3%BAben_Dias_2022.png" },
-            { id: "alexanderarnold", name: "Trent Alexander-Arnold", pos: "RB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Trent_Alexander-Arnold_2022.png/250px-Trent_Alexander-Arnold_2022.png" },
-            { id: "diaz", name: "Luis Díaz", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Luis_D%C3%ADaz_2022.png/250px-Luis_D%C3%ADaz_2022.png" },
-            { id: "nunez", name: "Darwin Núñez", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Darwin_N%C3%BA%C3%B1ez_2022.png/250px-Darwin_N%C3%BA%C3%B1ez_2022.png" },
-            { id: "szoboszlai", name: "Dominik Szoboszlai", pos: "CM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Dominik_Szoboszlai_2022.png/250px-Dominik_Szoboszlai_2022.png" },
-            { id: "macallister", name: "Alexis Mac Allister", pos: "CM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Alexis_Mac_Allister_2022.png/250px-Alexis_Mac_Allister_2022.png" },
-            { id: "havertz", name: "Kai Havertz", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Kai_Havertz_2022.png/250px-Kai_Havertz_2022.png" },
-            { id: "martinelli", name: "Gabriel Martinelli", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Gabriel_Martinelli_2022.png/250px-Gabriel_Martinelli_2022.png" },
-            { id: "odegaard", name: "Martin Ødegaard", pos: "CAM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Martin_%C3%98degaard_2022.png/250px-Martin_%C3%98degaard_2022.png" },
-            { id: "raya", name: "David Raya", pos: "GK", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/David_Raya_2024_%28cropped%29.png/250px-David_Raya_2024_%28cropped%29.png" },
-            { id: "gabriel", name: "Gabriel Magalhães", pos: "CB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Gabriel_Magalh%C3%A3es_2022.png/250px-Gabriel_Magalh%C3%A3es_2022.png" },
-            { id: "caicedo", name: "Moisés Caicedo", pos: "CDM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Mois%C3%A9s_Caicedo_2022.png/250px-Mois%C3%A9s_Caicedo_2022.png" },
-            { id: "jackson", name: "Nicolas Jackson", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Nicolas_Jackson_2023.png/250px-Nicolas_Jackson_2023.png" },
-            { id: "madueke", name: "Noni Madueke", pos: "RW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Noni_Madueke_2023.png/250px-Noni_Madueke_2023.png" },
-            { id: "son", name: "Son Heung-min", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Son_Heung-min_2022.png/250px-Son_Heung-min_2022.png" },
-            { id: "maddison", name: "James Maddison", pos: "CAM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/James_Maddison_2021.png/250px-James_Maddison_2021.png" },
-            { id: "vicario", name: "Guglielmo Vicario", pos: "GK", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Guglielmo_Vicario_2023.png/250px-Guglielmo_Vicario_2023.png" },
-            { id: "solanke", name: "Dominic Solanke", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Dominic_Solanke_2021.png/250px-Dominic_Solanke_2021.png" },
-            { id: "watkins", name: "Ollie Watkins", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Ollie_Watkins_2021.png/250px-Ollie_Watkins_2021.png" },
-            { id: "martinez", name: "Emiliano Martínez", pos: "GK", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Emiliano_Mart%C3%ADnez_2022.png/250px-Emiliano_Mart%C3%ADnez_2022.png" },
-            { id: "isak", name: "Alexander Isak", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Alexander_Isak_2021.png/250px-Alexander_Isak_2021.png" },
-            { id: "guimaraes", name: "Bruno Guimarães", pos: "CM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Bruno_Guimar%C3%A3es_2022.png/250px-Bruno_Guimar%C3%A3es_2022.png" },
-            { id: "gordon", name: "Anthony Gordon", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Anthony_Gordon_2023.png/250px-Anthony_Gordon_2023.png" },
-            { id: "donnarumma", name: "Gianluigi Donnarumma", pos: "GK", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Gianluigi_Donnarumma_2021.png/250px-Gianluigi_Donnarumma_2021.png" },
-            { id: "hakimi", name: "Achraf Hakimi", pos: "RB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Achraf_Hakimi_2022.png/250px-Achraf_Hakimi_2022.png" },
-            { id: "marquinhos", name: "Marquinhos", pos: "CB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Marquinhos_2022.png/250px-Marquinhos_2022.png" },
-            { id: "dembele", name: "Ousmane Dembélé", pos: "RW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Ousmane_Demb%C3%A9l%C3%A9_2022.png/250px-Ousmane_Demb%C3%A9l%C3%A9_2022.png" },
-            { id: "vitinha", name: "Vitinha", pos: "CM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Vitinha_2022.png/250px-Vitinha_2022.png" },
-            { id: "barcola", name: "Bradley Barcola", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Bradley_Barcola_2024_%28cropped%29.png/250px-Bradley_Barcola_2024_%28cropped%29.png" },
-            { id: "leao", name: "Rafael Leão", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Rafael_Le%C3%A3o_2022.png/250px-Rafael_Le%C3%A3o_2022.png" },
-            { id: "maignan", name: "Mike Maignan", pos: "GK", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Mike_Maignan_2022.png/250px-Mike_Maignan_2022.png" },
-            { id: "theo", name: "Theo Hernández", pos: "LB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Theo_Hern%C3%A1ndez_2022.png/250px-Theo_Hern%C3%A1ndez_2022.png" },
-            { id: "pulisic", name: "Christian Pulisic", pos: "RW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Christian_Pulisic_2022.png/250px-Christian_Pulisic_2022.png" },
-            { id: "barella", name: "Nicolò Barella", pos: "CM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Nicol%C3%B2_Barella_2021.png/250px-Nicol%C3%B2_Barella_2021.png" },
-            { id: "bastoni", name: "Alessandro Bastoni", pos: "CB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Alessandro_Bastoni_2021.png/250px-Alessandro_Bastoni_2021.png" },
-            { id: "thuram", name: "Marcus Thuram", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Marcus_Thuram_2022.png/250px-Marcus_Thuram_2022.png" },
-            { id: "dybala", name: "Paulo Dybala", pos: "CF", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Paulo_Dybala_2018.png/250px-Paulo_Dybala_2018.png" },
-            { id: "vlahovic", name: "Dušan Vlahović", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Du%C3%B1an_Vlahovi%C3%A1_2022.png/250px-Du%C3%B1an_Vlahovi%C3%A1_2022.png" },
-            { id: "kvaratskhelia", name: "Khvicha Kvaratskhelia", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Khvicha_Kvaratskhelia_2023.png/250px-Khvicha_Kvaratskhelia_2023.png" },
-            { id: "osimhen", name: "Victor Osimhen", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Victor_Osimhen_2023.png/250px-Victor_Osimhen_2023.png" },
-            { id: "gyokeres", name: "Viktor Gyökeres", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Viktor_Gy%C3%B6keres_2023.png/250px-Viktor_Gy%C3%B6keres_2023.png" },
-            { id: "davies", name: "Alphonso Davies", pos: "LB", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Alphonso_Davies_2022.png/250px-Alphonso_Davies_2022.png" }
+            { id: "saka", name: "Saka", pos: "RW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Bukayo_Saka_2024_%28cropped%29.png/250px-Bukayo_Saka_2024_%28cropped%29.png" }
         ];
 
         playerSearch.addEventListener("input", () => {
@@ -650,7 +519,7 @@
 
             openWheelBtn.disabled = false;
             resetCardStats();
-            updateCardTier(80);
+            updateCardTier(85);
         }
 
         function resetCardStats() {
@@ -669,11 +538,11 @@
                 return;
             }
 
-            if (ovr >= 50 && ovr <= 69) fcCard.classList.add("card-bronze");
-            else if (ovr >= 70 && ovr <= 79) fcCard.classList.add("card-silver");
-            else if (ovr >= 80 && ovr <= 89) fcCard.classList.add("card-gold");
-            else if (ovr >= 90 && ovr <= 94) fcCard.classList.add("card-toty-hm");
-            else if (ovr >= 95) fcCard.classList.add("card-toty");
+            if (ovr >= 92) {
+                fcCard.classList.add("card-toty");
+            } else {
+                fcCard.classList.add("card-gold");
+            }
         }
 
         function buildNumberedWheel() {
@@ -698,7 +567,7 @@
 
                 const textAngle = startAngle + (segmentAngle / 2);
                 const textRad = ((textAngle - 90) * Math.PI) / 180;
-                const textR = r - 22; 
+                const textR = r - 20; 
                 const tx = cx + textR * Math.cos(textRad);
                 const ty = cy + textR * Math.sin(textRad);
 
