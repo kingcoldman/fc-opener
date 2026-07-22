@@ -36,7 +36,7 @@
             text-align: center;
         }
 
-        /* SEARCH BAR */
+        /* SEARCH CONTAINER */
         .search-container {
             position: relative;
             width: 300px;
@@ -113,7 +113,7 @@
         }
 
         /* ================================================== */
-        /* RARE GOLD FC CARD - EXACTLY 50 LINES OF CSS STYLES */
+        /* 1. RARE GOLD CARD - EXACTLY 50 LINES OF CSS STYLES */
         /* ================================================== */
         .card-gold {
             width: 300px;
@@ -164,7 +164,7 @@
         }
 
         /* ================================================== */
-        /* TOTY BLUE CARD - EXACTLY 50 LINES OF CSS STYLES   */
+        /* 2. TOTY BLUE CARD - EXACTLY 50 LINES OF CSS STYLES */
         /* ================================================== */
         .card-toty {
             width: 300px;
@@ -214,7 +214,160 @@
             color: #ffffff;
         }
 
-        /* COMMON INTERNAL CARD ELEMENTS */
+        /* ================================================== */
+        /* 3. RARE SILVER CARD - EXACTLY 50 LINES OF CSS      */
+        /* ================================================== */
+        .card-silver {
+            width: 300px;
+            height: 460px;
+            position: relative;
+            clip-path: polygon(18% 0%, 82% 0%, 100% 9%, 100% 78%, 50% 100%, 0% 78%, 0% 9%);
+            background: radial-gradient(
+                ellipse at 50% 30%,
+                #ffffff 0%,
+                #c0c0c0 40%,
+                #707070 75%,
+                #2a2a2a 100%
+            );
+            color: #1a1a1a;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.8);
+            border: 2px solid #c0c0c0;
+            overflow: hidden;
+            user-select: none;
+        }
+        .card-silver .card-top-panel {
+            position: absolute;
+            top: 45px;
+            left: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 5;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+        }
+        .card-silver .overall-rating {
+            font-size: 44px;
+            font-weight: 900;
+            line-height: 0.8;
+            letter-spacing: -2px;
+            color: #1a1a1a;
+        }
+        .card-silver .position {
+            font-size: 15px;
+            font-weight: 900;
+            margin-top: 5px;
+            text-transform: uppercase;
+            color: #2b2b2b;
+        }
+        .card-silver .player-name-banner {
+            background: linear-gradient(90deg, transparent 0%, rgba(40, 40, 40, 0.25) 20%, rgba(40, 40, 40, 0.25) 80%, transparent 100%);
+            border-bottom: 2px solid #1a1a1a;
+            color: #1a1a1a;
+        }
+
+        /* ================================================== */
+        /* 4. RARE BRONZE CARD - EXACTLY 50 LINES OF CSS      */
+        /* ================================================== */
+        .card-bronze {
+            width: 300px;
+            height: 460px;
+            position: relative;
+            clip-path: polygon(18% 0%, 82% 0%, 100% 9%, 100% 78%, 50% 100%, 0% 78%, 0% 9%);
+            background: radial-gradient(
+                ellipse at 50% 30%,
+                #f3d1b5 0%,
+                #b87333 40%,
+                #6e3b12 75%,
+                #2b1200 100%
+            );
+            color: #2b1200;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.8);
+            border: 2px solid #b87333;
+            overflow: hidden;
+            user-select: none;
+        }
+        .card-bronze .card-top-panel {
+            position: absolute;
+            top: 45px;
+            left: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 5;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+        }
+        .card-bronze .overall-rating {
+            font-size: 44px;
+            font-weight: 900;
+            line-height: 0.8;
+            letter-spacing: -2px;
+            color: #2b1200;
+        }
+        .card-bronze .position {
+            font-size: 15px;
+            font-weight: 900;
+            margin-top: 5px;
+            text-transform: uppercase;
+            color: #3e1b00;
+        }
+        .card-bronze .player-name-banner {
+            background: linear-gradient(90deg, transparent 0%, rgba(43, 18, 0, 0.25) 20%, rgba(43, 18, 0, 0.25) 80%, transparent 100%);
+            border-bottom: 2px solid #2b1200;
+            color: #2b1200;
+        }
+
+        /* ================================================== */
+        /* 5. ICON CARD - EXACTLY 50 LINES OF CSS STYLES      */
+        /* ================================================== */
+        .card-icon {
+            width: 300px;
+            height: 460px;
+            position: relative;
+            clip-path: polygon(18% 0%, 82% 0%, 100% 9%, 100% 78%, 50% 100%, 0% 78%, 0% 9%);
+            background: radial-gradient(
+                ellipse at 50% 25%,
+                #ffffff 0%,
+                #f7f0dc 35%,
+                #d4af37 75%,
+                #1c180a 100%
+            );
+            color: #1a1608;
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
+            border: 2px solid #e6c65c;
+            overflow: hidden;
+            user-select: none;
+        }
+        .card-icon .card-top-panel {
+            position: absolute;
+            top: 45px;
+            left: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 5;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+        }
+        .card-icon .overall-rating {
+            font-size: 44px;
+            font-weight: 900;
+            line-height: 0.8;
+            letter-spacing: -2px;
+            color: #1a1608;
+        }
+        .card-icon .position {
+            font-size: 15px;
+            font-weight: 900;
+            margin-top: 5px;
+            text-transform: uppercase;
+            color: #3b3110;
+        }
+        .card-icon .player-name-banner {
+            background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.3) 20%, rgba(212, 175, 55, 0.3) 80%, transparent 100%);
+            border-bottom: 2px solid #1a1608;
+            color: #1a1608;
+        }
+
+        /* SHARED INTERNAL CARD ELEMENTS */
         .card-top-panel {
             position: absolute;
             top: 45px;
@@ -534,7 +687,6 @@
         let cardStats = { PAC: null, DRI: null, SHO: null, DEF: null, PAS: null, PHY: null };
         let currentRotation = 0;
 
-        // Clean SVG Silhouette Fallback
         const defaultSilhouette = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='32' r='20' fill='%23ffffff'/><path d='M20 90 C20 60, 30 50, 50 50 C70 50, 80 60, 80 90 Z' fill='%23ffffff'/></svg>";
 
         playerPic.onerror = function() {
@@ -547,14 +699,16 @@
         const segmentAngle = 360 / totalSegments;
 
         const playersDb = [
-            { id: "mbappe", name: "Mbappé", pos: "ST", img: "" },
-            { id: "haaland", name: "Haaland", pos: "ST", img: "" },
-            { id: "bellingham", name: "Bellingham", pos: "CAM", img: "" },
-            { id: "messi", name: "Messi", pos: "CF", img: "" },
-            { id: "ronaldo", name: "Ronaldo", pos: "ST", img: "" },
-            { id: "vini", name: "Vinícius Jr.", pos: "LW", img: "" },
-            { id: "yamal", name: "Lamine Yamal", pos: "RW", img: "" },
-            { id: "saka", name: "Saka", pos: "RW", img: "" }
+            { id: "pelé", name: "Pelé", pos: "CAM", isIcon: true },
+            { id: "zidane", name: "Zidane", pos: "CM", isIcon: true },
+            { id: "mbappe", name: "Mbappé", pos: "ST" },
+            { id: "haaland", name: "Haaland", pos: "ST" },
+            { id: "bellingham", name: "Bellingham", pos: "CAM" },
+            { id: "messi", name: "Messi", pos: "CF" },
+            { id: "ronaldo", name: "Ronaldo", pos: "ST" },
+            { id: "vini", name: "Vinícius Jr.", pos: "LW" },
+            { id: "yamal", name: "Lamine Yamal", pos: "RW" },
+            { id: "saka", name: "Saka", pos: "RW" }
         ];
 
         playerSearch.addEventListener("input", () => {
@@ -610,15 +764,24 @@
         function updateCardTier(ovr) {
             fcCard.className = "";
 
+            if (selectedPlayer && selectedPlayer.isIcon) {
+                fcCard.classList.add("card-icon");
+                return;
+            }
+
             if (ovr === null || isNaN(ovr)) {
                 fcCard.classList.add("card-blank");
                 return;
             }
 
-            if (ovr >= 92) {
-                fcCard.classList.add("card-toty");
-            } else {
+            if (ovr < 65) {
+                fcCard.classList.add("card-bronze");
+            } else if (ovr < 75) {
+                fcCard.classList.add("card-silver");
+            } else if (ovr < 92) {
                 fcCard.classList.add("card-gold");
+            } else {
+                fcCard.classList.add("card-toty");
             }
         }
 
