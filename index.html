@@ -22,15 +22,12 @@
             --text-muted-slate: #64748b;
             --border-dark-slate: #1e293b;
 
-            /* Dynamic Tier Gradients */
+            /* Tier Gradients */
             --gold-grad: linear-gradient(135deg, #ffe57f 0%, #e1ba52 30%, #a27b1e 70%, #3a2a00 100%);
             --toty-grad: linear-gradient(135deg, #80f3ff 0%, #0066ff 30%, #001f70 70%, #010619 100%);
-            --icon-grad: linear-gradient(135deg, #ffffff 0%, #f7f0dc 25%, #d4af37 50%, #8c7118 80%, #1c180a 100%);
             --silver-grad: linear-gradient(135deg, #ffffff 0%, #e0e0e0 30%, #808080 70%, #1a1a1a 100%);
             --bronze-grad: linear-gradient(135deg, #f3d1b5 0%, #b87333 30%, #6e3b12 70%, #210d00 100%);
             --tots-grad: linear-gradient(135deg, #00f0ff 0%, #1e40af 40%, #0b132b 100%);
-            --shapeshifter-grad: linear-gradient(135deg, #00ff88 0%, #10b981 30%, #064e3b 70%, #022c22 100%);
-            --futties-grad: linear-gradient(135deg, #ff2a85 0%, #c084fc 50%, #3b0764 100%);
         }
 
         body {
@@ -283,12 +280,6 @@
         .tier-toty .player-ribbon { color: #ffffff; border-color: #80f3ff; }
         .tier-toty .stat-lbl { color: #80f3ff; }
 
-        .tier-icon { background: var(--icon-grad); border: 3px solid #fff3c4; box-shadow: 0 20px 50px rgba(212, 175, 55, 0.6); }
-        .tier-icon .ovr-rating { color: #1c180a; }
-        .tier-icon .pos-badge { color: #4a3f18; }
-        .tier-icon .player-ribbon { color: #ffffff; border-color: #d4af37; }
-        .tier-icon .stat-lbl { color: #f7f0dc; }
-
         .tier-silver { background: var(--silver-grad); border: 3px solid #ffffff; box-shadow: 0 20px 50px rgba(192, 192, 192, 0.5); }
         .tier-silver .ovr-rating { color: #1a1a1a; }
         .tier-silver .pos-badge { color: #333333; }
@@ -306,12 +297,6 @@
         .tier-tots .pos-badge { color: #00f0ff; }
         .tier-tots .player-ribbon { color: #ffffff; border-color: #00f0ff; }
         .tier-tots .stat-lbl { color: #00f0ff; }
-
-        .tier-shapeshifter { background: var(--shapeshifter-grad); border: 3px solid #00ff88; box-shadow: 0 20px 50px rgba(0, 255, 136, 0.6); }
-        .tier-shapeshifter .ovr-rating { color: #ffffff; text-shadow: 0 0 10px #00ff88; }
-        .tier-shapeshifter .pos-badge { color: #00ff88; }
-        .tier-shapeshifter .player-ribbon { color: #ffffff; border-color: #00ff88; }
-        .tier-shapeshifter .stat-lbl { color: #00ff88; }
 
         .tier-blank { background: radial-gradient(circle at 50% 30%, #1c2430 0%, #0d121a 100%); border: 3px solid var(--border-dark-slate); }
         .tier-blank .ovr-rating, .tier-blank .pos-badge, .tier-blank .player-ribbon, .tier-blank .stat-lbl { color: var(--text-muted-slate); border-color: var(--border-dark-slate); }
@@ -520,11 +505,10 @@
 
         playerPic.onerror = function() { this.src = fallbackPic; };
 
-        // HELPER TO DETERMINE CARD TIER BASED ON OVERALL RATING
+        // REBALANCED TIER THRESHOLDS (SHAPESHIFTER REMOVED)
         function getTierFromOvr(ovr) {
             if (ovr >= 95) return "toty";
             if (ovr >= 90) return "tots";
-            if (ovr >= 85) return "shapeshifter";
             if (ovr >= 75) return "gold";
             if (ovr >= 65) return "silver";
             return "bronze";
@@ -656,7 +640,6 @@
                 cardStats[activeStat] = rolledVal;
                 statRefs[activeStat].num.innerText = rolledVal;
 
-                // Calculate OVR & DYNAMICALLY update tier class based on overall score
                 let total = 0, count = 0;
                 for (const key in cardStats) {
                     if (cardStats[key] !== null) {
@@ -667,7 +650,6 @@
                 const currentOvr = Math.round(total / count);
                 cardOvr.innerText = currentOvr;
 
-                // DYNAMIC BACKGROUND CHANGE BASED ON OVR
                 const dynamicTier = getTierFromOvr(currentOvr);
                 futCard.className = `fut-card tier-${dynamicTier}`;
 
