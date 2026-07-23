@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FC Ultimate Team - Card Creator & Stat Wheel</title>
+    <title>FC Ultimate Team - Dynamic OVR Card Creator</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;0,900;1,900&display=swap');
 
@@ -22,7 +22,7 @@
             --text-muted-slate: #64748b;
             --border-dark-slate: #1e293b;
 
-            /* Tier Color Gradients */
+            /* Dynamic Tier Gradients */
             --gold-grad: linear-gradient(135deg, #ffe57f 0%, #e1ba52 30%, #a27b1e 70%, #3a2a00 100%);
             --toty-grad: linear-gradient(135deg, #80f3ff 0%, #0066ff 30%, #001f70 70%, #010619 100%);
             --icon-grad: linear-gradient(135deg, #ffffff 0%, #f7f0dc 25%, #d4af37 50%, #8c7118 80%, #1c180a 100%);
@@ -146,7 +146,7 @@
             clip-path: polygon(15% 0%, 85% 0%, 100% 8%, 100% 75%, 85% 85%, 50% 100%, 15% 85%, 0% 75%, 0% 8%);
             overflow: hidden;
             user-select: none;
-            transition: transform 0.4s ease, background 0.5s ease, box-shadow 0.5s ease;
+            transition: transform 0.4s ease, background 0.6s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.6s ease;
         }
 
         .fut-card:hover {
@@ -156,7 +156,7 @@
         .card-texture {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 30%, rgba(255,255,255,0.2) 0%, rgba(0,0,0,0.5) 100%);
+            background: radial-gradient(circle at 50% 30%, rgba(255,255,255,0.25) 0%, rgba(0,0,0,0.6) 100%);
             pointer-events: none;
             z-index: 1;
         }
@@ -177,8 +177,10 @@
         .headshot-container img {
             max-width: 100%;
             max-height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 12px 20px rgba(0,0,0,0.7));
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #ffffff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.8);
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
@@ -248,7 +250,7 @@
             cursor: pointer;
             padding: 6px 8px;
             border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.08);
             transition: all 0.2s ease;
         }
 
@@ -268,54 +270,48 @@
             font-weight: 800;
         }
 
-        /* Tier Designs */
-        .tier-gold { background: var(--gold-grad); border: 3px solid #ffe57f; box-shadow: 0 20px 50px rgba(225, 186, 82, 0.4); }
+        /* Tier Styles */
+        .tier-gold { background: var(--gold-grad); border: 3px solid #ffe57f; box-shadow: 0 20px 50px rgba(225, 186, 82, 0.5); }
         .tier-gold .ovr-rating { color: #2e2000; }
         .tier-gold .pos-badge { color: #4a3600; }
         .tier-gold .player-ribbon { color: #ffffff; border-color: #ffd700; }
         .tier-gold .stat-lbl { color: #ffea9f; }
 
-        .tier-toty { background: var(--toty-grad); border: 3px solid #80f3ff; box-shadow: 0 20px 50px rgba(0, 102, 255, 0.6); }
+        .tier-toty { background: var(--toty-grad); border: 3px solid #80f3ff; box-shadow: 0 20px 50px rgba(0, 102, 255, 0.7); }
         .tier-toty .ovr-rating { color: #ffffff; text-shadow: 0 0 12px rgba(128, 243, 255, 0.9); }
         .tier-toty .pos-badge { color: #80f3ff; }
         .tier-toty .player-ribbon { color: #ffffff; border-color: #80f3ff; }
         .tier-toty .stat-lbl { color: #80f3ff; }
 
-        .tier-icon { background: var(--icon-grad); border: 3px solid #fff3c4; box-shadow: 0 20px 50px rgba(212, 175, 55, 0.5); }
+        .tier-icon { background: var(--icon-grad); border: 3px solid #fff3c4; box-shadow: 0 20px 50px rgba(212, 175, 55, 0.6); }
         .tier-icon .ovr-rating { color: #1c180a; }
         .tier-icon .pos-badge { color: #4a3f18; }
         .tier-icon .player-ribbon { color: #ffffff; border-color: #d4af37; }
         .tier-icon .stat-lbl { color: #f7f0dc; }
 
-        .tier-silver { background: var(--silver-grad); border: 3px solid #ffffff; box-shadow: 0 20px 50px rgba(192, 192, 192, 0.4); }
+        .tier-silver { background: var(--silver-grad); border: 3px solid #ffffff; box-shadow: 0 20px 50px rgba(192, 192, 192, 0.5); }
         .tier-silver .ovr-rating { color: #1a1a1a; }
         .tier-silver .pos-badge { color: #333333; }
         .tier-silver .player-ribbon { color: #ffffff; border-color: #ffffff; }
         .tier-silver .stat-lbl { color: #e0e0e0; }
 
-        .tier-bronze { background: var(--bronze-grad); border: 3px solid #f3d1b5; box-shadow: 0 20px 50px rgba(184, 115, 51, 0.4); }
+        .tier-bronze { background: var(--bronze-grad); border: 3px solid #f3d1b5; box-shadow: 0 20px 50px rgba(184, 115, 51, 0.5); }
         .tier-bronze .ovr-rating { color: #2b1200; }
         .tier-bronze .pos-badge { color: #4a2100; }
         .tier-bronze .player-ribbon { color: #ffffff; border-color: #f3d1b5; }
         .tier-bronze .stat-lbl { color: #f3d1b5; }
 
-        .tier-tots { background: var(--tots-grad); border: 3px solid #00f0ff; box-shadow: 0 20px 50px rgba(0, 240, 255, 0.5); }
+        .tier-tots { background: var(--tots-grad); border: 3px solid #00f0ff; box-shadow: 0 20px 50px rgba(0, 240, 255, 0.6); }
         .tier-tots .ovr-rating { color: #ffffff; text-shadow: 0 0 10px #00f0ff; }
         .tier-tots .pos-badge { color: #00f0ff; }
         .tier-tots .player-ribbon { color: #ffffff; border-color: #00f0ff; }
         .tier-tots .stat-lbl { color: #00f0ff; }
 
-        .tier-shapeshifter { background: var(--shapeshifter-grad); border: 3px solid #00ff88; box-shadow: 0 20px 50px rgba(0, 255, 136, 0.5); }
+        .tier-shapeshifter { background: var(--shapeshifter-grad); border: 3px solid #00ff88; box-shadow: 0 20px 50px rgba(0, 255, 136, 0.6); }
         .tier-shapeshifter .ovr-rating { color: #ffffff; text-shadow: 0 0 10px #00ff88; }
         .tier-shapeshifter .pos-badge { color: #00ff88; }
         .tier-shapeshifter .player-ribbon { color: #ffffff; border-color: #00ff88; }
         .tier-shapeshifter .stat-lbl { color: #00ff88; }
-
-        .tier-futties { background: var(--futties-grad); border: 3px solid #ff2a85; box-shadow: 0 20px 50px rgba(255, 42, 133, 0.5); }
-        .tier-futties .ovr-rating { color: #ffffff; text-shadow: 0 0 10px #ff2a85; }
-        .tier-futties .pos-badge { color: #ff2a85; }
-        .tier-futties .player-ribbon { color: #ffffff; border-color: #ff2a85; }
-        .tier-futties .stat-lbl { color: #c084fc; }
 
         .tier-blank { background: radial-gradient(circle at 50% 30%, #1c2430 0%, #0d121a 100%); border: 3px solid var(--border-dark-slate); }
         .tier-blank .ovr-rating, .tier-blank .pos-badge, .tier-blank .player-ribbon, .tier-blank .stat-lbl { color: var(--text-muted-slate); border-color: var(--border-dark-slate); }
@@ -405,7 +401,7 @@
 
     <div class="app-header">
         <h1 class="app-title">FC Ultimate Team</h1>
-        <p class="app-subtitle">Card Creator & Stat Roller</p>
+        <p class="app-subtitle">Dynamic OVR Card Creator</p>
     </div>
 
     <div class="search-container">
@@ -417,7 +413,7 @@
         <div class="fut-card tier-blank" id="futCard">
             <div class="card-texture"></div>
             <div class="headshot-container">
-                <img src="" alt="Player Cutout" id="playerPic" style="opacity: 0;">
+                <img src="" alt="Player Headshot" id="playerPic" style="opacity: 0;">
             </div>
 
             <div class="card-info-pane">
@@ -457,35 +453,26 @@
     </div>
 
     <script>
-        // Guaranteed Inline SVG Cutouts (No External Links That Can Break)
-        const playerSvg = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 12 C36 12, 26 24, 26 40 C26 55, 36 65, 50 65 C64 65, 74 55, 74 40 C74 24, 64 12, 50 12 Z M20 95 C20 72, 32 64, 50 64 C68 64, 80 72, 80 95 Z' fill='%23ffffff'/></svg>";
-
         const starPlayers = [
-            { name: "Pelé", pos: "CAM", tier: "icon", img: playerSvg },
-            { name: "Zinedine Zidane", pos: "CM", tier: "icon", img: playerSvg },
-            { name: "Ronaldo Nazário", pos: "ST", tier: "icon", img: playerSvg },
-            { name: "Ronaldinho", pos: "LW", tier: "icon", img: playerSvg },
-            { name: "Thierry Henry", pos: "ST", tier: "icon", img: playerSvg },
-            { name: "David Beckham", pos: "RM", tier: "icon", img: playerSvg },
-            { name: "Kylian Mbappé", pos: "ST", tier: "toty", img: playerSvg },
-            { name: "Lionel Messi", pos: "CF", tier: "tots", img: playerSvg },
-            { name: "Cristiano Ronaldo", pos: "ST", tier: "futties", img: playerSvg },
-            { name: "Erling Haaland", pos: "ST", tier: "toty", img: playerSvg },
-            { name: "Jude Bellingham", pos: "CAM", tier: "shapeshifter", img: playerSvg },
-            { name: "Mohamed Salah", pos: "RW", tier: "gold", img: playerSvg },
-            { name: "Kevin De Bruyne", pos: "CM", tier: "gold", img: playerSvg },
-            { name: "Neymar Jr", pos: "LW", tier: "gold", img: playerSvg },
-            { name: "Virgil van Dijk", pos: "CB", tier: "gold", img: playerSvg }
+            { name: "Lionel Messi", pos: "CF", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Lionel_Messi_20180626.jpg/440px-Lionel_Messi_20180626.jpg" },
+            { name: "Cristiano Ronaldo", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cristiano_Ronaldo_2018.jpg/440px-Cristiano_Ronaldo_2018.jpg" },
+            { name: "Kylian Mbappé", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/2019-06-11_Fu%C3%9Fball%2C_M%C3%A4nner%2C_L%C3%A4nderspiel_Andorra_-_Frankreich_Sven_1D4_0288_%28cropped%29.jpg/440px-2019-06-11_Fu%C3%9Fball%2C_M%C3%A4nner%2C_L%C3%A4nderspiel_Andorra_-_Frankreich_Sven_1D4_0288_%28cropped%29.jpg" },
+            { name: "Mohamed Salah", pos: "RW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Mohamed_Salah_2018.jpg/440px-Mohamed_Salah_2018.jpg" },
+            { name: "Kevin De Bruyne", pos: "CM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Kevin_De_Bruyne_201809091.jpg/440px-Kevin_De_Bruyne_201809091.jpg" },
+            { name: "Neymar Jr", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Bra-Cst_%281%29_%28cropped%29.jpg/440px-Bra-Cst_%281%29_%28cropped%29.jpg" },
+            { name: "Pelé", pos: "CAM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Pele_by_John_Mathew_Smith_crop.jpg/440px-Pele_by_John_Mathew_Smith_crop.jpg" },
+            { name: "Zinedine Zidane", pos: "CM", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Zinedine_Zidane_by_Tasnim_03.jpg/440px-Zinedine_Zidane_by_Tasnim_03.jpg" },
+            { name: "Ronaldo Nazário", pos: "ST", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Ronaldo_2002.jpg/440px-Ronaldo_2002.jpg" },
+            { name: "Ronaldinho", pos: "LW", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Ronaldinho_11feb2007.jpg/440px-Ronaldinho_11feb2007.jpg" }
         ];
 
+        const fallbackPic = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Portrait_Placeholder.png/440px-Portrait_Placeholder.png";
         const positionsList = ["ST", "RW", "LW", "CAM", "CM", "CDM", "CB", "LB", "RB", "GK"];
-        const tierTypes = ["gold", "silver", "bronze", "toty", "icon", "tots", "shapeshifter", "futties"];
 
         const database = starPlayers.map((p, idx) => ({
             id: `p${idx + 1}`,
             name: p.name,
             pos: p.pos,
-            tier: p.tier,
             img: p.img
         }));
 
@@ -494,8 +481,7 @@
                 id: `p${i}`,
                 name: `Player ${i}`,
                 pos: positionsList[i % positionsList.length],
-                tier: tierTypes[i % tierTypes.length],
-                img: playerSvg
+                img: fallbackPic
             });
         }
 
@@ -532,6 +518,18 @@
         const segmentCount = wheelNumbers.length;
         const segmentAngle = 360 / segmentCount;
 
+        playerPic.onerror = function() { this.src = fallbackPic; };
+
+        // HELPER TO DETERMINE CARD TIER BASED ON OVERALL RATING
+        function getTierFromOvr(ovr) {
+            if (ovr >= 95) return "toty";
+            if (ovr >= 90) return "tots";
+            if (ovr >= 85) return "shapeshifter";
+            if (ovr >= 75) return "gold";
+            if (ovr >= 65) return "silver";
+            return "bronze";
+        }
+
         playerSearch.addEventListener("input", () => {
             const query = playerSearch.value.trim().toLowerCase();
             suggestionsMenu.innerHTML = "";
@@ -547,7 +545,7 @@
                 matches.forEach(p => {
                     const row = document.createElement("div");
                     row.className = "suggestion-item";
-                    row.innerHTML = `<span>${p.name}</span><small style="opacity:0.75">${p.tier.toUpperCase()}</small>`;
+                    row.innerHTML = `<span>${p.name}</span><small style="opacity:0.8; font-weight:800;">${p.pos}</small>`;
                     row.addEventListener("click", () => handlePlayerSelect(p));
                     suggestionsMenu.appendChild(row);
                 });
@@ -571,12 +569,11 @@
 
             openModalBtn.disabled = false;
             resetCardState();
-
-            futCard.className = `fut-card tier-${player.tier}`;
         }
 
         function resetCardState() {
             cardOvr.innerText = "--";
+            futCard.className = "fut-card tier-blank";
             for (const key in statRefs) {
                 cardStats[key] = null;
                 statRefs[key].num.innerText = "--";
@@ -659,6 +656,7 @@
                 cardStats[activeStat] = rolledVal;
                 statRefs[activeStat].num.innerText = rolledVal;
 
+                // Calculate OVR & DYNAMICALLY update tier class based on overall score
                 let total = 0, count = 0;
                 for (const key in cardStats) {
                     if (cardStats[key] !== null) {
@@ -666,7 +664,12 @@
                         count++;
                     }
                 }
-                cardOvr.innerText = Math.round(total / count);
+                const currentOvr = Math.round(total / count);
+                cardOvr.innerText = currentOvr;
+
+                // DYNAMIC BACKGROUND CHANGE BASED ON OVR
+                const dynamicTier = getTierFromOvr(currentOvr);
+                futCard.className = `fut-card tier-${dynamicTier}`;
 
                 startSpinBtn.innerText = "DONE!";
                 statusHeading.innerText = `LANDED ON ${rolledVal}!`;
